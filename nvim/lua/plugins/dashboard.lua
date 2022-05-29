@@ -45,11 +45,6 @@ dashboard.section.footer.opts.hl = "Type"
 dashboard.section.header.opts.hl = "Include"
 dashboard.section.buttons.opts.hl = "Keyword"
 
-local function footer()
-  return "https://github.com/imbacraft"
-end
-
-dashboard.section.footer.val = footer()
 dashboard.opts.opts.noautocmd = true
 
 alpha.setup(dashboard.opts)

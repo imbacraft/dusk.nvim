@@ -55,11 +55,12 @@ Of course you can add any colorscheme you want!
 
 ## Installation
 
-1. Make sure to remove or move your current `nvim` directory (~/.config/nvim)
-2. git clone https://github.com/imbacraft/dusk.nvim ~/.config/nvim
-3. Run the `nvim` command and wait for the plugins to be installed.
-4. Reload `nvim` and run :PackerSync (SPC p s).
-5. Ready to go!
+1. Make sure to remove or move your current `nvim` directory (~/.config/nvim), if it exists.
+2. git clone https://github.com/imbacraft/dusk.nvim
+3. Copy or Move the `nvim` folder to ~/.config/ 
+4. Run the `nvim` command and wait for the plugins to be installed.
+5. Reload `nvim` and run :PackerSync (SPC p s).
+6. Ready to go!
 
 ## Directory Structure
 
