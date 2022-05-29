@@ -1,5 +1,3 @@
--- Kudos to https://github.com/ChristianChiarulli/nvim
-
 --Startup performance
 require "plugins.impatient"
 

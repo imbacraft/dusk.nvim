@@ -6,7 +6,7 @@ Dusk is a lightweight minimal neovim config written in lua, oriented for full st
 
 <img src="./showcase/dashboard.png" alt="Dashboard" title="Dashboard">
 <img src="./showcase/javacode.png" alt="Javacode" title="Javacode">
-
+<img src="./showcase/nvimtree.png" alt="Javacode" title="Javacode">
 
 ## Design Philosophy
 
@@ -17,7 +17,7 @@ The goal is to create an IDE experience with exactly the necessary functionaliti
 Dusk is designed according following principles (inspired by doom-emacs):
 
 - Gotta go fast. Startup and run-time performance are priorities.
-- Aisthetic Minimalism. Clutter on the screen is to be avoided. No fancy colors either.
+- Aesthetic Minimalism. Clutter on the screen is to be avoided. No fancy colors either.
 - Functional completeness. Minimalism does not sacrifice the full necessary functionality of an IDE.
 - Intuitive, consistent keybinding. f = find, s = search, b = buffer etc.
 - Extensibility. Code base that is understandable and commented where possible, to help you configure it to your needs.
@@ -25,6 +25,8 @@ Dusk is designed according following principles (inspired by doom-emacs):
 - Opinionated, but not stubborn. Dusk is about reasonable defaults and curated opinions, but use as little or as much of it as you like.
 
 I encourage you to try out this config and adjust it to your preferences.
+
+## Features
 
 ## Dependencies
 
@@ -42,7 +44,7 @@ I encourage you to try out this config and adjust it to your preferences.
 4. Reload `nvim` and run :PackerSync (SPC p s).
 5. Ready to go!
 
-### Directory Structure
+## Directory Structure
 
 1. The entry file is `init.lua`. 
 2. The `lua` folder contains all the configuration.
@@ -52,7 +54,16 @@ I encourage you to try out this config and adjust it to your preferences.
 6. The `jars` folder contains the necessary jars for Java debugging and testing. If you want to build them from source yourself, see "Java Debugging and Testing" section.
 7. The `ftplugin` folder contains the configuration files for the language servers. Currently only java is configured.
 
-## Java Debugging and Testing
+## Credits
+
+1. Kudos to https://github.com/ChristianChiarulli/nvim for providing the configuration for the Java Language server.
+2. Aesthetics for Dusk were inspired by https://github.com/shaunsingh/nyoom.nvim.
+3. Basic configuration files were inspired by https://github.com/LunarVim/Neovim-from-scratch.
+4. Folder structure inspired by https://github.com/abyo/nvim-windows.
+
+## Miscellaneous
+
+### Java Debugging and Testing
 
 ```
 git clone git@github.com:microsoft/java-debug.git
@@ -67,7 +78,7 @@ npm install
 npm run build-plugin
 ```
 
-## JSON formatting
+### JSON formatting
 
 1. sudo apt install jq in Ubuntu/Debian 
 2. sudo dnf install jq on Fedora/RHEL/CentOS
