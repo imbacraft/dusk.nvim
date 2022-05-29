@@ -11,6 +11,7 @@ Dusk is a lightweight neovim config written in lua with a special bent for java 
 ## Design Philosophy
 
 Dusk aims to strike a middle ground between the one-size-fits-all configs, who try to squeeze as much functionality as possible, and super minimal configs such as nyoom.nvim (which is great and you should try it too).
+But with a little preference towards minimalism. Like the Dusk, between dark and light, but towards dark!
 
 The goal is to create an IDE experience with exactly the necessary functionalities (no more, no less). 
 
