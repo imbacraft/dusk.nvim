@@ -15,7 +15,7 @@ But with a little preference towards minimalism. Like the Dusk, between dark and
 
 The goal is to create an IDE experience with exactly the necessary functionalities (no more, no less). 
 
-Dusk is designed according following principles (inspired by doom-emacs):
+Dusk is designed against the following principles (inspired by doom-emacs):
 
 - Gotta go fast. Startup and run-time performance are priorities.
 - Aesthetic Minimalism. Clutter on the screen is to be avoided. No fancy colors either.
