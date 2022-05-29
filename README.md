@@ -1,6 +1,6 @@
 # Dusk Neovim
 
-Dusk is a lightweight minimal neovim config written in lua, oriented for full stack developers, especially java developers.
+Dusk is a lightweight neovim config written in lua with a special bent for java developers.
 
 ## Showcase
 
@@ -26,7 +26,24 @@ Dusk is designed according following principles (inspired by doom-emacs):
 
 I encourage you to try out this config and adjust it to your preferences.
 
-## Features
+## Highlight Features
+
+- Native LSP
+- Syntax highlighting via nvim-treesitter
+- Explore files via nvim-tree 
+- Fuzzy finder via Telescope 
+
+## Colorschemes
+
+Supported colorschemes are:
+
+1. All base16 themes (default is twilight).
+2. Doom-one.
+3. All the colorschemes from https://github.com/LunarVim/Colorschemes.
+
+Change colorscheme while editing by SPC f c.
+
+Of course you can add any colorscheme you want!
 
 ## Dependencies
 
@@ -40,7 +57,7 @@ I encourage you to try out this config and adjust it to your preferences.
 
 1. Make sure to remove or move your current `nvim` directory (~/.config/nvim)
 2. git clone https://github.com/imbacraft/dusk.nvim ~/.config/nvim
-3. Run `nvim` and wait for the plugins to be installed.
+3. Run the `nvim` command and wait for the plugins to be installed.
 4. Reload `nvim` and run :PackerSync (SPC p s).
 5. Ready to go!
 
@@ -58,26 +75,24 @@ I encourage you to try out this config and adjust it to your preferences.
 
 1. Kudos to https://github.com/ChristianChiarulli/nvim for providing the configuration for the Java Language server.
 2. Aesthetics for Dusk were inspired by https://github.com/shaunsingh/nyoom.nvim.
-3. Basic configuration files were inspired by https://github.com/LunarVim/Neovim-from-scratch.
-4. Folder structure inspired by https://github.com/abyo/nvim-windows.
 
 ## Miscellaneous
 
 ### Java Debugging and Testing
 
+Jars required for Java debugging and testing are included in the jars folder.
+But if you want to build them yourself from source, do the following:
 ```
-git clone git@github.com:microsoft/java-debug.git
-cd java-debug/
-./mvnw clean install
+1. git clone https://github.com/microsoft/java-debug
+2. cd java-debug/
+3. ./mvnw clean install
 ```
-
 ```
-git clone git@github.com:microsoft/vscode-java-test.git
-cd vscode-java-test
-npm install
-npm run build-plugin
+1. https://github.com/Microsoft/vscode-java-test
+2. cd vscode-java-test
+3. npm install
+4. npm run build-plugin
 ```
-
 ### JSON formatting
 
 1. sudo apt install jq in Ubuntu/Debian 

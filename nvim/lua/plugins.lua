@@ -76,10 +76,9 @@ return packer.startup(function(use)
   -----------------------------------------------
 
   -- Colorschemes
-  use "lunarvim/darkplus.nvim"
   use "RRethy/nvim-base16"
   use "NTBBloodbath/doom-one.nvim"
-  use 'sainnhe/gruvbox-material'                      
+  use "LunarVim/Colorschemes"                    
 
   -- Buffer (Tab) line
   use "akinsho/bufferline.nvim"-- 
