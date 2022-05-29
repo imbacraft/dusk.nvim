@@ -53,6 +53,8 @@ Of course you can add any colorscheme you want!
 4. Nodejs (for copilot)
 5. A font with nerdfont icons (my suggestion: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
 
+NOTE: Run :checkhealth command to see what other dependencies you might be missing.
+
 ## Installation
 
 1. Make sure to remove or move your current `nvim` directory (~/.config/nvim), if it exists.
