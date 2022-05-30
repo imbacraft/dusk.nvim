@@ -78,7 +78,7 @@ return packer.startup(function(use)
   -- Colorschemes
   use "RRethy/nvim-base16"
   use "NTBBloodbath/doom-one.nvim"
-  use "LunarVim/Colorschemes"                    
+  use "LunarVim/Colorschemes"
 
   -- Buffer (Tab) line
   use "akinsho/bufferline.nvim"-- 
@@ -102,7 +102,7 @@ return packer.startup(function(use)
   use {"nvim-telescope/telescope.nvim", cmd = "Telescope"}
 
   -- Find projects
-  use "ahmedkhalf/project.nvim"
+  use {"ahmedkhalf/project.nvim", cmd = "ProjectRoot"}
 
  --------------------------------------
          -- Autocompletion --
@@ -135,7 +135,7 @@ return packer.startup(function(use)
   use {"mfussenegger/nvim-jdtls"}
 
   --  Formatters
-  use "jose-elias-alvarez/null-ls.nvim"               -- Inject LSP diagnostics, code actions ...
+  use {"jose-elias-alvarez/null-ls.nvim", event="BufRead"}               -- Inject LSP diagnostics, code actions ...
 
 
   --LSP diagnostics    
@@ -198,20 +198,6 @@ return packer.startup(function(use)
 
   --Csv
   use {"mechatroner/rainbow_csv", ft = "csv"}
- 
-  --Org
-  use {'nvim-orgmode/orgmode', config = function()
-       require('orgmode').setup{}
-       require('orgmode').setup_ts_grammar()
-       end, run = ":TSUpdate org"
-      }
-  use {"akinsho/org-bullets.nvim", config = function()
-  require("org-bullets").setup {
-    symbols = { "◉", "○", "✸", "✿" }
-      }
-  end
-      }
-
 
 --------------------------------------
              -- Git --
@@ -224,7 +210,7 @@ return packer.startup(function(use)
   end
 }
   use {"f-person/git-blame.nvim", cmd="GitBlameToggle"}
-  use "https://github.com/rhysd/conflict-marker.vim"
+  use {"https://github.com/rhysd/conflict-marker.vim", event="BufRead"}
 
 
 --------------------------------------
@@ -242,6 +228,7 @@ return packer.startup(function(use)
 
   -- Treesitter 
   use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}      -- Syntax highlighting
+  use "nvim-treesitter/nvim-treesitter-textobjects"               -- Additional text objects
   use {"windwp/nvim-ts-autotag"}                                  -- Auto close tags
   use {"windwp/nvim-autopairs"}                                   -- Autoclose quotes, parentheses etc.
 

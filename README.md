@@ -31,10 +31,11 @@ I encourage you to try out this config and adjust it to your preferences.
 
 - Native LSP
 - Syntax highlighting via nvim-treesitter
+- Java Unit Testing with vscode-java-test
 - Explore files via nvim-tree 
 - Fuzzy finder via Telescope
 - Zen mode for distraction-free coding.
-- Notes with Markdown or Org mode.
+- Notes with Markdown
 
 ## Colorschemes
 
