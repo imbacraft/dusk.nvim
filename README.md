@@ -6,7 +6,7 @@ Dusk is a lightweight, aesthetically minimal neovim config written in lua with a
 
 <img src="./showcase/dashboard.png" alt="Dashboard" title="Dashboard">
 <img src="./showcase/javacode.png" alt="Javacode" title="Javacode">
-<img src="./showcase/nvimtree.png" alt="Javacode" title="Javacode">
+<img src="./showcase/nvimtree.png" alt="Nvimtree" title="Nvimtree">
 
 ## Design Philosophy
 
@@ -49,19 +49,26 @@ Of course you can add any colorscheme you want!
 
 ## Dependencies
 
-1. Neovim version >= 0.70
+1. Neovim version >= 0.7.0
 2. Git 2.23+
 3. Ripgrep (for telescope)
 4. Nodejs (for copilot)
-5. A font with nerdfont icons (my suggestion: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
+5. Java 11 (for LSP)
+6. A font with nerdfont icons (my suggestion: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
 
 NOTE: Run :checkhealth command to see what other dependencies you might be missing.
 
 ## Installation
 
-1. Make sure to remove or move your current `nvim` directory (~/.config/nvim), if it exists.
+| Platform | Supported |
+|:--------:|:---------:|
+|  Windows |     ❌    |
+|   macOS  |     ✅    |
+|   Linux  |     ✅    |
+
+1. Make sure to remove or move your current `nvim` directory (`~/.config/nvim`), if it exists.
 2. git clone https://github.com/imbacraft/dusk.nvim
-3. Copy or Move the `nvim` folder to ~/.config/ 
+3. Copy or Move the `nvim` folder to `~/.config/` 
 4. Run the `nvim` command and wait for the plugins to be installed.
 5. Reload `nvim` and run :PackerSync (SPC p s).
 6. Ready to go!
