@@ -1,6 +1,6 @@
 # Dusk Neovim
 
-Dusk is a lightweight, aesthetically minimal neovim config written in lua with a special bent for java developers.
+Dusk is a lightweight, aesthetically minimal Neovim config, written in Lua, able to provide for web and Java development. 
 
 ## Showcase
 
