@@ -102,7 +102,7 @@ return packer.startup(function(use)
   use {"nvim-telescope/telescope.nvim", cmd = "Telescope"}
 
   -- Find projects
-  use {"ahmedkhalf/project.nvim", cmd = "ProjectRoot"}
+  use "ahmedkhalf/project.nvim"
 
  --------------------------------------
          -- Autocompletion --
@@ -112,7 +112,6 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-path"                              -- Cmp source for path
   use "hrsh7th/cmp-nvim-lsp"                          -- Cmp source for LSP client
   use "hrsh7th/cmp-nvim-lua"                          -- Cmp source for nvim lua
-  use "hrsh7th/cmp-cmdline"                           -- Cmp source for vim's cmdline
   use "saadparwaiz1/cmp_luasnip"                      -- Luasnip completion source
 
   -- Snippets
@@ -123,7 +122,7 @@ return packer.startup(function(use)
               -- LSP --
  --------------------------------------
   --  Copilot
-  use "zbirenbaum/copilot.lua"                        -- Github Copilot
+  use "zbirenbaum/copilot.lua"                        -- Github Copilot in lua
 
   -- LSP
   use "neovim/nvim-lspconfig"                         -- Enable native LSP
@@ -135,7 +134,7 @@ return packer.startup(function(use)
   use {"mfussenegger/nvim-jdtls"}
 
   --  Formatters
-  use {"jose-elias-alvarez/null-ls.nvim", event="BufRead"}               -- Inject LSP diagnostics, code actions ...
+  use "jose-elias-alvarez/null-ls.nvim"               -- Inject LSP diagnostics, code actions, formatters ...
 
 
   --LSP diagnostics    
@@ -150,13 +149,13 @@ return packer.startup(function(use)
 --------------------------------------
 
   --Terminal
-  use {"akinsho/toggleterm.nvim"} -- Cannot lazyload for some reason.
+  use "akinsho/toggleterm.nvim" -- Cannot lazyload for some reason.
   
   --Show colors
   use {"norcalli/nvim-colorizer.lua", event = "BufRead"}
 
   --Replace with sed cmd
-  use {"windwp/nvim-spectre"}
+  use {"windwp/nvim-spectre", event="BufRead"}
 
   --Zen Mode
   use {"folke/zen-mode.nvim", cmd="ZenMode"}
@@ -228,9 +227,9 @@ return packer.startup(function(use)
 
   -- Treesitter 
   use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}      -- Syntax highlighting
-  use "nvim-treesitter/nvim-treesitter-textobjects"               -- Additional text objects
   use {"windwp/nvim-ts-autotag"}                                  -- Auto close tags
   use {"windwp/nvim-autopairs"}                                   -- Autoclose quotes, parentheses etc.
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
