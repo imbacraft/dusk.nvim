@@ -81,15 +81,14 @@ return packer.startup(function(use)
   use "LunarVim/Colorschemes"
 
   -- Buffer (Tab) line
-  use "akinsho/bufferline.nvim"-- 
-  use "moll/vim-bbye" 
+  use "akinsho/bufferline.nvim"--
+  use "moll/vim-bbye"
 
   -- Status Line
   use 'nvim-lualine/lualine.nvim'
 
   --Dashboard
   use "goolord/alpha-nvim"
-
 
   --------------------------------------
   -- File Navigation and Fuzzy Search --
@@ -99,7 +98,7 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-tree.lua"
 
   -- Telescope
-  use {"nvim-telescope/telescope.nvim", cmd = "Telescope"}
+  use "nvim-telescope/telescope.nvim"
 
   -- Find projects
   use "ahmedkhalf/project.nvim"
@@ -172,7 +171,7 @@ return packer.startup(function(use)
 --------------------------------------
          -- Editing --
 --------------------------------------
-  
+
   --Surround
   use {
   "ur4ltz/surround.nvim",
@@ -193,7 +192,6 @@ return packer.startup(function(use)
   use {'preservim/vim-markdown', ft="markdown"}
   -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
   use {'dkarter/bullets.vim', ft="markdown"}
-
 
   --Csv
   use {"mechatroner/rainbow_csv", ft = "csv"}

@@ -126,3 +126,4 @@ Release version
 
 1. Introduced keymaps for window navigation
 2. Set shiftwidth = 4
+3. Don't lazyload Telescope
