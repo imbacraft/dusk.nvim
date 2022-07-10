@@ -144,7 +144,7 @@ local mappings = {
     name = "Find",
     c = { "<cmd>Telescope colorscheme<cr>", "Colorschemes" },
     f = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      "<cmd>Telescope find_files hidden=true no_ignore=true<cr>",
       "Files",
     },
     t = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Text in current Buffer"},
