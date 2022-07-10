@@ -114,3 +114,15 @@ But if you want to build them yourself from source, do the following:
 3. brew install jq in macOS
 4. Type the vim command: ":%!jq ." on a json file.
 5. Json file is formatted.
+
+
+## Changelog
+
+### 1.00
+
+Release version
+
+### 1.01 (10.07.2022)
+
+1. Introduced keymaps for window navigation
+2. Set shiftwidth = 4
