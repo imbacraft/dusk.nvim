@@ -116,7 +116,7 @@ local mappings = {
   r = {
     name = "Spectre Replace",
     r = { "<cmd>lua require('spectre').open()<cr>", "Replace in path" },
-    -- w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
+    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
     b = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace in the current Buffer" },
   },
 
@@ -149,7 +149,7 @@ local mappings = {
     },
     t = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Text in current Buffer"},
     b = { "<cmd>Telescope buffers<cr>", "Buffers"},
-    g = { "<cmd>Telescope live_grep theme=ivy<cr>", "Live Grep" },
+    p = { "<cmd>Telescope live_grep theme=ivy<cr>", "Text in current directory" },
     h = { "<cmd>Telescope help_tags<cr>", "Help" },
     l = { "<cmd>Telescope resume<cr>", "Last Search" },
     r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
