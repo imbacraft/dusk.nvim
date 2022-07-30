@@ -147,9 +147,7 @@ local mappings = {
       "<cmd>Telescope find_files hidden=true no_ignore=true<cr>",
       "Files",
     },
-    t = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Text in current Buffer"},
     b = { "<cmd>Telescope buffers<cr>", "Buffers"},
-    p = { "<cmd>Telescope live_grep theme=ivy<cr>", "Text in current directory" },
     h = { "<cmd>Telescope help_tags<cr>", "Help" },
     l = { "<cmd>Telescope resume<cr>", "Last Search" },
     r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
@@ -208,13 +206,10 @@ local mappings = {
   },
 
   s = {
-    name = "Surround",
-    ["."] = { "<cmd>lua require('surround').repeat_last()<cr>", "Repeat last surround" },
-    a = { "<cmd>lua require('surround').surround_add(true)<cr>", "Add" },
-    d = { "<cmd>lua require('surround').surround_delete()<cr>", "Delete" },
-    r = { "<cmd>lua require('surround').surround_replace()<cr>", "Replace" },
-    q = { "<cmd>lua require('surround').toggle_quotes()<cr>", "Change quote type" },
-    b = { "<cmd>lua require('surround').toggle_brackets()<cr>", "Change bracket type" },
+    name = "Search",
+    b = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "In current Buffer"},
+    p = { "<cmd>Telescope live_grep theme=ivy<cr>", "In Project" },
+
   },
 
   t = {

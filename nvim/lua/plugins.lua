@@ -172,16 +172,12 @@ return packer.startup(function(use)
          -- Editing --
 --------------------------------------
 
-  --Surround
-  use {
-  "ur4ltz/surround.nvim",
-  config = function()
-    require"surround".setup {mappings_style = "sandwich"}
-  end
-}
-
   --Commenting
-  use {'numToStr/Comment.nvim', event = 'BufRead'}
+  use {'numToStr/Comment.nvim',
+        config = function()
+        require('Comment').setup()
+        end
+      }
 
 --------------------------------------
       -- File type specific --
