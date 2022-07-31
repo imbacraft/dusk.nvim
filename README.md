@@ -128,3 +128,10 @@ Release version
 2. Set shiftwidth = 4
 3. Don't lazyload telescope
 4. Set Telescope find files to search for hidden files also.
+
+### 1.02 (31.07.2022)
+
+1. Removed Surround plugin as unneccesary.
+2. Additional keymap for "gcc" to comment.
+3. Modified search in buffer and search in Project keymaps (NEW: SPC s b, SPC s p)
+4. Updated lsp handlers and null-ls config.
