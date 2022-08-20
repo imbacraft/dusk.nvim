@@ -91,9 +91,14 @@ local m_opts = {
 local mappings = {
   ["d"] = { "<cmd>Alpha<cr>", "Dashboard" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["z"] = { "<cmd>ZenMode<cr>", "Zen" },  
   -- ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
+  
+  b = {
+    name = "Buffer",
+      c = { "<Cmd>bd!<Cr>", "Close current buffer" },
+      D = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+  },
 
   p = {
     name = "Packer",
@@ -194,6 +199,7 @@ local mappings = {
       "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
       "Next Diagnostic",
     },
+
     p = {
       "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>",
       "Prev Diagnostic",
@@ -220,6 +226,12 @@ local mappings = {
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
 
+  w = {
+    name = "Window",        
+    w = { "<C-w>w", "Last window" }
+    
+    },
+  
 }
 
 local vopts = {
