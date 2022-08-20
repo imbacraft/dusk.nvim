@@ -91,7 +91,6 @@ local m_opts = {
 local mappings = {
   ["d"] = { "<cmd>Alpha<cr>", "Dashboard" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["z"] = { "<cmd>ZenMode<cr>", "Zen" },  
   -- ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
@@ -147,6 +146,7 @@ local mappings = {
       "<cmd>Telescope find_files hidden=true no_ignore=true<cr>",
       "Files",
     },
+    p = {"<cmd>Telescope projects <CR>", "Projects"},    
     b = { "<cmd>Telescope buffers<cr>", "Buffers"},
     h = { "<cmd>Telescope help_tags<cr>", "Help" },
     l = { "<cmd>Telescope resume<cr>", "Last Search" },
@@ -230,11 +230,8 @@ local vopts = {
   noremap = true, -- use `noremap` when creating keymaps
   nowait = true, -- use `nowait` when creating keymaps
 }
-local vmappings = {
-  ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
-}
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
+-- which_key.register(vmappings, vopts)
 -- which_key.register(m_mappings, m_opts)

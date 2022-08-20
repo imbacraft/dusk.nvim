@@ -10,6 +10,9 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+--Doom emacs keymap for find file
+keymap("n", "<leader><Space>", "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", opts)
+
 -- Better window navigation
 keymap("n", "<leader>w<Left>", "<C-w>h", opts)
 keymap("n", "<leader>w<Up>", "<C-w>j", opts)
