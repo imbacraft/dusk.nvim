@@ -142,3 +142,4 @@ Release version
 1. Fixed deprecated variables in bufferline.lua.
 2. Added SPC SPC keymap for find file (for emacs users).
 3. Added SPC f p keymap for find projects.
+4. Added SPC b c and D for close current buffer and close all buffers respectively.
