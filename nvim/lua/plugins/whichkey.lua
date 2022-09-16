@@ -96,8 +96,8 @@ local mappings = {
   
   b = {
     name = "Buffer",
-      c = { "<Cmd>bd!<Cr>", "Close current buffer" },
-      D = { "<Cmd>%bd|e#|bd#<Cr>", "Delete all buffers" },
+      k = { "<Cmd>bd!<Cr>", "Kill current buffer" },
+      K = { "<Cmd>%bd|e#|bd#<Cr>", "Kill all buffers except current" },
   },
 
   p = {
@@ -192,7 +192,6 @@ local mappings = {
       "Workspace Diagnostics",
     },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-    F = { "<cmd>LspToggleAutoFormat<cr>", "Toggle Autoformat" },
     i = { "<cmd>LspInstall<cr>", "Install Server" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     n = {
@@ -208,7 +207,6 @@ local mappings = {
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
-    o = { "<cmd>SymbolsOutline<cr>", "Class Outline" },
   },
 
   s = {

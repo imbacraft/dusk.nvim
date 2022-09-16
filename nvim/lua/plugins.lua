@@ -159,9 +159,6 @@ return packer.startup(function(use)
   --Zen Mode
   use {"folke/zen-mode.nvim", cmd="ZenMode"}
  
-  --Class outline
-  use {"simrat39/symbols-outline.nvim", cmd = "SymbolsOutline"}
-
   --Testing
   use { "vim-test/vim-test",
          cmd = { "TestFile", "TestNearest", "TestSuite", "TestVisit" },
