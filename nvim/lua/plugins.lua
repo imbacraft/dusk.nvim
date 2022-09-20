@@ -81,8 +81,9 @@ return packer.startup(function(use)
   use "LunarVim/Colorschemes"
 
   -- Buffer (Tab) line
-  use "akinsho/bufferline.nvim"--
+  use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
+  use {"numtostr/BufOnly.nvim", cmd= "BufOnly"} -- Close all buffers except current 
 
   -- Status Line
   use 'nvim-lualine/lualine.nvim'
@@ -189,6 +190,18 @@ return packer.startup(function(use)
   --Csv
   use {"mechatroner/rainbow_csv", ft = "csv"}
 
+  --Norg
+  use {
+        "nvim-neorg/neorg",
+        config = function()
+            require('neorg').setup {
+                 load = {
+                    ["core.defaults"] = {}
+                }
+            }
+        end,
+        requires = "nvim-lua/plenary.nvim"
+    }
 --------------------------------------
              -- Git --
 --------------------------------------

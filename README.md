@@ -143,3 +143,9 @@ Release version
 2. Added SPC SPC keymap for find file (for emacs users).
 3. Added SPC f p keymap for find projects.
 4. Added SPC b k and K for close current buffer and close all buffers respectively.
+
+### 1.04 (20.09.2022)
+
+1. Added BufOnly plugin for better mass buffer closure performance.
+2. Added norg plugin for notes (works only for Neovim version 0.8.0++)
+3. Added more ensured installed treesitter parsers (json, javascript, css, typescript, bash, python)

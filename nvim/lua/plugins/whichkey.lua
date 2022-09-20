@@ -97,7 +97,7 @@ local mappings = {
   b = {
     name = "Buffer",
       k = { "<Cmd>bd!<Cr>", "Kill current buffer" },
-      K = { "<Cmd>%bd|e#|bd#<Cr>", "Kill all buffers except current" },
+      K = { "<Cmd>BufOnly<CR>", "Kill all buffers except current" },
   },
 
   p = {
