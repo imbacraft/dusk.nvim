@@ -187,10 +187,6 @@ local mappings = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
     d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-    w = {
-      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-      "Workspace Diagnostics",
-    },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInstall<cr>", "Install Server" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
