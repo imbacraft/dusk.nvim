@@ -43,7 +43,7 @@ local setup = {
     scroll_up = "<c-u>", -- binding to scroll up inside the popup
   },
   window = {
-    border = "rounded", -- none, single, double, shadow
+    border = "none", -- none, single, double, shadow
     position = "bottom", -- bottom, top
     margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
     padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
@@ -91,13 +91,17 @@ local m_opts = {
 local mappings = {
   ["d"] = { "<cmd>Alpha<cr>", "Dashboard" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["z"] = { "<cmd>ZenMode<cr>", "Zen" },  
+  ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
   -- ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
-  
+
   b = {
     name = "Buffer",
+      p = { "<Cmd>bprevious<cr>", "Previous buffer"},
+      n = { "<Cmd>bnext<cr>", "Next buffer"},
       k = { "<Cmd>bd!<Cr>", "Kill current buffer" },
       K = { "<Cmd>BufOnly<CR>", "Kill all buffers except current" },
+      l = { "<cmd>Telescope buffers<cr>", "Buffer List"},
+
   },
 
   p = {
@@ -113,7 +117,8 @@ local mappings = {
     name = "Options",
   w = { '<cmd>lua require("plugins.functions").toggle_option("wrap")<cr>', "Wrap Text" },
   r = { '<cmd>lua require("plugins.functions").toggle_option("relativenumber")<cr>', "Show Relative Code Line Numbers" },
-  a = { '<cmd>lua require("plugins.functions").toggle_option("number")<cr>', "Show Absolute Code Line Numbers " },
+  a = { '<cmd>lua require("plugins.functions").toggle_option("number")<cr>', "Show Absolute Code Line Numbers" },
+  h = { '<cmd>lua require("plugins.functions").toggle_option("cursorline")<cr>', "Highlight line where cursor is" },
   s = { '<cmd>lua require("plugins.functions").toggle_option("spell")<cr>', "Toggle Spell Check" },
   },
 
@@ -151,7 +156,7 @@ local mappings = {
       "<cmd>Telescope find_files hidden=true no_ignore=true<cr>",
       "Files",
     },
-    p = {"<cmd>Telescope projects <CR>", "Projects"},    
+    p = {"<cmd>Telescope projects <CR>", "Projects"},
     b = { "<cmd>Telescope buffers<cr>", "Buffers"},
     h = { "<cmd>Telescope help_tags<cr>", "Help" },
     l = { "<cmd>Telescope resume<cr>", "Last Search" },
@@ -221,11 +226,10 @@ local mappings = {
   },
 
   w = {
-    name = "Window",        
-    w = { "<C-w>w", "Last window" }
-    
+    name = "Window",
+        w = { "<C-w>w", "Last window" }
+
     },
-  
 }
 
 local vopts = {

@@ -1,9 +1,8 @@
 local options = {
   backup = false,                          -- creates a backup file
   clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
-  -- cmdheight = 1,                           -- more space in the neovim command line for displaying messages
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-  conceallevel = 2,                        -- so that `` is NOT visible in markdown files
+  -- conceallevel = 2,                        -- so that `` is NOT visible in markdown files
   fileencoding = "utf-8",                  -- the encoding written to a file
   hlsearch = true,                         -- highlight all matches on previous search pattern
   ignorecase = true,                       -- ignore case in search patterns
@@ -24,15 +23,15 @@ local options = {
   expandtab = true,                        -- convert tabs to spaces
   shiftwidth = 4,                          -- the number of spaces inserted for each indentation
   tabstop = 4,                             -- insert 4 spaces for a tab
-  cursorline = false,                      -- disable highlight the current line
-  number = false,                          -- disable showing the numbers of the code lines
-  relativenumber = false,                  -- set relative numbered lines
+  cursorline = true,                      -- disable highlight the current line
+  number = true,                           -- show code lines
+  relativenumber = false,                  -- set relative numbered code lines
   numberwidth = 4,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                            -- display lines as one long line
   scrolloff = 8,                           -- is one of my fav
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
-  spell = false                            -- disable spell checking
+  spell = false,                           -- disable spell checking
 
 }
 
@@ -66,6 +65,9 @@ for _, plugin in pairs(disabled_built_ins) do
 end
 
 
+-- Enable folding in markdown files
+vim.g.markdown_folding = 1
+
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.opt.fillchars:append { eob = " " } -- hide tildes at the end of buffers
 vim.opt.fillchars:append { vert = " "} -- hide borders of split vertical windows (nvim tree)
@@ -74,4 +76,4 @@ vim.cmd "highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE"
 vim.cmd "highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE"
 
 --Enable fenced code blocks syntax highlighting in markdown files for these languages
-vim.g.vim_markdown_fenced_languages = 'c++=cpp', 'python', 'viml=vim', 'bash=sh', 'javascript=js', 'java', 'html', 'xml', 'markdown'
+-- vim.g.vim_markdown_fenced_languages = 'c++=cpp', 'python', 'viml=vim', 'bash=sh', 'javascript=js', 'java', 'html', 'xml', 'markdown'

@@ -6,7 +6,7 @@ end
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = 'base16',
+    theme = 'auto',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
     disabled_filetypes = {},
@@ -19,7 +19,7 @@ lualine.setup {
     lualine_c = {'filename'},
     lualine_x = {'encoding', 'filetype'},
     lualine_y = {''},
-    lualine_z = {{'location', color = { fg='grey', bg = 'gray21' }}}
+    lualine_z = {''}
   },
   inactive_sections = {
     lualine_a = {},

@@ -79,6 +79,8 @@ return packer.startup(function(use)
   use "RRethy/nvim-base16"
   use "NTBBloodbath/doom-one.nvim"
   use "LunarVim/Colorschemes"
+  use "EdenEast/nightfox.nvim"
+  use 'B4mbus/oxocarbon-lua.nvim'
 
   -- Buffer (Tab) line
   use "akinsho/bufferline.nvim"
@@ -182,26 +184,14 @@ return packer.startup(function(use)
 --------------------------------------
 
   --Markdown
-  use {'godlygeek/tabular', ft="markdown"}
-  use {'preservim/vim-markdown', ft="markdown"}
+  -- use {'godlygeek/tabular', ft="markdown"}
+  -- use {'preservim/vim-markdown', ft="markdown"}
   -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
   use {'dkarter/bullets.vim', ft="markdown"}
 
   --Csv
   use {"mechatroner/rainbow_csv", ft = "csv"}
 
-  --Norg
-  use {
-        "nvim-neorg/neorg",
-        config = function()
-            require('neorg').setup {
-                 load = {
-                    ["core.defaults"] = {}
-                }
-            }
-        end,
-        requires = "nvim-lua/plenary.nvim"
-    }
 --------------------------------------
              -- Git --
 --------------------------------------
