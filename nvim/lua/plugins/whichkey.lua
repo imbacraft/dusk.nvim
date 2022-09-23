@@ -100,7 +100,7 @@ local mappings = {
       n = { "<Cmd>bnext<cr>", "Next buffer"},
       k = { "<Cmd>bd!<Cr>", "Kill current buffer" },
       K = { "<Cmd>BufOnly<CR>", "Kill all buffers except current" },
-      l = { "<cmd>Telescope buffers<cr>", "Buffer List"},
+      b = { "<cmd>Telescope buffers<cr>", "Buffer List"},
 
   },
 
