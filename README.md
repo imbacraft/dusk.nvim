@@ -41,13 +41,13 @@ I encourage you to try out this config and adjust it to your preferences.
 
 Supported colorschemes are:
 
-1. All base16 themes (default is twilight).
-2. Doom-one.
-3. All the colorschemes from https://github.com/LunarVim/Colorschemes.
+1. All the colorschemes from https://github.com/LunarVim/Colorschemes (default is ferrum)
+2. All base16 themes.
+3. Doom-one (port from doom-emacs).
+4. Nightfox.
+5. oxocarbon-lua.
 
 Change colorscheme while editing by SPC f c.
-
-Of course you can add any colorscheme you want!
 
 ## Dependencies
 
@@ -149,3 +149,13 @@ Release version
 1. Added BufOnly plugin for better mass buffer closure performance.
 2. Added norg plugin for notes (works only for Neovim version 0.8.0++)
 3. Added more ensured installed treesitter parsers (json, javascript, css, typescript, bash, python)
+
+### 1.1 (24.09.2022) - Major update
+
+1. Migrated to mason.nvim (https://github.com/williamboman/mason.nvim/) from nvim-lsp-installer.
+2. Added jaq code runner (https://github.com/is0n/jaq-nvim).
+3. Changed default colorscheme (from base16-twilight to ferrum).
+4. Added more colorschemes to choose from (nightfox and oxocarbon-lua).
+5. Show absolute code line numbers by default.
+6. Removed code line indicator from statusline as unneccesary.
+7. Cleaned up many keymaps
