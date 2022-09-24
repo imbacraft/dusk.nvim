@@ -29,14 +29,13 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
 local workspace_dir = WORKSPACE_PATH .. project_name
 
--- TODO: Testing
-
 local bundles = {
   vim.fn.glob(
     home .. "/.config/nvim/jars/java-debug/com.microsoft.java.debug.plugin-*.jar"
   ),
 }
 
+--This line is required to have Java unit testing
 vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.config/nvim/jars/vscode-java-test/server/*.jar"), "\n"))
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
@@ -170,6 +169,7 @@ local config = {
     bundles = bundles,
   },
 }
+
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 require("jdtls").start_or_attach(config)
@@ -188,44 +188,16 @@ if not status_ok then
   return
 end
 
-local opts = {
-  mode = "n", -- NORMAL mode
-  prefix = "<leader>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
-
-local vopts = {
-  mode = "v", -- VISUAL mode
-  prefix = "<leader>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
-  noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
-}
 
 local mappings = {
   j = {
     name = "Java",
     o = { "<Cmd>lua require'jdtls'.organize_imports()<CR>", "Organize Imports" },
-    v = { "<Cmd>lua require('jdtls').extract_variable()<CR>", "Extract Variable" },
-    c = { "<Cmd>lua require('jdtls').extract_constant()<CR>", "Extract Constant" },
     t = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", "Test Method" },
     T = { "<Cmd>lua require'jdtls'.test_class()<CR>", "Test Class" },
     u = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
-  },
-}
-
-local vmappings = {
-  j = {
-    name = "Java",
-    v = { "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", "Extract Variable" },
-    c = { "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", "Extract Constant" },
-    m = { "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", "Extract Method" },
+    r = {"<Cmd>Jaq<CR>", "Run current Java file (without Maven)"}    
   },
 }
 
 which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
