@@ -173,9 +173,10 @@ local mappings = {
         name = "LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-        f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-        i = { "<cmd>LspInstall<cr>", "Install Server" },
-        I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+        f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format Buffer" },
+        i = { "<cmd>LspInstall<cr>", "Install LSP Server" },
+        I = { "<cmd>LspInfo<cr>", "Installed LSP servers Info" },
+        m = { "<cmd>Mason<cr>", "Mason LSP Installer Overview"},
         n = {
             "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
             "Next Diagnostic",

@@ -27,4 +27,4 @@ require "plugins.colorizer"
 require "plugins.spectre"
 require "plugins.zen-mode"
 require "plugins.functions"
-require("plugins.jaq")
+require "plugins.jaq"

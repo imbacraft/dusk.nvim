@@ -129,7 +129,9 @@ return packer.startup(function(use)
 
     -- LSP
     use "neovim/nvim-lspconfig" -- Enable native LSP
-    use "williamboman/nvim-lsp-installer" -- Language server installer
+    use "williamboman/mason.nvim" -- New LSP Installer
+    use "williamboman/mason-lspconfig.nvim" -- New LSP Installer
+    -- use "williamboman/nvim-lsp-installer" -- Language server installer
     use "antoinemadec/FixCursorHold.nvim" -- Fix lsp doc highlight
     use "tamago324/nlsp-settings.nvim" -- Configure LSP settings with json
 
