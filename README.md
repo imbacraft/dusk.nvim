@@ -6,7 +6,7 @@ Dusk is a lightweight, aesthetically minimal Neovim config, written in Lua, able
 
 <img src="./showcase/dashboard.png" alt="Dashboard" title="Dashboard">
 <img src="./showcase/javacode.png" alt="Javacode" title="Javacode">
-<img src="./showcase/xmlcode.png.png" alt="xmlcode" title="xmlcode">
+<img src="./showcase/xmlcode.png" alt="xmlcode" title="xmlcode">
 
 ## Design Philosophy
 
