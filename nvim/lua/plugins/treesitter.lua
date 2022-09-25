@@ -7,7 +7,7 @@ end
 require 'nvim-treesitter.install'.compilers = { "zig", "clang", "gcc" }
 
 configs.setup {
-  ensure_installed = {"java", "lua", "html", "json", "javascript", "typescript", "bash", "python", "sql", "gitignore"},
+  ensure_installed = {"java", "lua", "html", "json", "javascript", "typescript", "bash", "python", "sql", "gitignore", "markdown", "markdown_inline"},
   sync_install = false,
   -- NOTE: need to ignore installation of phpdoc parser because it is not ready for Mac m1 arm64 architecture
   ignore_install = { "phpdoc", "tree-sitter-phpdoc" }, -- List of parsers to ignore installing
