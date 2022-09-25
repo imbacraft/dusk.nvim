@@ -41,7 +41,7 @@ I encourage you to try out this config and adjust it to your preferences.
 
 Supported colorschemes are:
 
-1. All the colorschemes from https://github.com/LunarVim/Colorschemes (default is ferrum)
+1. All the colorschemes from https://github.com/LunarVim/Colorschemes (default is aurora)
 2. All base16 themes.
 3. Doom-one (port from doom-emacs).
 4. Nightfox.
@@ -87,8 +87,7 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
 
 ## Credits
 
-1. Kudos to https://github.com/ChristianChiarulli/nvim for providing the configuration for the Java Language server.
-2. Aesthetics for Dusk were inspired by https://github.com/shaunsingh/nyoom.nvim.
+Kudos to https://github.com/ChristianChiarulli/nvim for providing the configuration for the Java Language server.
 
 ## Miscellaneous
 
@@ -154,7 +153,7 @@ Release version
 
 1. Migrated to mason.nvim (https://github.com/williamboman/mason.nvim/) from nvim-lsp-installer.
 2. Added jaq code runner (https://github.com/is0n/jaq-nvim).
-3. Changed default colorscheme (from base16-twilight to ferrum).
+3. Changed default colorscheme (from base16-twilight to aurora).
 4. Added more colorschemes to choose from (nightfox and oxocarbon-lua).
 5. Show absolute code line numbers by default.
 6. Removed code line indicator from statusline as unneccesary.
