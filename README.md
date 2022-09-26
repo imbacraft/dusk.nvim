@@ -18,7 +18,7 @@ The goal is to create an IDE experience with exactly the necessary functionaliti
 Dusk is designed against the following principles (inspired by doom-emacs):
 
 - Gotta go fast. Startup and run-time performance are priorities.
-- Aesthetic Minimalism. Clutter on the screen is to be avoided. No fancy colors either.
+- Aesthetic Minimalism. Clutter on the screen is to be avoided.
 - Functional completeness. Minimalism does not sacrifice the full necessary functionality of an IDE.
 - Intuitive, consistent keybinding. f = find, s = search, b = buffer etc.
 - Extensibility. Code base that is understandable and commented where possible, to help you configure it to your needs.
@@ -41,7 +41,7 @@ I encourage you to try out this config and adjust it to your preferences.
 
 Supported colorschemes are:
 
-1. All the colorschemes from https://github.com/LunarVim/Colorschemes (default is aurora)
+1. All the colorschemes from https://github.com/LunarVim/Colorschemes (default is onedarkest)
 2. All base16 themes.
 3. Doom-one (port from doom-emacs).
 4. Nightfox.
@@ -153,7 +153,7 @@ Release version
 
 1. Migrated to mason.nvim (https://github.com/williamboman/mason.nvim/) from nvim-lsp-installer.
 2. Added jaq code runner (https://github.com/is0n/jaq-nvim).
-3. Changed default colorscheme (from base16-twilight to aurora).
+3. Changed default colorscheme (from base16-twilight to onedarkest).
 4. Added more colorschemes to choose from (nightfox and oxocarbon-lua).
 5. Show absolute code line numbers by default.
 6. Removed code line indicator from statusline as unneccesary.
