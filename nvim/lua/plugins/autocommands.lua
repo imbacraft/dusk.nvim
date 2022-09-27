@@ -19,6 +19,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "markdown" },
+  callback = function()
+    vim.cmd [[
+      set conceallevel=2
+    ]]
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   callback = function()
     vim.cmd [[

@@ -41,8 +41,8 @@ I encourage you to try out this config and adjust it to your preferences.
 
 Supported colorschemes are:
 
-1. All the colorschemes from https://github.com/LunarVim/Colorschemes (default is onedarkest)
-2. All base16 themes.
+1. All the colorschemes from https://github.com/LunarVim/Colorschemes 
+2. All base16 themes (default is base16-twilight).
 3. Doom-one (port from doom-emacs).
 4. Nightfox.
 5. oxocarbon-lua.
@@ -153,7 +153,6 @@ Release version
 
 1. Migrated to mason.nvim (https://github.com/williamboman/mason.nvim/) from nvim-lsp-installer.
 2. Added jaq code runner (https://github.com/is0n/jaq-nvim).
-3. Changed default colorscheme (from base16-twilight to onedarkest).
 4. Added more colorschemes to choose from (nightfox and oxocarbon-lua).
 5. Show absolute code line numbers by default.
 6. Removed code line indicator from statusline as unneccesary.

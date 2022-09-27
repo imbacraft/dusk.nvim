@@ -81,7 +81,6 @@ return packer.startup(function(use)
     use "LunarVim/Colorschemes"
     use "EdenEast/nightfox.nvim"
     use 'B4mbus/oxocarbon-lua.nvim'
-    use 'ful1e5/onedark.nvim'
 
     -- Buffer (Tab) line
     use "akinsho/bufferline.nvim"
