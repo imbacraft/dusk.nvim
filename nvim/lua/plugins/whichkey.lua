@@ -43,7 +43,7 @@ local setup = {
         scroll_up = "<c-u>", -- binding to scroll up inside the popup
     },
     window = {
-        border = "none", -- none, single, double, shadow
+        border = "single", -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
@@ -176,7 +176,7 @@ local mappings = {
         f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format Buffer" },
         i = { "<cmd>LspInstall<cr>", "Install LSP Server" },
         I = { "<cmd>LspInfo<cr>", "Installed LSP servers Info" },
-        m = { "<cmd>Mason<cr>", "Mason LSP Installer Overview"},
+        m = { "<cmd>Mason<cr>", "Mason LSP Installer Overview" },
         n = {
             "<cmd>lua vim.diagnostic.goto_next({buffer=0})<CR>",
             "Next Diagnostic",
@@ -198,7 +198,15 @@ local mappings = {
         t = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", "Test Method" },
         T = { "<Cmd>lua require'jdtls'.test_class()<CR>", "Test Class" },
         u = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
-        r = { "<Cmd>Jaq<CR>", "Run current Java file (without Maven)" }
+        r = { "<Cmd>Jaq<CR>", "Execute Java (without Maven)" },
+    },
+
+    m = {
+        name = "Maven",
+        c = { "<Cmd>T mvn compile<CR>", "Maven compile" },
+        t = { "<Cmd>T mvn test<CR>", "Maven test" },
+        p = { "<Cmd>T mvn package<CR>", "Maven package" },
+        s = { "<Cmd>T mvn spring-boot:run<CR>", "Maven run Spring Boot application" }
     },
 
     s = {

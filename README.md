@@ -31,23 +31,25 @@ I encourage you to try out this config and adjust it to your preferences.
 
 - Native LSP
 - Syntax highlighting via nvim-treesitter
+- Java code runner with jaq
+- Java Maven commands with the help of neoterm
 - Java Unit Testing with vscode-java-test
 - Explore files via nvim-tree 
 - Fuzzy finder via Telescope
-- Zen mode for distraction-free coding.
+- Zen mode for distraction-free coding
 - Notes with Markdown
 
 ## Colorschemes
 
 Supported colorschemes are:
 
-1. All the colorschemes from https://github.com/LunarVim/Colorschemes 
-2. All base16 themes (default is base16-twilight).
-3. Doom-one (port from doom-emacs).
-4. Nightfox.
-5. oxocarbon-lua.
+1. Nightfox themes (https://github.com/EdenEast/nightfox.nvim) - Default is carbonfox.
+2. All the colorschemes from https://github.com/LunarVim/Colorschemes. 
+3. All base16 themes.
+4. Doom-one (port from doom-emacs).
 
 Change colorscheme while editing by SPC f c.
+Change default colorscheme in colorscheme.lua file.
 
 ## Dependencies
 
@@ -146,14 +148,15 @@ Release version
 ### 1.04 (20.09.2022)
 
 1. Added BufOnly plugin for better mass buffer closure performance.
-2. Added norg plugin for notes (works only for Neovim version 0.8.0++)
-3. Added more ensured installed treesitter parsers (json, javascript, css, typescript, bash, python)
+2. Added more ensured installed treesitter parsers (json, javascript, css, typescript, bash, python)
 
 ### 1.1 (24.09.2022) - Major update
 
 1. Migrated to mason.nvim (https://github.com/williamboman/mason.nvim/) from nvim-lsp-installer.
-2. Added jaq code runner (https://github.com/is0n/jaq-nvim).
-4. Added more colorschemes to choose from (nightfox and oxocarbon-lua).
-5. Show absolute code line numbers by default.
-6. Removed code line indicator from statusline as unneccesary.
-7. Cleaned up many keymaps
+2. Added jaq code runner (https://github.com/is0n/jaq-nvim), which can be used to run Java files.
+3. Added Neoterm to run terminal commands in a new buffer.
+4. Added keymaps to run Maven commands.
+5. Changed default colorscheme (carbonfox).
+6. Show absolute code line numbers by default.
+7. Removed code line indicator from statusline as unneccesary.
+8. Cleaned up many old keymaps.

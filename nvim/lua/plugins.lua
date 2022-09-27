@@ -85,7 +85,7 @@ return packer.startup(function(use)
     -- Buffer (Tab) line
     use "akinsho/bufferline.nvim"
     use "moll/vim-bbye"
-    use { "numtostr/BufOnly.nvim", cmd = "BufOnly" } -- Close all buffers except current
+    use { "numtostr/BufOnly.nvim" } -- Close all buffers except current
 
     -- Status Line
     use 'nvim-lualine/lualine.nvim'
@@ -143,13 +143,11 @@ return packer.startup(function(use)
     --  Formatters
     use "jose-elias-alvarez/null-ls.nvim" -- Inject LSP diagnostics, code actions, formatters ...
 
-
     --LSP diagnostics
     use {
         "folke/trouble.nvim",
         cmd = "TroubleToggle",
     }
-
 
     --------------------------------------
     -- Features --
@@ -157,6 +155,7 @@ return packer.startup(function(use)
 
     --Terminal
     use "akinsho/toggleterm.nvim" -- Cannot lazyload for some reason.
+    use "kassio/neoterm" --Open Terminal as new buffer. Also send shell commands to new buffer-terminal.
 
     --Show colors
     use { "norcalli/nvim-colorizer.lua", event = "BufRead" }
@@ -171,7 +170,6 @@ return packer.startup(function(use)
     use { "vim-test/vim-test",
         cmd = { "TestFile", "TestNearest", "TestSuite", "TestVisit" },
     }
-
 
     --------------------------------------
     -- Editing --
@@ -191,8 +189,7 @@ return packer.startup(function(use)
     --Markdown
     -- use {'godlygeek/tabular', ft="markdown"}
     -- use {'preservim/vim-markdown', ft="markdown"}
-    -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
-    use { 'dkarter/bullets.vim', ft = "markdown" }
+    use { 'dkarter/bullets.vim', ft = "markdown" } -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
 
     --Csv
     use { "mechatroner/rainbow_csv", ft = "csv" }

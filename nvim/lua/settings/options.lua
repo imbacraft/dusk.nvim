@@ -64,16 +64,12 @@ for _, plugin in pairs(disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
 
-
 -- Enable folding in markdown files
 vim.g.markdown_folding = 1
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.opt.fillchars:append { eob = " " } -- hide tildes at the end of buffers
-vim.opt.fillchars:append { vert = " "} -- hide borders of split vertical windows (nvim tree)
+vim.opt.fillchars:append { vert = " "} -- hide borders of split vertical windows (e.g. nvim tree)
 
-vim.cmd "highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE"
-vim.cmd "highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE"
-
---Enable fenced code blocks syntax highlighting in markdown files for these languages
--- vim.g.vim_markdown_fenced_languages = 'c++=cpp', 'python', 'viml=vim', 'bash=sh', 'javascript=js', 'java', 'html', 'xml', 'markdown'
+vim.cmd "highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE" --requred to hide tildes at the end of buffer
+vim.cmd "highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE" -- required to hide borders of split vertical windows
