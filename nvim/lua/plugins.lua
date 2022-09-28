@@ -71,6 +71,16 @@ return packer.startup(function(use)
     -- Measure nvim startup time
     use "dstein64/vim-startuptime"
 
+    --Auto save files
+    use({
+        "Pocco81/auto-save.nvim",
+        config = function()
+            require("auto-save").setup {
+                debounce_delay = 1500, -- saves the file at most every `debounce_delay` milliseconds
+            }
+        end,
+    })
+
     -----------------------------------------------
     -- Themes, Icons, Tree, Statusbar, Bufferbar --
     -----------------------------------------------
@@ -190,6 +200,9 @@ return packer.startup(function(use)
     -- use {'godlygeek/tabular', ft="markdown"}
     -- use {'preservim/vim-markdown', ft="markdown"}
     use { 'dkarter/bullets.vim', ft = "markdown" } -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+    use { 'vuciv/vim-bujo' }
 
     --Csv
     use { "mechatroner/rainbow_csv", ft = "csv" }

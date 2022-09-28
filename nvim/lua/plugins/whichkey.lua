@@ -69,6 +69,10 @@ local setup = {
     },
 }
 
+---------------------------------
+--NORMAL mode mappings
+---------------------------------
+
 local opts = {
     mode = "n", -- NORMAL mode
     prefix = "<leader>",
@@ -78,21 +82,19 @@ local opts = {
     nowait = true, -- use `nowait` when creating keymaps
 }
 
-local m_opts = {
-    mode = "n", -- NORMAL mode
-    prefix = "m",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
-}
-
-
 local mappings = {
-    ["d"] = { "<cmd>Alpha<cr>", "Dashboard" },
+    ["a"] = { "<cmd>Alpha<cr>", "Dashboard" },
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
     -- ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
+
+    d = {
+        name = "Todo",
+        p = { "<Cmd>Todo<cr>", "Open todo file for current project" },
+        o = { "<Cmd>Todo g<cr>", "Open global todo file" },
+        a = { "<Plug>BujoAddnormal", "Add new Task" },
+        c = { "<Plug>BujoChecknormal<Cr>", "Check current Task" },
+    },
 
     b = {
         name = "Buffer",
@@ -231,6 +233,9 @@ local mappings = {
     },
 }
 
+---------------------------------
+--VISUAL / INSERT mode mappings
+---------------------------------
 local vopts = {
     mode = "v", -- VISUAL mode
     prefix = "<leader>",
@@ -240,7 +245,10 @@ local vopts = {
     nowait = true, -- use `nowait` when creating keymaps
 }
 
+local vmappings = {
+
+}
+
 which_key.setup(setup)
 which_key.register(mappings, opts)
 -- which_key.register(vmappings, vopts)
--- which_key.register(m_mappings, m_opts)

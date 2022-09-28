@@ -97,13 +97,14 @@ Kudos to https://github.com/ChristianChiarulli/nvim for providing the configurat
 
 Jars required for Java debugging and testing are included in the jars folder.
 But if you want to build them yourself from source, do the following:
+
 ```
 1. git clone https://github.com/microsoft/java-debug
 2. cd java-debug/
 3. ./mvnw clean install
 ```
 ```
-1. https://github.com/Microsoft/vscode-java-test
+1. git clone https://github.com/Microsoft/vscode-java-test
 2. cd vscode-java-test
 3. npm install
 4. npm run build-plugin
@@ -116,12 +117,11 @@ But if you want to build them yourself from source, do the following:
 4. Type the vim command: ":%!jq ." on a json file.
 5. Json file is formatted.
 
-
 ## Changelog
 
 ### 1.00
 
-Release version
+Release
 
 ### 1.01 (10.07.2022)
 
@@ -153,10 +153,13 @@ Release version
 ### 1.1 (24.09.2022) - Major update
 
 1. Migrated to mason.nvim (https://github.com/williamboman/mason.nvim/) from nvim-lsp-installer.
-2. Added jaq code runner (https://github.com/is0n/jaq-nvim), which can be used to run Java files.
+2. Added jaq code runner (https://github.com/is0n/jaq-nvim), which can be used to run Java files (SPC + j + r).
 3. Added Neoterm to run terminal commands in a new buffer.
-4. Added keymaps to run Maven commands.
-5. Changed default colorscheme (carbonfox).
-6. Show absolute code line numbers by default.
-7. Removed code line indicator from statusline as unneccesary.
-8. Cleaned up many old keymaps.
+4. Added keymaps to run Maven commands (SPC + m).
+5. Added https://github.com/vuciv/vim-bujo plugin for easy Project TODO management with markdown files and created related keymaps (SPC + d).
+6. Added markdown preview plugin.
+7. Added autosave plugin (https://github.com/Pocco81/auto-save.nvim).
+8. Changed default colorscheme (carbonfox).
+9. Show absolute code line numbers by default.
+10. Removed code line indicator from statusline as unneccesary.
+11. Cleaned up many old keymaps.
