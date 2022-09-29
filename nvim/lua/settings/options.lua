@@ -45,7 +45,7 @@ local disabled_built_ins = {
   "getscriptPlugin",
   "gzip",
   "logipat",
-  -- "netrw",  -- If you disable netrw, you can't use gx to open links in browser
+  "netrw",  -- If you disable netrw, you can't use gx to open links in browser
   "netrwPlugin",
   "netrwSettings",
   "netrwFileHandlers",
@@ -56,7 +56,8 @@ local disabled_built_ins = {
   "vimballPlugin",
   "zip",
   "zipPlugin",
-  "tohmtl"
+  "tohmtl",
+  "matchparen",
 
 }
 

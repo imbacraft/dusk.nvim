@@ -15,14 +15,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     vim.cmd [[packadd packer.nvim]]
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
-
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
@@ -69,9 +61,12 @@ return packer.startup(function(use)
     use "folke/which-key.nvim"
 
     -- Measure nvim startup time
-    use "dstein64/vim-startuptime"
+    use {"dstein64/vim-startuptime", cmd="StartupTime"}
 
-    --Auto save files
+    --Replace native matchparen.vim for performance
+    use 'monkoose/matchparen.nvim'
+
+    --Auto save
     use({
         "Pocco81/auto-save.nvim",
         config = function()
@@ -95,7 +90,7 @@ return packer.startup(function(use)
     -- Buffer (Tab) line
     use "akinsho/bufferline.nvim"
     use "moll/vim-bbye"
-    use { "numtostr/BufOnly.nvim" } -- Close all buffers except current
+    use {"numtostr/BufOnly.nvim", cmd="BufOnly" } -- Close all buffers except current
 
     -- Status Line
     use 'nvim-lualine/lualine.nvim'
@@ -140,7 +135,7 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig" -- Enable native LSP
     use "williamboman/mason.nvim" -- New LSP Installer
     use "williamboman/mason-lspconfig.nvim" -- New LSP Installer
-    -- use "williamboman/nvim-lsp-installer" -- Language server installer
+    -- use "williamboman/nvim-lsp-installer" -- LSP server installer
     use "antoinemadec/FixCursorHold.nvim" -- Fix lsp doc highlight
     use "tamago324/nlsp-settings.nvim" -- Configure LSP settings with json
 
@@ -164,8 +159,8 @@ return packer.startup(function(use)
     --------------------------------------
 
     --Terminal
-    use "akinsho/toggleterm.nvim" -- Cannot lazyload for some reason.
-    use "kassio/neoterm" --Open Terminal as new buffer. Also send shell commands to new buffer-terminal.
+    use {"akinsho/toggleterm.nvim"} -- Cannot lazyload for some reason.
+    use {"kassio/neoterm", cmd="T"} --Open Terminal as new buffer. Also send shell commands to new buffer-terminal.
 
     --Show colors
     use { "norcalli/nvim-colorizer.lua", event = "BufRead" }
