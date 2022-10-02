@@ -75,4 +75,4 @@ vim.opt.fillchars:append { vert = " "} -- hide borders of split vertical windows
 vim.cmd "highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE" --requred to hide tildes at the end of buffer
 vim.cmd "highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE" -- required to hide borders of split vertical windows
 
-vim.cmd"let g:bujo#window_width = 65" --Increase width of Bujo plugin window
+vim.cmd"let g:bujo#window_width = 60" --Increase width of Bujo plugin window

@@ -22,32 +22,33 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "markdown" },
     callback = function()
         vim.cmd [[
-      set conceallevel=0
+      set conceallevel=2
+      set wrap
     ]]
     end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-    callback = function()
-        vim.cmd [[
-      if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-    ]]
-    end,
-})
+-- vim.api.nvim_create_autocmd({ "BufEnter" }, {
+--     callback = function()
+--         vim.cmd [[
+--       if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+--     ]]
+--     end,
+-- })
 
-vim.api.nvim_create_autocmd({ "VimResized" }, {
-    callback = function()
-        vim.cmd "tabdo wincmd ="
-    end,
-})
-
-
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-    callback = function()
-        vim.cmd "set formatoptions-=cro"
-    end,
-})
-
+-- vim.api.nvim_create_autocmd({ "VimResized" }, {
+--     callback = function()
+--         vim.cmd "tabdo wincmd ="
+--     end,
+-- })
+--
+--
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+--     callback = function()
+--         vim.cmd "set formatoptions-=cro"
+--     end,
+-- })
+--
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     callback = function()
         vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
@@ -61,8 +62,8 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "VimEnter" }, {
-    callback = function()
-        vim.cmd "hi link illuminatedWord LspReferenceText"
-    end,
-})
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, {
+--     callback = function()
+--         vim.cmd "hi link illuminatedWord LspReferenceText"
+--     end,
+-- })

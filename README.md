@@ -10,8 +10,7 @@ Dusk is a lightweight, aesthetically minimal Neovim config, written in Lua, able
 
 ## Design Philosophy
 
-Dusk aims to strike a middle ground between the one-size-fits-all configs, who try to squeeze as much functionality as possible, and super minimal configs such as nyoom.nvim (which is great and you should try it too).
-But with a little preference towards minimalism. Like the Dusk, between dark and light, but towards dark!
+Dusk aims to strike a middle ground between the one-size-fits-all configs, who try to squeeze as much functionality as possible, and minimal configs such as nyoom.nvim. However, it maintains a little preference towards minimalism. Like the Dusk, between dark and light, but towards dark!
 
 The goal is to create an IDE experience with exactly the necessary functionalities (no more, no less). 
 
@@ -27,9 +26,9 @@ Dusk is designed against the following principles (inspired by doom-emacs):
 
 I encourage you to try out this config and adjust it to your preferences.
 
-## Highlight Features
+## Features
 
-- Native LSP
+- Native LSP and autocompletion
 - Syntax highlighting via nvim-treesitter
 - Java code runner with jaq
 - Java Maven commands with the help of neoterm
@@ -56,11 +55,13 @@ Change default colorscheme in colorscheme.lua file.
 1. Neovim version >= 0.7.0
 2. Git 2.23+
 3. Ripgrep (for telescope)
-4. Nodejs (for copilot)
-5. Java 11 (for LSP)
-6. A font with nerdfont icons (my suggestion: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
+4. Nodejs (for copilot and treesitter)
+5. Gcc package to be able to compile treesitter parsers (check your package manager for a gcc package)
+6. Treesitter-cli nodejs module (Check your package manager for a treesitter or treesitter-cli package)
+7. Java 11 (for Java LSP server)
+8. A font with nerdfont icons (my suggestion: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
 
-NOTE: Run :checkhealth command to see what other dependencies you might be missing.
+NOTE: Run :checkhealth command to see what other dependencies you might be missing and to receive help if you have problems with installation.
 
 ## Installation
 
@@ -72,10 +73,11 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
 
 1. Make sure to remove or move your current `nvim` directory (`~/.config/nvim`), if it exists.
 2. git clone https://github.com/imbacraft/dusk.nvim
-3. Copy or Move the `nvim` folder to `~/.config/` 
+3. Copy or Move the `nvim` folder from the cloned dusk.nvim project to your `~/.config/` folder. 
 4. Run the `nvim` command and wait for the plugins to be installed.
-5. Reload `nvim` and run :PackerSync (SPC p s).
-6. Ready to go!
+5. Enter the :qa! command to exit `nvim`.
+6. Re-run the `nvim` command and run :PackerSync (SPC p s).
+7. Ready to go!
 
 ## Directory Structure
 
@@ -95,8 +97,8 @@ Kudos to https://github.com/ChristianChiarulli/nvim for providing the configurat
 
 ### Java Debugging and Testing
 
-Jars required for Java debugging and testing are included in the jars folder.
-But if you want to build them yourself from source, do the following:
+The jars required for Java debugging and testing are included in the jars folder.
+However, if you want to build them yourself from source, do the following:
 
 ```
 1. git clone https://github.com/microsoft/java-debug
@@ -109,14 +111,6 @@ But if you want to build them yourself from source, do the following:
 3. npm install
 4. npm run build-plugin
 ```
-### JSON formatting
-
-1. sudo apt install jq in Ubuntu/Debian 
-2. sudo dnf install jq on Fedora/RHEL/CentOS
-3. brew install jq in macOS
-4. Type the vim command: ":%!jq ." on a json file.
-5. Json file is formatted.
-
 ## Changelog
 
 ### 1.00
@@ -156,10 +150,9 @@ Release
 2. Added jaq code runner (https://github.com/is0n/jaq-nvim), which can be used to run Java files (SPC + j + r).
 3. Added Neoterm to run terminal commands in a new buffer.
 4. Added keymaps to run Maven commands (SPC + m).
-5. Added https://github.com/vuciv/vim-bujo plugin for easy Project TODO management with markdown files and created related keymaps (SPC + d).
+5. Added https://github.com/vuciv/vim-bujo plugin for easy Project Agenda management with markdown files and created related keymaps (SPC + a).
 6. Added markdown preview plugin.
 7. Added autosave plugin (https://github.com/Pocco81/auto-save.nvim).
 8. Changed default colorscheme (carbonfox).
 9. Show absolute code line numbers by default.
-10. Removed code line indicator from statusline as unneccesary.
-11. Cleaned up many old keymaps.
+10. Cleaned up many old keymaps (ex. shift + Q).

@@ -52,6 +52,12 @@ return packer.startup(function(use)
     use 'kyazdani42/nvim-web-devicons'
     use "nvim-lua/popup.nvim"
 
+    --Replace native matchparen.vim with a lua alternative for performance
+    use { 'monkoose/matchparen.nvim',
+        config = function()
+            require('matchparen').setup()
+        end
+    }
 
     ----------------------
     -- General --
@@ -61,10 +67,7 @@ return packer.startup(function(use)
     use "folke/which-key.nvim"
 
     -- Measure nvim startup time
-    use {"dstein64/vim-startuptime", cmd="StartupTime"}
-
-    --Replace native matchparen.vim for performance
-    use 'monkoose/matchparen.nvim'
+    use { "dstein64/vim-startuptime", cmd = "StartupTime" }
 
     --Auto save
     use({
@@ -90,7 +93,7 @@ return packer.startup(function(use)
     -- Buffer (Tab) line
     use "akinsho/bufferline.nvim"
     use "moll/vim-bbye"
-    use {"numtostr/BufOnly.nvim", cmd="BufOnly" } -- Close all buffers except current
+    use { "numtostr/BufOnly.nvim", cmd = "BufOnly" } -- Close all buffers except current
 
     -- Status Line
     use 'nvim-lualine/lualine.nvim'
@@ -103,10 +106,10 @@ return packer.startup(function(use)
     --------------------------------------
 
     -- Nvim Tree
-    use "kyazdani42/nvim-tree.lua"
+    use { "kyazdani42/nvim-tree.lua" }
 
     -- Telescope
-    use "nvim-telescope/telescope.nvim"
+    use { "nvim-telescope/telescope.nvim", cmd = "Telescope" }
 
     -- Find projects
     use "ahmedkhalf/project.nvim"
@@ -134,14 +137,13 @@ return packer.startup(function(use)
     -- LSP
     use "neovim/nvim-lspconfig" -- Enable native LSP
     use "williamboman/mason.nvim" -- New LSP Installer
-    use "williamboman/mason-lspconfig.nvim" -- New LSP Installer
-    -- use "williamboman/nvim-lsp-installer" -- LSP server installer
-    use "antoinemadec/FixCursorHold.nvim" -- Fix lsp doc highlight
+    use "williamboman/mason-lspconfig.nvim" -- New LSP server Installer
+    -- use "williamboman/nvim-lsp-installer" -- Old LSP server installer
+    -- use "antoinemadec/FixCursorHold.nvim" -- Fix lsp doc highlight
     use "tamago324/nlsp-settings.nvim" -- Configure LSP settings with json
 
-    -- Java
+    -- Java LSP
     use { "mfussenegger/nvim-jdtls" }
-
     -- Code Runner
     use { "is0n/jaq-nvim" }
 
@@ -159,14 +161,7 @@ return packer.startup(function(use)
     --------------------------------------
 
     --Terminal
-    use {"akinsho/toggleterm.nvim"} -- Cannot lazyload for some reason.
-    use {"kassio/neoterm", cmd="T"} --Open Terminal as new buffer. Also send shell commands to new buffer-terminal.
-
-    --Show colors
-    use { "norcalli/nvim-colorizer.lua", event = "BufRead" }
-
-    --Replace with sed cmd
-    use { "windwp/nvim-spectre", event = "BufRead" }
+    use { "kassio/neoterm", cmd = "T" } --Send shell commands to new buffer-terminal.
 
     --Zen Mode
     use { "folke/zen-mode.nvim", cmd = "ZenMode" }
@@ -177,13 +172,32 @@ return packer.startup(function(use)
     }
 
     --------------------------------------
-    -- Editing --
+    -- Editing Enhancements --
     --------------------------------------
 
-    --Commenting
+    --Show colors
+    use { "norcalli/nvim-colorizer.lua" }
+
+    --Replace with sed cmd
+    use { "windwp/nvim-spectre" }
+
+    -- -- Commenting
     use { 'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
+        end
+    }
+
+    --Handy package with many lightweight editing tools
+    -- Check documentation at https://github.com/echasnovski/mini.nvim
+    use { 'echasnovski/mini.nvim',
+        config = function()
+            require('mini.align').setup()
+            -- require('mini.comment').setup()
+            require('mini.cursorword').setup()
+            require('mini.surround').setup()
+            require('mini.fuzzy').setup()
+            require('mini.ai').setup()
         end
     }
 
@@ -196,8 +210,9 @@ return packer.startup(function(use)
     -- use {'preservim/vim-markdown', ft="markdown"}
     use { 'dkarter/bullets.vim', ft = "markdown" } -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
-        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-    use { 'vuciv/vim-bujo' }
+        setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }) --Markdown preview
+    use { 'jghauser/follow-md-links.nvim' } --Follow md links with ENTER
+    use { "vuciv/vim-bujo" } --Handy Global and Project Agendas
 
     --Csv
     use { "mechatroner/rainbow_csv", ft = "csv" }
@@ -213,17 +228,17 @@ return packer.startup(function(use)
         end
     }
     use { "f-person/git-blame.nvim", cmd = "GitBlameToggle" }
-    use { "https://github.com/rhysd/conflict-marker.vim", event = "BufRead" }
-
+    -- use { "https://github.com/rhysd/conflict-marker.vim", event = "BufRead" }
+    use { 'akinsho/git-conflict.nvim', tag = "*", config = function()
+        require('git-conflict').setup()
+    end
+    }
 
     --------------------------------------
-    -- DAP --
+    -- DAP (Required to run unit tests)--
     --------------------------------------
-    use { "mfussenegger/nvim-dap", event = "BufRead" }
-    -- use "theHamsta/nvim-dap-virtual-text"
-    -- use "rcarriga/nvim-dap-ui"
-    use { "Pocco81/DAPInstall.nvim", event = "BufRead" }
-
+    use { "mfussenegger/nvim-dap" }
+    use { "Pocco81/DAPInstall.nvim" }
 
     -----------------------------------
     -- Treesitter --
@@ -233,7 +248,6 @@ return packer.startup(function(use)
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" } -- Syntax highlighting
     use { "windwp/nvim-ts-autotag" } -- Auto close tags
     use { "windwp/nvim-autopairs" } -- Autoclose quotes, parentheses etc.
-
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

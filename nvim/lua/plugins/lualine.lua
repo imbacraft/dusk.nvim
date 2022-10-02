@@ -15,7 +15,7 @@ lualine.setup {
   },
   sections = {
     lualine_a = {''},
-    lualine_b = {'branch', 'diff'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {'filename'},
     lualine_x = {'encoding', 'filetype'},
     lualine_y = {''},

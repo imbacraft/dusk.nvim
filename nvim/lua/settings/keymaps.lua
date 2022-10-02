@@ -28,6 +28,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<TAB>", ":bnext<CR>", opts)
+keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -39,9 +40,8 @@ keymap("v", ">", ">gv", opts)
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 
--- Custom
--- keymap("n", "<esc><esc>", "<cmd>nohlsearch<cr>", opts)
-keymap("n", "Q", "<cmd>Bdelete!<CR>", opts)
+-- Close Windows quickly with shift+Q
+keymap("n", "Q", "<cmd>close!<CR>", opts)
 
 --Search for visually selected word
 keymap("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts)

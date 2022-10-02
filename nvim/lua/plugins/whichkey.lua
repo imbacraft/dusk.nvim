@@ -17,7 +17,7 @@ local setup = {
             operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
             motions = false, -- adds help for motions
             text_objects = false, -- help for text objects triggered after entering an operator
-            windows = true, -- default bindings on <c-w>
+            windows = false, -- default bindings on <c-w>
             nav = true, -- misc bindings to work with windows
             z = true, -- bindings for folds, spelling and others prefixed with z
             g = true, -- bindings for prefixed with g
@@ -83,16 +83,15 @@ local opts = {
 }
 
 local mappings = {
-    ["a"] = { "<cmd>Alpha<cr>", "Dashboard" },
-    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    ["d"] = { "<cmd>Alpha<cr>", "Dashboard" },
+    ["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
     ["z"] = { "<cmd>ZenMode<cr>", "Zen" },
-    -- ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
 
-    d = {
-        name = "Todo",
-        p = { "<Cmd>Todo<cr>", "Open todo file for current project" },
-        o = { "<Cmd>Todo g<cr>", "Open global todo file" },
-        a = { "<Plug>BujoAddnormal", "Add new Task" },
+    a = {
+        name = "Agenda",
+        p = { "<Cmd>Todo<cr>", "Agenda for current project" },
+        a = { "<Cmd>Todo g<cr>", "Global Agenda" },
+        t = { "<Plug>BujoAddnormal", "Add new Task" },
         c = { "<Plug>BujoChecknormal<Cr>", "Check current Task" },
     },
 
@@ -100,7 +99,7 @@ local mappings = {
         name = "Buffer",
         p = { "<Cmd>bprevious<cr>", "Previous buffer" },
         n = { "<Cmd>bnext<cr>", "Next buffer" },
-        k = { "<Cmd>bd!<Cr>", "Kill current buffer" },
+        k = { "<Cmd>Bdelete!<Cr>", "Kill current buffer" },
         K = { "<Cmd>BufOnly<CR>", "Kill all buffers except current" },
         b = { "<cmd>Telescope buffers<cr>", "Buffer List" },
 
@@ -115,14 +114,16 @@ local mappings = {
         u = { "<cmd>PackerUpdate<cr>", "Update" },
     },
 
-    o = {
-        name = "Options",
+    t = {
+        name = "Toggle",
         w = { '<cmd>lua require("plugins.functions").toggle_option("wrap")<cr>', "Wrap Text" },
         r = { '<cmd>lua require("plugins.functions").toggle_option("relativenumber")<cr>',
-            "Show Relative Code Line Numbers" },
-        a = { '<cmd>lua require("plugins.functions").toggle_option("number")<cr>', "Show Absolute Code Line Numbers" },
-        h = { '<cmd>lua require("plugins.functions").toggle_option("cursorline")<cr>', "Highlight line where cursor is" },
-        s = { '<cmd>lua require("plugins.functions").toggle_option("spell")<cr>', "Toggle Spell Check" },
+            "Relative Code Line Numbers" },
+        a = { '<cmd>lua require("plugins.functions").toggle_option("number")<cr>', "Absolute Code Line Numbers" },
+        h = { '<cmd>lua require("plugins.functions").toggle_option("cursorline")<cr>', "Cursor Line Highlight" },
+        s = { '<cmd>lua require("plugins.functions").toggle_option("spell")<cr>', "Spell Check" },
+        t = { '<cmd>term<cr>', "Terminal" },
+        c = { "<cmd>let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>", "ConcealLevel" }
     },
 
     r = {
@@ -190,8 +191,15 @@ local mappings = {
         },
         l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
         q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+        r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable" },
         R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+    },
+
+    o = {
+        name = "Open",
+        p = { "<Cmd>!open .<CR>", "Open current directory in file explorer" },
+        l = { "<Cmd>silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>", "Open link in browser" },
+        f = { "<Cmd>!open %<cr>", "Open current file with system app" }
     },
 
     j = {
@@ -218,17 +226,10 @@ local mappings = {
 
     },
 
-    t = {
-        name = "Terminal",
-        n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-        f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-        h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-        v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-    },
-
     w = {
         name = "Window",
-        w = { "<C-w>w", "Last window" }
+        w = { "<C-w>w", "Last window" },
+        q = { "<cmd>q!<cr>", "Kill window" }
 
     },
 }

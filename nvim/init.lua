@@ -1,14 +1,11 @@
---Startup performance
-require "plugins.impatient"
+--Load Plugins
+require "plugins"
 
---Nvim Settings
+--Load Nvim Settings
 require "settings.options"
 require "settings.keymaps"
 
---Plugins
-require "plugins"
-
---Plugin settings
+--Load Plugin settings
 require "plugins.lsp"
 require "plugins.cmp"
 require "plugins.colorscheme"
@@ -19,7 +16,6 @@ require "plugins.autopairs"
 require "plugins.nvim-tree"
 require "plugins.bufferline"
 require "plugins.lualine"
-require "plugins.toggleterm"
 require "plugins.project"
 require "plugins.dashboard"
 require "plugins.whichkey"
