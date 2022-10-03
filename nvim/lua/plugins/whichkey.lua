@@ -205,10 +205,10 @@ local mappings = {
     j = {
         name = "Java",
         o = { "<Cmd>lua require'jdtls'.organize_imports()<CR>", "Organize Imports" },
-        t = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", "Test Method" },
-        T = { "<Cmd>lua require'jdtls'.test_class()<CR>", "Test Class" },
+        t = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", "Test Method (without Maven)" },
+        T = { "<Cmd>lua require'jdtls'.test_class()<CR>", "Test Class (without Maven)" },
         u = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
-        r = { "<Cmd>Jaq<CR>", "Execute Java (without Maven)" },
+        r = { "<Cmd>Jaq<CR>", "Execute Java" },
     },
 
     m = {
@@ -216,7 +216,8 @@ local mappings = {
         c = { "<Cmd>T mvn compile<CR>", "Maven compile" },
         t = { "<Cmd>T mvn test<CR>", "Maven test" },
         p = { "<Cmd>T mvn package<CR>", "Maven package" },
-        s = { "<Cmd>T mvn spring-boot:run<CR>", "Maven run Spring Boot application" }
+        s = { "<Cmd>T mvn spring-boot:run<CR>", "Maven run Spring Boot application" },
+        g = { "<Cmd>T mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4<CR>", "Create new standard Maven project" },
     },
 
     s = {
