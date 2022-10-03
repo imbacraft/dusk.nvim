@@ -181,20 +181,20 @@ return packer.startup(function(use)
     --Replace with sed cmd
     use { "windwp/nvim-spectre" }
 
-    -- -- Commenting
+    -- Commenting
     use { 'numToStr/Comment.nvim',
         config = function()
             require('Comment').setup()
         end
     }
 
-    --Handy package with many lightweight editing tools
+    --Text align
+    use 'Vonr/align.nvim'
+
+    --Handy package with many lightweight editing tools. Choose those that fit you.
     -- Check documentation at https://github.com/echasnovski/mini.nvim
     use { 'echasnovski/mini.nvim',
         config = function()
-            require('mini.align').setup()
-            -- require('mini.comment').setup()
-            require('mini.cursorword').setup()
             require('mini.surround').setup()
             require('mini.fuzzy').setup()
             require('mini.ai').setup()
