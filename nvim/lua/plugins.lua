@@ -195,6 +195,8 @@ return packer.startup(function(use)
     -- Check documentation at https://github.com/echasnovski/mini.nvim
     use { 'echasnovski/mini.nvim',
         config = function()
+            require('mini.jump').setup()
+            require('mini.jump2d').setup()
             require('mini.surround').setup()
             require('mini.fuzzy').setup()
             require('mini.ai').setup()
