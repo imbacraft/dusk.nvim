@@ -52,7 +52,9 @@ Change default colorscheme in colorscheme.lua file.
 
 ## Dependencies
 
-1. Neovim version >= 0.7.0
+For Dusk.nvim to work as intended, you need to have the following dependencies installed:
+
+1. Neovim version >= 0.8.0
 2. Git 2.23+
 3. Ripgrep (for telescope)
 4. Nodejs (for copilot and treesitter)
@@ -156,3 +158,8 @@ Release
 8. Changed default colorscheme (carbonfox).
 9. Show absolute code line numbers by default.
 10. Cleaned up many old keymaps (ex. shift + Q).
+
+### 1.11 (05.10.2022)
+
+1. Fixed deprecated client.resolved_capabilities.document_formatting in lsp handler.
+2. Removed filetype.lua plugin since it has become native in Neovim v.8.0.

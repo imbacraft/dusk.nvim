@@ -54,7 +54,7 @@ end
 --Highlight word under cursor
 
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_exec(
       [[
       augroup lsp_document_highlight

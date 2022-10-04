@@ -47,7 +47,6 @@ return packer.startup(function(use)
     ----------------------
     -- Improve startup time (source: https://alpha2phi.medium.com/neovim-for-beginners-performance-95687714c236)
     use "lewis6991/impatient.nvim"
-    use "nathom/filetype.nvim"
     use "nvim-lua/plenary.nvim"
     use 'kyazdani42/nvim-web-devicons'
     use "nvim-lua/popup.nvim"
@@ -139,11 +138,12 @@ return packer.startup(function(use)
     use "williamboman/mason.nvim" -- New LSP Installer
     use "williamboman/mason-lspconfig.nvim" -- New LSP server Installer
     -- use "williamboman/nvim-lsp-installer" -- Old LSP server installer
-    -- use "antoinemadec/FixCursorHold.nvim" -- Fix lsp doc highlight
+    -- use "antoinemadec/FixCursorHold.nvim" -- Fix lsp doc highlight -- This is not needed after https://github.com/neovim/neovim/pull/20198
     use "tamago324/nlsp-settings.nvim" -- Configure LSP settings with json
 
     -- Java LSP
     use { "mfussenegger/nvim-jdtls" }
+
     -- Code Runner
     use { "is0n/jaq-nvim" }
 
@@ -211,7 +211,7 @@ return packer.startup(function(use)
     use { 'dkarter/bullets.vim', ft = "markdown" } -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
         setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }) --Markdown preview
-    use { 'jghauser/follow-md-links.nvim' } --Follow md links with ENTER
+    use { 'jghauser/follow-md-links.nvim', ft="markdown" } --Follow md links with ENTER
     use { "vuciv/vim-bujo" } --Handy Global and Project Agendas
 
     --Csv

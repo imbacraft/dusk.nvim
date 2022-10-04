@@ -52,7 +52,7 @@ keymap("n", "<C-z>", "<cmd>ZenMode<cr>", opts)
 -- Open file under cursor with system app
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cWORD>'), 1)<CR>]], opts)
 
-
+--Keymaps for Text Align plugin
 vim.keymap.set('x', 'aa', function() require'align'.align_to_char(1, true)             end, opts) -- Aligns to 1 character, looking left
 vim.keymap.set('x', 'as', function() require'align'.align_to_char(2, true, true)       end, opts) -- Aligns to 2 characters, looking left and with previews
 vim.keymap.set('x', 'aw', function() require'align'.align_to_string(false, true, true) end, opts) -- Aligns to a string, looking left and with previews
