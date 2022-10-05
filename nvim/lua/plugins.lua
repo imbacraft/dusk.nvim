@@ -132,7 +132,15 @@ return packer.startup(function(use)
     -- LSP --
     --------------------------------------
     --  Copilot
-    use "zbirenbaum/copilot.lua" -- Github Copilot in lua
+    use {
+        "zbirenbaum/copilot.lua",
+        event = { "VimEnter" },
+        config = function()
+            vim.defer_fn(function()
+                require("copilot").setup()
+            end, 100)
+        end,
+    }
 
     -- LSP
     use "neovim/nvim-lspconfig" -- Enable native LSP
