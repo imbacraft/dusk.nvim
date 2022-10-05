@@ -73,6 +73,7 @@ return packer.startup(function(use)
         "Pocco81/auto-save.nvim",
         config = function()
             require("auto-save").setup {
+                trigger_events = { "TextChangedI", "TextChanged" }, -- vim events that trigger auto-save. See :h events
                 debounce_delay = 1500, -- saves the file at most every `debounce_delay` milliseconds
             }
         end,
@@ -108,7 +109,7 @@ return packer.startup(function(use)
     use { "kyazdani42/nvim-tree.lua" }
 
     -- Telescope
-    use { "nvim-telescope/telescope.nvim", cmd = "Telescope" }
+    use { "nvim-telescope/telescope.nvim" }
 
     -- Find projects
     use "ahmedkhalf/project.nvim"
@@ -182,11 +183,11 @@ return packer.startup(function(use)
     use { "windwp/nvim-spectre" }
 
     -- Commenting
-    use { 'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup()
-        end
-    }
+    -- use { 'numToStr/Comment.nvim',
+    --     config = function()
+    --         require('Comment').setup()
+    --     end
+    -- }
 
     --Text align
     use 'Vonr/align.nvim'
@@ -195,6 +196,7 @@ return packer.startup(function(use)
     -- Check documentation at https://github.com/echasnovski/mini.nvim
     use { 'echasnovski/mini.nvim',
         config = function()
+            require('mini.comment').setup()
             require('mini.jump').setup()
             require('mini.jump2d').setup()
             require('mini.surround').setup()
@@ -213,7 +215,7 @@ return packer.startup(function(use)
     use { 'dkarter/bullets.vim', ft = "markdown" } -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install",
         setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }) --Markdown preview
-    use { 'jghauser/follow-md-links.nvim', ft="markdown" } --Follow md links with ENTER
+    use { 'jghauser/follow-md-links.nvim', ft = "markdown" } --Follow md links with ENTER
     use { "vuciv/vim-bujo" } --Handy Global and Project Agendas
 
     --Csv

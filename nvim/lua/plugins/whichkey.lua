@@ -143,7 +143,6 @@ local mappings = {
         p = { "<cmd>Telescope projects <CR>", "Projects" },
         b = { "<cmd>Telescope buffers<cr>", "Buffers" },
         h = { "<cmd>Telescope help_tags<cr>", "Help" },
-        l = { "<cmd>Telescope resume<cr>", "Last Search" },
         r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
         R = { "<cmd>Telescope registers<cr>", "Registers" },
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
@@ -176,7 +175,7 @@ local mappings = {
         name = "LSP",
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
         d = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-        f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format Buffer" },
+        f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format Buffer" },
         i = { "<cmd>LspInstall<cr>", "Install LSP Server" },
         I = { "<cmd>LspInfo<cr>", "Installed LSP servers Info" },
         m = { "<cmd>Mason<cr>", "Mason LSP Installer Overview" },
@@ -224,7 +223,7 @@ local mappings = {
         name = "Search",
         b = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "In current Buffer" },
         p = { "<cmd>Telescope live_grep theme=ivy<cr>", "In Project" },
-
+        l = { "<cmd>Telescope resume<cr>", "Last Search" },
     },
 
     w = {

@@ -11,10 +11,10 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup {
   debug = false,
   sources = {
-    null_ls.builtins.formatting.google_java_format,
+    -- null_ls.builtins.formatting.google_java_format,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.eslint,
-    null_ls.builtins.code_actions.eslint,
+    -- null_ls.builtins.code_actions.eslint,
     -- null_ls.builtins.formatting.rustfmt,
   },
 }
