@@ -163,3 +163,5 @@ Release
 
 1. Fixed deprecated client.resolved_capabilities.document_formatting in lsp handler.
 2. Removed filetype.lua plugin since it has become native in Neovim v.8.0.
+3. Added treesitter textobjects (https://github.com/nvim-treesitter/nvim-treesitter-textobjects) for better selection experience.
+4. Cleand null-ls config and added shell script formatting.
