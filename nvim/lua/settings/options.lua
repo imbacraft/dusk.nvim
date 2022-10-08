@@ -2,7 +2,7 @@ local options = {
     backup = false,                          -- creates a backup file
     clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
     completeopt = { "menuone", "noselect" }, -- mostly just for cmp
-    -- conceallevel = 2,                        -- so that `` is NOT visible in markdown files
+    conceallevel = 0,                        -- so that `` is visible
     fileencoding = "utf-8",                  -- the encoding written to a file
     hlsearch = true,                         -- highlight all matches on previous search pattern
     ignorecase = true,                       -- ignore case in search patterns
@@ -21,18 +21,17 @@ local options = {
     updatetime = 400,                        -- faster completion (4000ms default)
     writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     expandtab = true,                        -- convert tabs to spaces
-    shiftwidth = 4,                          -- the number of spaces inserted for each indentation
-    tabstop = 4,                             -- insert 4 spaces for a tab
+    shiftwidth = 2,                          -- the number of spaces inserted for each indentation
+    tabstop = 2,                             -- insert 4 spaces for a tab
     cursorline = true,                       -- disable/enable highlight the current line
     number = true,                           -- show code lines
     relativenumber = false,                  -- relative numbered code lines
     numberwidth = 4,                         -- set number column width to 2 {default 4}
     signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
     wrap = false,                            -- display lines as one long line
-    scrolloff = 8,                           -- is one of my fav
-    guifont = "monospace:h17",               -- the font used in graphical neovim applications
+    sidescrolloff = 8,
+    -- scrolloff = 8, -- is one of my fav
     spell = false,                           -- disable spell checking
-
 }
 
 for k, v in pairs(options) do
@@ -58,7 +57,6 @@ local disabled_built_ins = {
     "zipPlugin",
     "tohmtl",
     "matchparen",
-
 }
 
 for _, plugin in pairs(disabled_built_ins) do
@@ -68,11 +66,11 @@ end
 -- Enable folding in markdown files
 vim.g.markdown_folding = 1
 
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.opt.fillchars:append { eob = " " } -- hide tildes at the end of buffers
-vim.opt.fillchars:append { vert = " " } -- hide borders of split vertical windows (e.g. nvim tree)
+vim.cmd("set whichwrap+=<,>,[,],h,l")
+vim.opt.fillchars:append({ eob = " " }) -- hide tildes at the end of buffers
+vim.opt.fillchars:append({ vert = " " }) -- hide borders of split vertical windows (e.g. nvim tree)
 
-vim.cmd "highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE" --requred to hide tildes at the end of buffer
-vim.cmd "highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE" -- required to hide borders of split vertical windows
+vim.cmd("highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE") --requred to hide tildes at the end of buffer
+vim.cmd("highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE") -- required to hide borders of split vertical windows
 
-vim.cmd "let g:bujo#window_width = 60" --Increase width of Bujo plugin window
+vim.cmd("let g:bujo#window_width = 60") --Increase width of Bujo plugin window

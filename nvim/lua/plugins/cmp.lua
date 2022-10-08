@@ -111,11 +111,11 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "nvim_lsp"},
-    { name = "nvim_lua",  max_item_count = 2}, -- Adjust max item counts to your preference
-    { name = "luasnip", max_item_count = 2},
-    { name = "buffer", max_item_count = 2},
-    { name = "path", max_item_count = 4},
+    { name = "path" },
+    { name = "nvim_lsp", keyword_length = 3}, --keyword_length : how many characters are necessary to trigger autocompletion
+    { name = "buffer", keyword_length = 3 },
+    { name = "luasnip", keyword_length = 2 },
+    { name = "nvim_lua", keyword_length = 3 },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,

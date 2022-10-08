@@ -24,7 +24,6 @@ M.server_capabilities = function()
     end)
 end
 
--- require "user.lsp.lsp-installer"
 require("plugins.lsp.mason")
 require("plugins.lsp.handlers").setup()
 require "plugins.lsp.null-ls"

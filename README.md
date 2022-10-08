@@ -122,9 +122,8 @@ Release
 ### 1.01 (10.07.2022)
 
 1. Introduced keymaps for window navigation
-2. Set shiftwidth = 4
-3. Don't lazyload telescope
-4. Set Telescope find files to search for hidden files also.
+2. Don't lazyload telescope
+3. Set Telescope find files to search for hidden files also.
 
 ### 1.02 (31.07.2022)
 
@@ -164,4 +163,4 @@ Release
 1. Fixed deprecated client.resolved_capabilities.document_formatting in lsp handler.
 2. Removed filetype.lua plugin since it has become native in Neovim v.8.0.
 3. Added treesitter textobjects (https://github.com/nvim-treesitter/nvim-treesitter-textobjects) for better selection experience.
-4. Cleand null-ls config and added shell script formatting.
+4. Cleaned null-ls config and added shell script formatting.
