@@ -27,8 +27,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		vim.cmd([[
       set conceallevel=2
       set wrap
-      setlocal foldlevel=0
-      let g:markdown_fold_style = 'nested'
     ]])
 	end,
 })
