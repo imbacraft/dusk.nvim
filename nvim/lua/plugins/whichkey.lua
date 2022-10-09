@@ -196,9 +196,7 @@ local mappings = {
 
 	o = {
 		name = "Open",
-		p = { "<Cmd>!open .<CR>", "Open current directory in file explorer" },
-		l = { "<Cmd>silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>", "Open link in browser" },
-		f = { "<Cmd>!open %<cr>", "Open current file with system app" },
+		p = { "<Cmd>!open .<CR>", "Open current directory in OS file explorer" },
 	},
 
 	j = {

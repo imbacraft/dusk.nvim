@@ -31,14 +31,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-	callback = function()
-		vim.cmd([[
-      if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-    ]])
-	end,
-})
-
 --Don't autostart new comment line after a comment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	callback = function()
