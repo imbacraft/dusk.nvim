@@ -75,6 +75,16 @@ local function lsp_keymaps(bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
+-- Set filetype of floating Documentation windows as markdown
+-- This is because in java LSP server the floating window does not render properly by default
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  local bufnr, winid = orig_util_open_floating_preview(contents, syntax, opts, ...)
+  vim.api.nvim_buf_set_option(bufnr, 'filetype', 'markdown')
+  print(bufnr, winid)
+end
+
+
 M.on_attach = function(client, bufnr)
 	if client.name == "jdt.ls" then
 		require("jdtls").setup_dap({ hotcodereplace = "auto" })
