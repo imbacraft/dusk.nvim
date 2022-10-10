@@ -176,6 +176,12 @@ return packer.startup(function(use)
 	--Testing
 	use({ "vim-test/vim-test", cmd = { "TestFile", "TestNearest", "TestSuite", "TestVisit" } })
 
+  --REST API requests
+	use({
+		"NTBBloodbath/rest.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
 	--------------------------------------
 	-- Editing Enhancements --
 	--------------------------------------
@@ -184,11 +190,12 @@ return packer.startup(function(use)
 	use({ "norcalli/nvim-colorizer.lua" })
 
 	--Replace with sed cmd
-	use({ "windwp/nvim-spectre" ,
-  		config = function()
-      require('spectre').setup()
-		end
-  })
+	use({
+		"windwp/nvim-spectre",
+		config = function()
+			require("spectre").setup()
+		end,
+	})
 
 	-- Commenting
 	-- use { 'numToStr/Comment.nvim',

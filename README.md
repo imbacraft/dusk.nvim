@@ -33,6 +33,7 @@ I encourage you to try out this config and adjust it to your preferences.
 - Java code runner with jaq
 - Java Maven commands with the help of neoterm
 - Java Unit Testing with vscode-java-test
+- Rest API requests with rest-nvim
 - Explore files via nvim-tree 
 - Fuzzy finder via Telescope
 - Zen mode for distraction-free coding
@@ -161,6 +162,11 @@ Release
 ### 1.11 (05.10.2022)
 
 1. Fixed deprecated client.resolved_capabilities.document_formatting in lsp handler.
-2. Removed filetype.lua plugin since it has become native in Neovim v.8.0.
+2. Removed filetype.lua plugin since it has become native in Neovim v.0.8.0.
 3. Added treesitter textobjects (https://github.com/nvim-treesitter/nvim-treesitter-textobjects) for better selection experience.
 4. Cleaned null-ls config and added shell script formatting.
+
+### 1.12 (10.10.2022)
+
+1. NEW FEATURE: Easy REST API requests with [rest-nvim](https://github.com/rest-nvim/rest.nvim).
+2. Fixed Nvim-Spectre config.

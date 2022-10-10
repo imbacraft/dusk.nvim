@@ -12,6 +12,7 @@ configs.setup({
 		"lua",
 		"html",
 		"json",
+    "http",
 		"javascript",
 		"typescript",
 		"bash",

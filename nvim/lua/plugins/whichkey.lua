@@ -128,10 +128,18 @@ local mappings = {
 	},
 
 	r = {
-		name = "Spectre Replace",
+		name = "Replace",
 		r = { "<cmd>lua require('spectre').open()<cr>", "Replace in path" },
 		w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
 		b = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace in the current Buffer" },
+	},
+
+	h = {
+		name = "HTTP Request",
+		r = { "<cmd>lua require('rest-nvim').run()<cr>", "Run request under cursor" },
+		p = { "<cmd>lua require('rest-nvim').run(true)<cr>", "Preview the request cURL command" },
+		l = { "<cmd>lua require('rest-nvim').last()<cr>", "Re-run last request" },
+    e = { "<cmd>e test_request.http<CR>", "Open test request file"}
 	},
 
 	f = {
@@ -246,9 +254,7 @@ local vopts = {
 	nowait = true, -- use `nowait` when creating keymaps
 }
 
-local vmappings = {
-
-}
+local vmappings = {}
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
