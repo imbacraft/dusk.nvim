@@ -139,7 +139,7 @@ local mappings = {
 		r = { "<cmd>lua require('rest-nvim').run()<cr>", "Run request under cursor" },
 		p = { "<cmd>lua require('rest-nvim').run(true)<cr>", "Preview the request cURL command" },
 		l = { "<cmd>lua require('rest-nvim').last()<cr>", "Re-run last request" },
-    e = { "<cmd>e test_request.http<CR>", "Open test request file"}
+    e = { "<cmd>e ~/.cache/myrequests/test_request.http<CR>", "Open test request file"}
 	},
 
 	f = {

@@ -72,12 +72,14 @@ return packer.startup(function(use)
 		"Pocco81/auto-save.nvim",
 		config = function()
 			require("auto-save").setup({
-				trigger_events = { "TextChangedI", "TextChanged" }, -- vim events that trigger auto-save. See :h events
-				debounce_delay = 3000, -- saves the file at most every `debounce_delay` milliseconds
+				trigger_events = { "CursorHold", "CursorHoldI" }, -- vim events that trigger auto-save. See :h events
+				debounce_delay = 2000, -- saves the file at most every `debounce_delay` milliseconds
 			})
 		end,
 	})
 
+	--Automatically create any non-existent directories before writing the buffer.
+	use({ "jghauser/mkdir.nvim" })
 	-----------------------------------------------
 	-- Themes, Icons, Tree, Statusbar, Bufferbar --
 	-----------------------------------------------
@@ -176,7 +178,7 @@ return packer.startup(function(use)
 	--Testing
 	use({ "vim-test/vim-test", cmd = { "TestFile", "TestNearest", "TestSuite", "TestVisit" } })
 
-  --REST API requests
+	--REST API requests
 	use({
 		"NTBBloodbath/rest.nvim",
 		requires = { "nvim-lua/plenary.nvim" },

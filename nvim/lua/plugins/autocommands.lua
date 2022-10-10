@@ -27,6 +27,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		vim.cmd([[
       set conceallevel=2
       set wrap
+      set foldlevel=99
     ]])
 	end,
 })

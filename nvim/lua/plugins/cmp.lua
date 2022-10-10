@@ -102,10 +102,10 @@ cmp.setup {
       -- NOTE: order matters
       vim_item.menu = ({
         nvim_lsp = "",
-        nvim_lua = "",
-        luasnip = "",
         buffer = "",
+        luasnip = "",
         path = "",
+        nvim_lua = "",
       })[entry.source.name]
       return vim_item
     end,
@@ -113,9 +113,9 @@ cmp.setup {
   sources = {
     { name = "path" },
     { name = "nvim_lsp", keyword_length = 3}, --keyword_length : how many characters are necessary to trigger autocompletion
-    { name = "buffer", keyword_length = 3 },
-    { name = "luasnip", keyword_length = 2 },
-    { name = "nvim_lua", keyword_length = 3 },
+    { name = "buffer", keyword_length = 3, max_item_count = 2},
+    { name = "luasnip", keyword_length = 2, max_item_count = 2 },
+    { name = "nvim_lua", keyword_length = 3, max_item_count = 2 },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
