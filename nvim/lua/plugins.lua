@@ -73,7 +73,7 @@ return packer.startup(function(use)
 		config = function()
 			require("auto-save").setup({
 				trigger_events = { "TextChangedI", "TextChanged" }, -- vim events that trigger auto-save. See :h events
-				debounce_delay = 1500, -- saves the file at most every `debounce_delay` milliseconds
+				debounce_delay = 3000, -- saves the file at most every `debounce_delay` milliseconds
 			})
 		end,
 	})
@@ -184,7 +184,11 @@ return packer.startup(function(use)
 	use({ "norcalli/nvim-colorizer.lua" })
 
 	--Replace with sed cmd
-	use({ "windwp/nvim-spectre" })
+	use({ "windwp/nvim-spectre" ,
+  		config = function()
+      require('spectre').setup()
+		end
+  })
 
 	-- Commenting
 	-- use { 'numToStr/Comment.nvim',
