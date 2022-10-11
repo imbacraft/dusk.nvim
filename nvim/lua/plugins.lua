@@ -73,7 +73,7 @@ return packer.startup(function(use)
 		config = function()
 			require("auto-save").setup({
 				trigger_events = { "CursorHold", "CursorHoldI" }, -- vim events that trigger auto-save. See :h events
-				debounce_delay = 2000, -- saves the file at most every `debounce_delay` milliseconds
+				debounce_delay = 500, -- saves the file at most every `debounce_delay` milliseconds
 			})
 		end,
 	})
@@ -205,6 +205,7 @@ return packer.startup(function(use)
 	--         require('Comment').setup()
 	--     end
 	-- }
+-- Using packer.nvim
 
 	--Text align
 	use("Vonr/align.nvim")

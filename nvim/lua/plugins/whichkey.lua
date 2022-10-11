@@ -200,6 +200,7 @@ local mappings = {
 		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable" },
 		R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+    t = { "<cmd>%s/\\s\\+$//e | :noh<cr>", "Remove trailing whitespace"},
 	},
 
 	o = {
