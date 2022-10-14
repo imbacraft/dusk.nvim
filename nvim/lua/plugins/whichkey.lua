@@ -100,7 +100,7 @@ local mappings = {
 		p = { "<Cmd>bprevious<cr>", "Previous buffer" },
 		n = { "<Cmd>bnext<cr>", "Next buffer" },
 		k = { "<Cmd>Bdelete!<Cr>", "Kill current buffer" },
-		K = { "<Cmd>BufOnly<CR>", "Kill all buffers except current" },
+		K = { "<cmd>%bd |edit # | bd#<cr>", "Kill all buffers except current" },
 		b = { "<cmd>Telescope buffers<cr>", "Buffer List" },
 	},
 
@@ -139,7 +139,7 @@ local mappings = {
 		r = { "<cmd>lua require('rest-nvim').run()<cr>", "Run request under cursor" },
 		p = { "<cmd>lua require('rest-nvim').run(true)<cr>", "Preview the request cURL command" },
 		l = { "<cmd>lua require('rest-nvim').last()<cr>", "Re-run last request" },
-    e = { "<cmd>e ~/.cache/myrequests/test_request.http<CR>", "Open test request file"}
+		e = { "<cmd>e ~/.cache/myrequests/test_request.http<CR>", "Open test request file" },
 	},
 
 	f = {
@@ -201,7 +201,7 @@ local mappings = {
 		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename variable" },
 		R = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
-    t = { "<cmd>%s/\\s\\+$//e | :noh<cr>", "Remove trailing whitespace"},
+		t = { "<cmd>%s/\\s\\+$//e | :noh<cr>", "Remove trailing whitespace" },
 	},
 
 	o = {

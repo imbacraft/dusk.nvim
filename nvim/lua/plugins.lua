@@ -101,7 +101,6 @@ return packer.startup(function(use)
 	-- Buffer (Tab) line
 	use("akinsho/bufferline.nvim")
 	use("moll/vim-bbye")
-	use({ "numtostr/BufOnly.nvim" }) -- Close all buffers except current
 
 	-- Status Line
 	use("nvim-lualine/lualine.nvim")
