@@ -66,6 +66,9 @@ end
 -- Enable folding in markdown files
 vim.g.markdown_folding = 1
 
+--Disable Git Blame on startup
+vim.g.gitblame_enabled = 0
+
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.opt.fillchars:append({ eob = " " }) -- hide tildes at the end of buffers
 vim.opt.fillchars:append({ vert = " " }) -- hide borders of split vertical windows (e.g. nvim tree)

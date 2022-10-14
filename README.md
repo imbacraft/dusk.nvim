@@ -34,6 +34,7 @@ I encourage you to try out this config and adjust it to your preferences.
 - Java Maven commands with the help of neoterm
 - Java Unit Testing with vscode-java-test
 - Rest API requests with rest-nvim
+- Git integration with LazyGit
 - Explore files via nvim-tree 
 - Fuzzy finder via Telescope
 - Zen mode for distraction-free coding
@@ -59,10 +60,11 @@ For Dusk.nvim to work as intended, you need to have the following dependencies i
 2. Git 2.23+
 3. Ripgrep (for telescope)
 4. Nodejs (for copilot and treesitter)
-5. Gcc package to be able to compile treesitter parsers (check your package manager for a gcc package)
-6. Treesitter-cli nodejs module (Check your package manager for a treesitter or treesitter-cli package)
-7. Java 11 (for Java LSP server)
-8. A font with nerdfont icons (my suggestion: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
+5. Neovim node client (npm install -g neovim) - [neovim/node-client](https://github.com/neovim/node-client) 
+6. "zig", "clang", or "gcc" executables to be able to compile treesitter parsers (check your package manager for one of these)
+7. Treesitter-cli nodejs module (Check your package manager for a treesitter or treesitter-cli package) 
+8. Java 11 (for Java LSP server)
+9. A font with nerdfont icons (my suggestion: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
 
 NOTE: Run :checkhealth command to see what other dependencies you might be missing and to receive help if you have problems with installation.
 
@@ -170,3 +172,8 @@ Release
 
 1. NEW FEATURE: Easy REST API requests with [rest-nvim](https://github.com/rest-nvim/rest.nvim).
 2. Fixed Nvim-Spectre config.
+
+### 1.13 (14.10.2022)
+
+1. Added [Neoscroll](https://github.com/karb94/neoscroll.nvim) for better scrolling experience.
+2. NEW FEATURE: Lazygit integration into neovim via [kdheepak/lazygit.nvim](https://github.com/kdheepak/lazygit.nvim). 

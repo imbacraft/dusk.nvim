@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ "User" }, {
 
 --Close specific windows with q
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
+	pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "startuptime" },
 	callback = function()
 		vim.cmd([[
       nnoremap <silent> <buffer> q :close<CR> 
@@ -44,12 +44,4 @@ local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
 	command = "silent! lua vim.highlight.on_yank()",
 	group = yankGrp,
-})
-
---Refresh code actions
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-	pattern = { "*.java" },
-	callback = function()
-		vim.lsp.codelens.refresh()
-	end,
 })

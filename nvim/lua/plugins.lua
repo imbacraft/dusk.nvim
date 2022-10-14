@@ -41,21 +41,13 @@ return packer.startup(function(use)
 	use("wbthomason/packer.nvim") -- Packer manage itself
 
 	----------------------
-	-- Dependencies --
+	-- Required plugins --
 	----------------------
 	-- Improve startup time (source: https://alpha2phi.medium.com/neovim-for-beginners-performance-95687714c236)
 	use("lewis6991/impatient.nvim")
 	use("nvim-lua/plenary.nvim")
 	use("kyazdani42/nvim-web-devicons")
 	use("nvim-lua/popup.nvim")
-
-	--Replace native matchparen.vim with a lua alternative for performance
-	use({
-		"monkoose/matchparen.nvim",
-		config = function()
-			require("matchparen").setup()
-		end,
-	})
 
 	----------------------
 	-- General --
@@ -67,14 +59,29 @@ return packer.startup(function(use)
 	-- Measure nvim startup time
 	use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
 
+	--Replace native matchparen.vim with a lua alternative for performance
+	use({
+		"monkoose/matchparen.nvim",
+		config = function()
+			require("matchparen").setup()
+		end,
+	})
+
 	--Auto save
 	use({
 		"Pocco81/auto-save.nvim",
 		config = function()
 			require("auto-save").setup({
-				trigger_events = { "CursorHold", "CursorHoldI" }, -- vim events that trigger auto-save. See :h events
-				debounce_delay = 500, -- saves the file at most every `debounce_delay` milliseconds
+				debounce_delay = 1500, -- saves the file at most every `debounce_delay` milliseconds
 			})
+		end,
+	})
+
+	--Smooth scrolling
+	use({
+		"karb94/neoscroll.nvim",
+		config = function()
+			require("neoscroll").setup()
 		end,
 	})
 
@@ -199,14 +206,6 @@ return packer.startup(function(use)
 		end,
 	})
 
-	-- Commenting
-	-- use { 'numToStr/Comment.nvim',
-	--     config = function()
-	--         require('Comment').setup()
-	--     end
-	-- }
--- Using packer.nvim
-
 	--Text align
 	use("Vonr/align.nvim")
 
@@ -255,8 +254,9 @@ return packer.startup(function(use)
 			require("gitsigns").setup()
 		end,
 	})
-	use({ "f-person/git-blame.nvim", cmd = "GitBlameToggle" })
-	-- use { "https://github.com/rhysd/conflict-marker.vim", event = "BufRead" }
+
+	use({ "f-person/git-blame.nvim" })
+
 	use({
 		"akinsho/git-conflict.nvim",
 		tag = "*",
@@ -265,6 +265,7 @@ return packer.startup(function(use)
 		end,
 	})
 
+	use({ "kdheepak/lazygit.nvim", cmd = "LazyGit" })
 	--------------------------------------
 	-- DAP (Required to run unit tests)--
 	--------------------------------------
