@@ -177,3 +177,4 @@ Release
 1. Added [Neoscroll](https://github.com/karb94/neoscroll.nvim) for better scrolling experience.
 2. NEW FEATURE: Lazygit integration into neovim via [kdheepak/lazygit.nvim](https://github.com/kdheepak/lazygit.nvim). 
 3. Replaced deprecated cmp.update_capabilities() with the new cmp.default_capabilities().
+4. Removed Zen mode as unneccesary.
