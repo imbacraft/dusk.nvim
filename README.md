@@ -37,7 +37,6 @@ I encourage you to try out this config and adjust it to your preferences.
 - Git integration with LazyGit
 - Explore files via nvim-tree 
 - Fuzzy finder via Telescope
-- Zen mode for distraction-free coding
 - Notes with Markdown
 
 ## Colorschemes

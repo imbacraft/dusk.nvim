@@ -178,9 +178,6 @@ return packer.startup(function(use)
 	--Terminal
 	use({ "kassio/neoterm", cmd = "T" }) --Send shell commands to new buffer-terminal.
 
-	--Zen Mode
-	use({ "folke/zen-mode.nvim", cmd = "ZenMode" })
-
 	--Testing
 	use({ "vim-test/vim-test", cmd = { "TestFile", "TestNearest", "TestSuite", "TestVisit" } })
 
