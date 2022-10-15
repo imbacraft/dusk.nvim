@@ -41,13 +41,10 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 
 -- Close Windows quickly with shift+Q
-keymap("n", "Q", "<cmd>close!<CR>", opts)
+keymap("n", "Q", "<cmd>close<CR>", opts)
 
 --Search for visually selected word
 keymap("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts)
-
---ZenMode
-keymap("n", "<C-z>", "<cmd>ZenMode<cr>", opts)
 
 -- Open file under cursor with system app
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cWORD>'), 1)<CR>]], opts)

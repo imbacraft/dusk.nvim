@@ -83,9 +83,10 @@ local opts = {
 }
 
 local mappings = {
+
 	["d"] = { "<cmd>Alpha<cr>", "Dashboard" },
+
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
-	["z"] = { "<cmd>ZenMode<cr>", "Zen" },
 
 	a = {
 		name = "Agenda",
