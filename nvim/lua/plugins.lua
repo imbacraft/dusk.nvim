@@ -129,7 +129,6 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-path") -- Cmp source for path
 	use("hrsh7th/cmp-nvim-lsp") -- Cmp source for LSP client
 	use("hrsh7th/cmp-nvim-lua") -- Cmp source for nvim lua
-	use("hrsh7th/cmp-cmdline") -- Cmp source for Vim commands
 	use("saadparwaiz1/cmp_luasnip") -- Luasnip completion source
 
 	-- Snippets
@@ -210,6 +209,7 @@ return packer.startup(function(use)
 	use({
 		"echasnovski/mini.nvim",
 		config = function()
+			require("mini.pairs").setup()
 			require("mini.comment").setup()
 			require("mini.jump").setup()
 			require("mini.jump2d").setup()
@@ -223,8 +223,6 @@ return packer.startup(function(use)
 	--------------------------------------
 
 	--Markdown
-	-- use {'godlygeek/tabular', ft="markdown"}
-	-- use {'preservim/vim-markdown', ft="markdown"}
 	use({ "dkarter/bullets.vim", ft = "markdown" }) -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
 	use({
 		"iamcco/markdown-preview.nvim",
@@ -276,7 +274,7 @@ return packer.startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- Syntax highlighting
 	use("nvim-treesitter/nvim-treesitter-textobjects") -- Extra text objects for better selecting
 	use({ "windwp/nvim-ts-autotag" }) -- Auto close tags
-	use({ "windwp/nvim-autopairs" }) -- Autoclose quotes, parentheses etc.
+	-- use({ "windwp/nvim-autopairs" }) -- Autoclose quotes, parentheses etc.
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
