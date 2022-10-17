@@ -95,8 +95,19 @@ return packer.startup(function(use)
 	use("RRethy/nvim-base16")
 	use("NTBBloodbath/doom-one.nvim")
 	use("LunarVim/Colorschemes")
-	use("EdenEast/nightfox.nvim")
 	use("B4mbus/oxocarbon-lua.nvim")
+	use({
+		"EdenEast/nightfox.nvim",
+		require("nightfox").setup({
+			palettes = {
+				-- Custom carbonfox with black background
+				carbonfox = {
+					bg0 = "#000000", -- Black background
+					bg1 = "#000000", -- Black background
+				},
+			},
+		}),
+	})
 
 	-- Buffer (Tab) line
 	use("akinsho/bufferline.nvim")
