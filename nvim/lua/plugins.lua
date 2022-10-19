@@ -153,7 +153,7 @@ return packer.startup(function(use)
   use("neovim/nvim-lspconfig") -- Enable native LSP
   use("williamboman/mason.nvim") -- New LSP Installer
   use("williamboman/mason-lspconfig.nvim") -- New LSP server Installer
-  use("tamago324/nlsp-settings.nvim") -- Configure LSP settings with json
+  -- use("tamago324/nlsp-settings.nvim") -- Configure LSP settings with json
 
   -- Java LSP
   use({ "mfussenegger/nvim-jdtls" })

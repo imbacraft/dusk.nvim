@@ -6,10 +6,10 @@ end
 -- Determine OS
 local home = os.getenv "HOME"
 if vim.fn.has "mac" == 1 then
-  WORKSPACE_PATH = home .. "/workspace/"
+  WORKSPACE_PATH = home .. "/.cache/jdtls/workspace/"
   CONFIG = "mac"
 elseif vim.fn.has "unix" == 1 then
-  WORKSPACE_PATH = home .. "/workspace/"
+  WORKSPACE_PATH = home .. "/.cache/jdtls/workspace/"
   CONFIG = "linux"
 else
   print "Unsupported system"
@@ -22,9 +22,6 @@ if root_dir == "" then
   return
 end
 
-local extendedClientCapabilities = jdtls.extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
-
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
 local workspace_dir = WORKSPACE_PATH .. project_name
@@ -34,6 +31,14 @@ local bundles = {
     home .. "/.config/nvim/jars/java-debug/com.microsoft.java.debug.plugin-*.jar"
   ),
 }
+
+local on_attach = function(client)
+	if client.name == "jdt.ls" then
+		require("jdtls").setup_dap({ hotcodereplace = "auto" })
+		require("jdtls.dap").setup_dap_main_class_configs()
+		vim.lsp.codelens.refresh()
+	end
+end
 
 --This line is required to have Java unit testing
 vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.config/nvim/jars/vscode-java-test/server/*.jar"), "\n"))
@@ -56,10 +61,8 @@ local config = {
     "-javaagent:" .. home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar",
     "-Xms1g",
     "--add-modules=ALL-SYSTEM",
-    "--add-opens",
-    "java.base/java.util=ALL-UNNAMED",
-    "--add-opens",
-    "java.base/java.lang=ALL-UNNAMED",
+    '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+    '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
     -- 💀
     "-jar",
@@ -81,8 +84,8 @@ local config = {
     workspace_dir,
   },
 
-  on_attach = require("plugins.lsp.handlers").on_attach,
-  capabilities = require("plugins.lsp.handlers").capabilities,
+  on_attach = on_attach,
+  -- capabilities = require("plugins.lsp.handlers").capabilities,
 
   -- 💀
   -- This is the default if not provided, you can remove it. Or adjust as needed.
@@ -138,7 +141,7 @@ local config = {
       },
     },
     contentProvider = { preferred = "fernflower" },
-    extendedClientCapabilities = extendedClientCapabilities,
+    -- extendedClientCapabilities = extendedClientCapabilities,
     sources = {
       organizeImports = {
         starThreshold = 9999,
@@ -180,5 +183,5 @@ vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._comple
 vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
 vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
 -- vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
-vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
+-- vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
 -- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"

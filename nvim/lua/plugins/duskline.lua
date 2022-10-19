@@ -13,7 +13,7 @@ local function branch_name()
 end
 
 --This autocommand is necessary to keep branch name updated
-vim.api.nvim_create_autocmd({"FileType", "BufEnter", "FocusGained"}, {
+vim.api.nvim_create_autocmd({"FileType"}, {
   callback = function()
     vim.b.branch_name = branch_name()
   end
