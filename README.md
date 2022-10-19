@@ -178,3 +178,9 @@ Release
 2. NEW FEATURE: Lazygit integration into neovim via [kdheepak/lazygit.nvim](https://github.com/kdheepak/lazygit.nvim). 
 3. Replaced deprecated cmp.update_capabilities() with the new cmp.default_capabilities().
 4. Removed Zen mode as unneccesary.
+
+### 1.14 (19.10.2022) - Performance upgrade
+
+1. Removed [lualine](https://github.com/nvim-lualine/lualine.nvim), created custom minimal Status Line for Dusk to gain performance increase.
+2. Removed null-ls, added [formatter.nvim](https://github.com/mhartington/formatter.nvim), for performance, since I used only formatters from that plugin.
+
