@@ -68,14 +68,14 @@ return packer.startup(function(use)
   })
 
   --Auto save
-  use({
-    "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup({
-        debounce_delay = 1500, -- saves the file at most every `debounce_delay` milliseconds
-      })
-    end,
-  })
+  -- use({
+  --   "Pocco81/auto-save.nvim",
+  --   config = function()
+  --     require("auto-save").setup({
+  --       debounce_delay = 1500, -- saves the file at most every `debounce_delay` milliseconds
+  --     })
+  --   end,
+  -- })
 
   --Smooth scrolling
   use({
@@ -96,7 +96,7 @@ return packer.startup(function(use)
   use({ "EdenEast/nightfox.nvim" })
 
   -- Buffer (Tab) line
-  use("akinsho/bufferline.nvim")
+  -- use("akinsho/bufferline.nvim")
 
   --Dashboard
   use("goolord/alpha-nvim")
@@ -111,7 +111,7 @@ return packer.startup(function(use)
     requires = {
       "nvim-tree/nvim-web-devicons", -- optional, for file icons
     },
-    tag = "nightly", -- optional, updated every week. (see issue #1193)
+    -- tag = "nightly", -- optional, updated every week. (see issue #1193)
     config = function()
       require("nvim-tree").setup({
         update_focused_file = {
@@ -184,6 +184,7 @@ return packer.startup(function(use)
   --REST API requests
   use({
     "NTBBloodbath/rest.nvim",
+    ft ="http",
     requires = { "nvim-lua/plenary.nvim" },
   })
 

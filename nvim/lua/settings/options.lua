@@ -9,7 +9,7 @@ local options = {
 	mouse = "a",                             -- allow the mouse to be used in neovim
 	pumheight = 10,                          -- pop up menu height
 	showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
-	showtabline = 1,                         -- Don't show tab line
+	showtabline = 0,                         -- Don't show tab line
 	smartcase = true,                        -- smart case
 	smartindent = true,                      -- make indenting smarter again
 	splitbelow = true,                       -- force all horizontal splits to go below current window
@@ -77,3 +77,14 @@ vim.cmd("highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE") --requred 
 vim.cmd("highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE") -- required to hide borders of split vertical windows
 
 vim.cmd("let g:bujo#window_width = 60") --Increase width of Bujo plugin window
+
+
+local M = {}
+
+function M.toggle_option(option)
+  local value = not vim.api.nvim_get_option_value(option, {})
+  vim.opt[option] = value
+  vim.notify(option .. " set to " .. tostring(value))
+end
+
+return M

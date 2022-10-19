@@ -1,22 +1,20 @@
 --Load Plugins
 require "plugins"
 
---Load Nvim Settings
+--Load Vim Settings
 require "settings.options"
 require "settings.keymaps"
-require "plugins.colorscheme"
+require "settings.colorscheme"
+require "settings.autocommands"
 
 --Load Plugin settings
 require "plugins.lsp"
 require "plugins.cmp"
-require "plugins.autocommands"
-require "plugins.bufferline"
-require "plugins.duskline"
 require "plugins.project"
+require "plugins.duskline"
 require "plugins.dashboard"
 require "plugins.whichkey"
 require "plugins.colorizer"
-require "plugins.functions"
 require "plugins.jaq"
 require "plugins.textalign"
 require "plugins.restnvim"

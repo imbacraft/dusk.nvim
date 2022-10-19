@@ -118,12 +118,12 @@ local mappings = {
 		name = "Toggle",
 		w = { '<cmd>lua require("plugins.functions").toggle_option("wrap")<cr>', "Wrap Text" },
 		r = {
-			'<cmd>lua require("plugins.functions").toggle_option("relativenumber")<cr>',
+			'<cmd>lua require("settings.options").toggle_option("relativenumber")<cr>',
 			"Relative Code Line Numbers",
 		},
-		a = { '<cmd>lua require("plugins.functions").toggle_option("number")<cr>', "Absolute Code Line Numbers" },
-		h = { '<cmd>lua require("plugins.functions").toggle_option("cursorline")<cr>', "Cursor Line Highlight" },
-		s = { '<cmd>lua require("plugins.functions").toggle_option("spell")<cr>', "Spell Check" },
+		a = { '<cmd>lua require("settings.options").toggle_option("number")<cr>', "Absolute Code Line Numbers" },
+		h = { '<cmd>lua require("settings.options").toggle_option("cursorline")<cr>', "Cursor Line Highlight" },
+		s = { '<cmd>lua require("settings.options").toggle_option("spell")<cr>', "Spell Check" },
 		t = { "<cmd>term<cr>", "Terminal" },
 		c = { "<cmd>let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>", "ConcealLevel" },
 	},
@@ -213,7 +213,6 @@ local mappings = {
 
 	j = {
 		name = "Java",
-		o = { "<Cmd>lua require'jdtls'.organize_imports()<CR>", "Organize Imports" },
 		t = { "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", "Test Method (without Maven)" },
 		T = { "<Cmd>lua require'jdtls'.test_class()<CR>", "Test Class (without Maven)" },
 		u = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
