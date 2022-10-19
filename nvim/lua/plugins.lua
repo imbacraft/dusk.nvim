@@ -122,7 +122,12 @@ return packer.startup(function(use)
 	})
 
 	-- Telescope
-	use({ "nvim-telescope/telescope.nvim" })
+	use({
+		"nvim-telescope/telescope.nvim",
+		config = function()
+			require("telescope").setup({})
+		end,
+	})
 
 	-- Find projects
 	use("ahmedkhalf/project.nvim")
