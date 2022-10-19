@@ -92,29 +92,15 @@ return packer.startup(function(use)
 	-----------------------------------------------
 
 	-- Colorschemes
-	use("RRethy/nvim-base16")
-	use("NTBBloodbath/doom-one.nvim")
-	use("LunarVim/Colorschemes")
 	use("B4mbus/oxocarbon-lua.nvim")
-	use({
-		"EdenEast/nightfox.nvim",
-		require("nightfox").setup({
-			palettes = {
-				-- Custom carbonfox with black background
-				carbonfox = {
-					bg0 = "#000000", -- Black background
-					bg1 = "#000000", -- Black background
-				},
-			},
-		}),
-	})
+	use({ "EdenEast/nightfox.nvim" })
 
 	-- Buffer (Tab) line
 	use("akinsho/bufferline.nvim")
 	use("moll/vim-bbye")
 
 	-- Status Line
-	use("nvim-lualine/lualine.nvim")
+	-- use("nvim-lualine/lualine.nvim")
 
 	--Dashboard
 	use("goolord/alpha-nvim")
@@ -124,7 +110,16 @@ return packer.startup(function(use)
 	--------------------------------------
 
 	-- Nvim Tree
-	use({ "kyazdani42/nvim-tree.lua" })
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional, for file icons
+		},
+		tag = "nightly", -- optional, updated every week. (see issue #1193)
+		config = function()
+			require("nvim-tree").setup()
+		end,
+	})
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })
