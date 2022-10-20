@@ -33,9 +33,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 --Don't autostart new comment line after a comment
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	callback = function()
 		vim.cmd("set formatoptions-=cro")
+    vim.cmd("highlight statusline ctermfg=NONE ctermbg=NONE guifg=#525252 guibg=NONE")
 	end,
 })
 

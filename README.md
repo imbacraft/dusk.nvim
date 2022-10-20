@@ -43,12 +43,10 @@ I encourage you to try out this config and adjust it to your preferences.
 
 Supported colorschemes are:
 
-1. Nightfox themes (https://github.com/EdenEast/nightfox.nvim) - Default is carbonfox.
-2. All the colorschemes from https://github.com/LunarVim/Colorschemes. 
-3. All base16 themes.
-4. Doom-one (port from doom-emacs).
+1. [Nightfox](https://github.com/EdenEast/nightfox.nvim) - Default is carbonfox.
+2. [Oxocarbon-lua](https://github.com/B4mbus/oxocarbon-lua.nvim) 
 
-Change colorscheme while editing by SPC f c.
+Change colorscheme while editing with SPC f c.
 Change default colorscheme in colorscheme.lua file.
 
 ## Dependencies
@@ -183,4 +181,4 @@ Release
 
 1. Removed [lualine](https://github.com/nvim-lualine/lualine.nvim), created custom minimal Status Line for Dusk to gain performance increase.
 2. Removed null-ls, added [formatter.nvim](https://github.com/mhartington/formatter.nvim), for performance, since I used only formatters from that plugin.
-
+3. Cleaned up LSP-handlers to make the code simpler and more readable.

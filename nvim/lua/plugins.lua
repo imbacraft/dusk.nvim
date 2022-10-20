@@ -67,15 +67,16 @@ return packer.startup(function(use)
     end,
   })
 
-  --Auto save
-  -- use({
-  --   "Pocco81/auto-save.nvim",
-  --   config = function()
-  --     require("auto-save").setup({
-  --       debounce_delay = 1500, -- saves the file at most every `debounce_delay` milliseconds
-  --     })
-  --   end,
-  -- })
+  -- Auto save
+  use({
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup({
+        trigger_events = {"CursorHold"},
+        debounce_delay = 1000, -- saves the file at most every `debounce_delay` milliseconds
+      })
+    end,
+  })
 
   --Smooth scrolling
   use({

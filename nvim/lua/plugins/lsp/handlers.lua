@@ -1,8 +1,8 @@
 local M = {}
 
----
+--------------------------------
 -- Global Config for all servers
----
+--------------------------------
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_status_ok then
@@ -66,7 +66,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+
+------------------------------
+-- Specific LSP servers config
+------------------------------
+
+--NOTE: jdtls setup is done in ftplugin/java.lua file because it requires special arguments
+
+lspconfig.sumneko_lua.setup({})
+lspconfig.jsonls.setup({})
+lspconfig.bashls.setup({})
+lspconfig.lemminx.setup({})
+lspconfig.emmet_ls.setup({})
+lspconfig.tsserver.setup({})
+
+
+----------------------
+-- Load Snippet Engine
+----------------------
 require('luasnip.loaders.from_vscode').lazy_load()
+
+
+----------------------------
+-- Global Diagnostics Config
+----------------------------
 
 M.setup = function()
   local signs = {
