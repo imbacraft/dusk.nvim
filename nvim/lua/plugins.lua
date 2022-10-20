@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use("lewis6991/impatient.nvim")
   use("nvim-lua/plenary.nvim")
   use("kyazdani42/nvim-web-devicons")
-  -- use("nvim-lua/popup.nvim")
+  use("nvim-lua/popup.nvim")
 
   ----------------------
   -- General --
@@ -123,12 +123,14 @@ return packer.startup(function(use)
   use({
     "nvim-telescope/telescope.nvim",
     config = function()
-      require("telescope").setup({})
+      require("telescope").setup({
+          path_display = { "smart" },
+      })
     end,
   })
 
   -- Find projects
-  use({"ahmedkhalf/project.nvim"})
+  use({ "ahmedkhalf/project.nvim" })
 
   --------------------------------------
   -- Autocompletion --
@@ -189,11 +191,15 @@ return packer.startup(function(use)
   --------------------------------------
 
   --Show colors
-  use({ "norcalli/nvim-colorizer.lua" })
+  use({ "norcalli/nvim-colorizer.lua", event = "CursorHold",
+    config = function()
+      require 'colorizer'.setup()
+    end })
 
   --Replace with sed cmd
   use({
     "windwp/nvim-spectre",
+    event = "CursorHold",
     config = function()
       require("spectre").setup()
     end,
@@ -231,7 +237,6 @@ return packer.startup(function(use)
     ft = { "markdown" },
   }) --Markdown preview
   use({ "jghauser/follow-md-links.nvim", ft = "markdown" }) --Follow md links with ENTER
-  use({ "vuciv/vim-bujo" }) --Handy Global and Project Agendas
 
   --Csv
   use({ "mechatroner/rainbow_csv", ft = "csv" })
@@ -247,10 +252,10 @@ return packer.startup(function(use)
     end,
   })
 
-  use({ "f-person/git-blame.nvim" })
+  use({ "f-person/git-blame.nvim", event = "CursorHold" })
 
   use({
-    "akinsho/git-conflict.nvim",
+    "akinsho/git-conflict.nvim", event = "CursorHold",
     tag = "*",
     config = function()
       require("git-conflict").setup()

@@ -88,14 +88,6 @@ local mappings = {
 
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "File Explorer" },
 
-	a = {
-		name = "Agenda",
-		p = { "<Cmd>Todo<cr>", "Agenda for current project" },
-		a = { "<Cmd>Todo g<cr>", "Global Agenda" },
-		t = { "<Plug>BujoAddnormal", "Add new Task" },
-		c = { "<Plug>BujoChecknormal<Cr>", "Check current Task" },
-	},
-
 	b = {
 		name = "Buffer",
 		p = { "<Cmd>bprevious<cr>", "Previous buffer" },

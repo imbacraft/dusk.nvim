@@ -1,6 +1,6 @@
 # Dusk Neovim
 
-Dusk is a lightweight, aesthetically minimal Neovim config, written in Lua, able to provide for web and Java development. 
+Dusk is a blazing fast Lua config suited for Full Stack Java development. 
 
 ## Showcase
 
@@ -22,7 +22,7 @@ Dusk is designed against the following principles (inspired by doom-emacs):
 - Intuitive, consistent keybinding. f = find, s = search, b = buffer etc.
 - Extensibility. Code base that is understandable and commented where possible, to help you configure it to your needs.
 - Close to metal. There's less between you and vanilla neovim by design. That's less to grok and less to work around when you tinker.
-- Opinionated, but not stubborn. Dusk is about reasonable defaults and curated opinions, but use as little or as much of it as you like.
+- Not Opinionated. Striving for sane defaults wherever possible.
 
 I encourage you to try out this config and adjust it to your preferences.
 
@@ -60,7 +60,7 @@ For Dusk.nvim to work as intended, you need to have the following dependencies i
 5. Neovim node client (npm install -g neovim) - [neovim/node-client](https://github.com/neovim/node-client) 
 6. "zig", "clang", or "gcc" executables to be able to compile treesitter parsers (check your package manager for one of these)
 7. Treesitter-cli nodejs module (Check your package manager for a treesitter or treesitter-cli package) 
-8. Java 11 (for Java LSP server)
+8. Java 17+ (for Java LSP server)
 9. A font with nerdfont icons (my suggestion: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack)
 
 NOTE: Run :checkhealth command to see what other dependencies you might be missing and to receive help if you have problems with installation.
@@ -80,16 +80,6 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
 5. Enter the :qa! command to exit `nvim`.
 6. Re-run the `nvim` command and run :PackerSync (SPC p s).
 7. Ready to go!
-
-## Directory Structure
-
-1. The entry file is `init.lua`. 
-2. The `lua` folder contains all the configuration.
-3. The `lua.plugins.lua` file defines the plugins to be used. Add or remove plugins here.
-4. The `lua.settings` folder contains the neovim settings and keybinds.
-5. The `lua.plugins` folder contains the configuration files for all the plugins.
-6. The `jars` folder contains the necessary jars for Java debugging and testing. If you want to build them from source yourself, see "Java Debugging and Testing" section.
-7. The `ftplugin` folder contains the configuration files for the language servers. Currently only java is configured.
 
 ## Credits
 
@@ -151,12 +141,11 @@ Release
 2. Added jaq code runner (https://github.com/is0n/jaq-nvim), which can be used to run Java files (SPC + j + r).
 3. Added Neoterm to run terminal commands in a new buffer.
 4. Added keymaps to run Maven commands (SPC + m).
-5. Added https://github.com/vuciv/vim-bujo plugin for easy Project Agenda management with markdown files and created related keymaps (SPC + a).
-6. Added markdown preview plugin.
-7. Added autosave plugin (https://github.com/Pocco81/auto-save.nvim).
-8. Changed default colorscheme (carbonfox).
-9. Show absolute code line numbers by default.
-10. Cleaned up many old keymaps (ex. shift + Q).
+5. Added markdown preview plugin.
+6. Added autosave plugin (https://github.com/Pocco81/auto-save.nvim).
+7. Changed default colorscheme (carbonfox).
+8. Show absolute code line numbers by default.
+9. Cleaned up many old keymaps (ex. shift + Q).
 
 ### 1.11 (05.10.2022)
 
