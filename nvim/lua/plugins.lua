@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use("lewis6991/impatient.nvim")
   use("nvim-lua/plenary.nvim")
   use("kyazdani42/nvim-web-devicons")
-  use("nvim-lua/popup.nvim")
+  -- use("nvim-lua/popup.nvim")
 
   ----------------------
   -- General --
@@ -72,7 +72,7 @@ return packer.startup(function(use)
     "Pocco81/auto-save.nvim",
     config = function()
       require("auto-save").setup({
-        trigger_events = {"CursorHold"},
+        trigger_events = { "CursorHold" },
         debounce_delay = 1000, -- saves the file at most every `debounce_delay` milliseconds
       })
     end,
@@ -109,10 +109,7 @@ return packer.startup(function(use)
   -- Nvim Tree
   use({
     "nvim-tree/nvim-tree.lua",
-    requires = {
-      "nvim-tree/nvim-web-devicons", -- optional, for file icons
-    },
-    -- tag = "nightly", -- optional, updated every week. (see issue #1193)
+    tag = "nightly", -- optional, updated every week. (see issue #1193)
     config = function()
       require("nvim-tree").setup({
         update_focused_file = {
@@ -136,16 +133,16 @@ return packer.startup(function(use)
   --------------------------------------
   -- Autocompletion --
   --------------------------------------
-  use("hrsh7th/nvim-cmp") -- Completion (cmp) plugin
-  use("hrsh7th/cmp-buffer") -- Cmp source for buffer words
-  use("hrsh7th/cmp-path") -- Cmp source for path
-  use("hrsh7th/cmp-nvim-lsp") -- Cmp source for LSP client
-  use("hrsh7th/cmp-nvim-lua") -- Cmp source for nvim lua
-  use("saadparwaiz1/cmp_luasnip") -- Luasnip completion source
-
-  -- Snippets
-  use("L3MON4D3/LuaSnip") -- Snippet engine
-  use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+  -- use("hrsh7th/nvim-cmp") -- Completion (cmp) plugin
+  -- use("hrsh7th/cmp-buffer") -- Cmp source for buffer words
+  -- use("hrsh7th/cmp-path") -- Cmp source for path
+  -- use("hrsh7th/cmp-nvim-lsp") -- Cmp source for LSP client
+  -- use("hrsh7th/cmp-nvim-lua") -- Cmp source for nvim lua
+  -- use("saadparwaiz1/cmp_luasnip") -- Luasnip completion source
+  --
+  -- -- Snippets
+  -- use("L3MON4D3/LuaSnip") -- Snippet engine
+  -- use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
   --------------------------------------
   -- LSP --
@@ -154,7 +151,6 @@ return packer.startup(function(use)
   use("neovim/nvim-lspconfig") -- Enable native LSP
   use("williamboman/mason.nvim") -- New LSP Installer
   use("williamboman/mason-lspconfig.nvim") -- New LSP server Installer
-  -- use("tamago324/nlsp-settings.nvim") -- Configure LSP settings with json
 
   -- Java LSP
   use({ "mfussenegger/nvim-jdtls" })
@@ -163,7 +159,6 @@ return packer.startup(function(use)
   use({ "is0n/jaq-nvim" })
 
   --  Formatters
-  -- use("jose-elias-alvarez/null-ls.nvim") -- Inject LSP diagnostics, code actions, formatters ...
   use { 'mhartington/formatter.nvim' }
 
   --LSP diagnostics
@@ -185,7 +180,7 @@ return packer.startup(function(use)
   --REST API requests
   use({
     "NTBBloodbath/rest.nvim",
-    ft ="http",
+    ft = "http",
     requires = { "nvim-lua/plenary.nvim" },
   })
 
@@ -204,14 +199,14 @@ return packer.startup(function(use)
     end,
   })
 
-  --Text align
-  use("Vonr/align.nvim")
-
   --Handy package with many lightweight editing tools. Choose those that fit you.
   -- Check documentation at https://github.com/echasnovski/mini.nvim
   use({
     "echasnovski/mini.nvim",
     config = function()
+      require("mini.ai").setup()
+      require("mini.align").setup()
+      require("mini.completion").setup()
       require("mini.pairs").setup()
       require("mini.comment").setup()
       require("mini.jump").setup()
@@ -275,8 +270,8 @@ return packer.startup(function(use)
 
   -- Treesitter
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- Syntax highlighting
-  use("nvim-treesitter/nvim-treesitter-textobjects") -- Extra text objects for better selecting
-  use({ "windwp/nvim-ts-autotag" }) -- Auto close tags
+  -- use("nvim-treesitter/nvim-treesitter-textobjects") -- Extra text objects for better selecting
+  -- use({ "windwp/nvim-ts-autotag" }) -- Auto close tags
   -- use({ "windwp/nvim-autopairs" }) -- Autoclose quotes, parentheses etc.
 
   -- Automatically set up your configuration after cloning packer.nvim
