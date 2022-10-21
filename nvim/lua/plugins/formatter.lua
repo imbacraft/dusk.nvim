@@ -1,6 +1,10 @@
--- Formatters
+local status_ok, formatter = pcall(require, "formatter")
+if not status_ok then
+	return
+end
+
 local home = os.getenv("HOME")
-require("formatter").setup(
+formatter.setup(
   {
     filetype = {
       typescript = {

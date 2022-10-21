@@ -9,7 +9,7 @@ require "settings.autocommands"
 
 --Load Plugin settings
 require "plugins.lsp"
--- require "plugins.cmp"
+require "plugins.cmp"
 require "plugins.project"
 require "plugins.duskline"
 require "plugins.dashboard"

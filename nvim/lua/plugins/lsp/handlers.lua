@@ -9,6 +9,11 @@ if not lspconfig_status_ok then
   return
 end
 
+local cmp_status_ok, cmp = pcall(require, "cmp_nvim_lsp")
+if not cmp_status_ok then
+  return
+end
+
 lspconfig = require('lspconfig')
 local lsp_defaults = lspconfig.util.default_config
 

@@ -67,27 +67,17 @@ return packer.startup(function(use)
     end,
   })
 
-  -- Auto save
-  use({
-    "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup({
-        trigger_events = { "CursorHold" },
-        debounce_delay = 1000, -- saves the file at most every `debounce_delay` milliseconds
-      })
-    end,
-  })
-
   --Smooth scrolling
   use({
     "karb94/neoscroll.nvim",
+    event = 'WinScrolled',
     config = function()
       require("neoscroll").setup()
     end,
   })
 
   --Automatically create any non-existent directories before writing the buffer.
-  use({ "jghauser/mkdir.nvim" })
+  use({ "jghauser/mkdir.nvim", event="CursorHold" })
   -----------------------------------------------
   -- Themes, Icons, Tree, Statusbar, Bufferbar --
   -----------------------------------------------
@@ -110,11 +100,15 @@ return packer.startup(function(use)
   use({
     "nvim-tree/nvim-tree.lua",
     tag = "nightly", -- optional, updated every week. (see issue #1193)
+    event = "CursorHold",
     config = function()
       require("nvim-tree").setup({
+        sync_root_with_cwd = true,
+        respect_buf_cwd = true,
         update_focused_file = {
           enable = true,
-        }
+          update_root = true
+        },
       })
     end,
   })
@@ -122,9 +116,10 @@ return packer.startup(function(use)
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
     config = function()
       require("telescope").setup({
-          path_display = { "smart" },
+        path_display = { "smart" },
       })
     end,
   })
@@ -146,6 +141,29 @@ return packer.startup(function(use)
   -- use("L3MON4D3/LuaSnip") -- Snippet engine
   -- use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
+ -- use({
+ --            {
+ --                'hrsh7th/nvim-cmp',
+ --                event = 'InsertEnter',
+ --                requires = {
+ --                    {
+ --                        'L3MON4D3/LuaSnip',
+ --                        event = 'InsertEnter',
+ --                        requires = {
+ --                            {
+ --                                'rafamadriz/friendly-snippets',
+ --                                event = 'CursorHold',
+ --                            },
+ --                        },
+ --                    },
+ --                },
+ --            },
+ --            { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+ --            { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+ --            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+ --        })
+
+
   --------------------------------------
   -- LSP --
   --------------------------------------
@@ -155,13 +173,13 @@ return packer.startup(function(use)
   use("williamboman/mason-lspconfig.nvim") -- New LSP server Installer
 
   -- Java LSP
-  use({ "mfussenegger/nvim-jdtls" })
+  use({ "mfussenegger/nvim-jdtls", ft = "java" })
 
   -- Code Runner
   use({ "is0n/jaq-nvim" })
 
   --  Formatters
-  use { 'mhartington/formatter.nvim' }
+  use { 'mhartington/formatter.nvim' } --Unfortunately could not lazyload this.
 
   --LSP diagnostics
   use({
@@ -266,8 +284,8 @@ return packer.startup(function(use)
   --------------------------------------
   -- DAP (Required to run unit tests)--
   --------------------------------------
-  use({ "mfussenegger/nvim-dap" })
-  use({ "Pocco81/DAPInstall.nvim" })
+  use({ "mfussenegger/nvim-dap", ft="java" })
+  use({ "Pocco81/DAPInstall.nvim", ft="java" })
 
   -----------------------------------
   -- Treesitter --
