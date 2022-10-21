@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use("lewis6991/impatient.nvim")
   use("nvim-lua/plenary.nvim")
   use("kyazdani42/nvim-web-devicons")
-  use("nvim-lua/popup.nvim")
+  -- use("nvim-lua/popup.nvim")
 
   ----------------------
   -- General --
@@ -100,7 +100,6 @@ return packer.startup(function(use)
   use({
     "nvim-tree/nvim-tree.lua",
     tag = "nightly", -- optional, updated every week. (see issue #1193)
-    event = "CursorHold",
     config = function()
       require("nvim-tree").setup({
         sync_root_with_cwd = true,
@@ -130,16 +129,16 @@ return packer.startup(function(use)
   --------------------------------------
   -- Autocompletion --
   --------------------------------------
-  -- use("hrsh7th/nvim-cmp") -- Completion (cmp) plugin
-  -- use("hrsh7th/cmp-buffer") -- Cmp source for buffer words
-  -- use("hrsh7th/cmp-path") -- Cmp source for path
-  -- use("hrsh7th/cmp-nvim-lsp") -- Cmp source for LSP client
-  -- use("hrsh7th/cmp-nvim-lua") -- Cmp source for nvim lua
-  -- use("saadparwaiz1/cmp_luasnip") -- Luasnip completion source
-  --
-  -- -- Snippets
-  -- use("L3MON4D3/LuaSnip") -- Snippet engine
-  -- use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+  use("hrsh7th/nvim-cmp") -- Completion (cmp) plugin
+  use("hrsh7th/cmp-buffer") -- Cmp source for buffer words
+  use("hrsh7th/cmp-path") -- Cmp source for path
+  use("hrsh7th/cmp-nvim-lsp") -- Cmp source for LSP client
+  use("hrsh7th/cmp-nvim-lua") -- Cmp source for nvim lua
+  use("saadparwaiz1/cmp_luasnip") -- Luasnip completion source
+
+  -- Snippets
+  use("L3MON4D3/LuaSnip") -- Snippet engine
+  use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
  -- use({
  --            {
@@ -173,7 +172,7 @@ return packer.startup(function(use)
   use("williamboman/mason-lspconfig.nvim") -- New LSP server Installer
 
   -- Java LSP
-  use({ "mfussenegger/nvim-jdtls", ft = "java" })
+  use({ "mfussenegger/nvim-jdtls" })
 
   -- Code Runner
   use({ "is0n/jaq-nvim" })
@@ -230,7 +229,6 @@ return packer.startup(function(use)
     config = function()
       require("mini.ai").setup()
       require("mini.align").setup()
-      require("mini.completion").setup()
       require("mini.pairs").setup()
       require("mini.comment").setup()
       require("mini.jump").setup()
@@ -284,8 +282,8 @@ return packer.startup(function(use)
   --------------------------------------
   -- DAP (Required to run unit tests)--
   --------------------------------------
-  use({ "mfussenegger/nvim-dap", ft="java" })
-  use({ "Pocco81/DAPInstall.nvim", ft="java" })
+  use({ "mfussenegger/nvim-dap" })
+  use({ "Pocco81/DAPInstall.nvim" })
 
   -----------------------------------
   -- Treesitter --

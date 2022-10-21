@@ -3,6 +3,9 @@ if not status then
   return
 end
 
+---------------
+-- GENERAL
+---------------
 
 -- Determine OS
 local home = os.getenv "HOME"
@@ -24,74 +27,40 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
 local workspace_dir = WORKSPACE_PATH .. project_name
 
--- local bundles = {
---   vim.fn.glob(
---     home .. "/.config/nvim/jars/java-debug/com.microsoft.java.debug.plugin-*.jar"
---   ),
--- }
 
--- local on_attach = function(client)
--- 	if client.name == "jdt.ls" then
--- 		require("jdtls").setup_dap({ hotcodereplace = "auto" })
--- 		require("jdtls.dap").setup_dap_main_class_configs()
--- 		vim.lsp.codelens.refresh()
--- 	end
--- end
+----------------------------
+-- Prepare dependencies
+-- for Testing and Debugging
+----------------------------
 
---This line is required to have Java unit testing
--- vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.config/nvim/jars/vscode-java-test/server/*.jar"), "\n"))
+local bundles = {
+  vim.fn.glob(
+    home .. "/.config/nvim/jars/java-debug/com.microsoft.java.debug.plugin-*.jar"
+  ),
+}
+
+vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.config/nvim/jars/vscode-java-test/server/*.jar"), "\n"))
+
+
+-------------------------------
+-- Prepare on_attach and capabilities
+-------------------------
+
+local on_attach = function(client)
+	if client.name == "jdt.ls" then
+		require("jdtls").setup_dap({ hotcodereplace = "auto" })
+		require("jdtls.dap").setup_dap_main_class_configs()
+		vim.lsp.codelens.refresh()
+	end
+end
+
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities;
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true;
 
-
-
-
-local jar_patterns = {
-  '/dev/microsoft/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar',
-  '/dev/dgileadi/vscode-java-decompiler/server/*.jar',
-  '/dev/microsoft/vscode-java-test/java-extension/com.microsoft.java.test.plugin/target/*.jar',
-  '/dev/microsoft/vscode-java-test/java-extension/com.microsoft.java.test.runner/target/*.jar',
-  '/dev/microsoft/vscode-java-test/java-extension/com.microsoft.java.test.runner/lib/*.jar',
-  '/dev/testforstephen/vscode-pde/server/*.jar'
-}
--- npm install broke for me: https://github.com/npm/cli/issues/2508
--- So gather the required jars manually; this is based on the gulpfile.js in the vscode-java-test repo
-local plugin_path = '/dev/microsoft/vscode-java-test/java-extension/com.microsoft.java.test.plugin.site/target/repository/plugins/'
-local bundle_list = vim.tbl_map(
-  function(x) return require('jdtls.path').join(plugin_path, x) end,
-  {
-    'org.eclipse.jdt.junit4.runtime_*.jar',
-    'org.eclipse.jdt.junit5.runtime_*.jar',
-    'org.junit.jupiter.api*.jar',
-    'org.junit.jupiter.engine*.jar',
-    'org.junit.jupiter.migrationsupport*.jar',
-    'org.junit.jupiter.params*.jar',
-    'org.junit.vintage.engine*.jar',
-    'org.opentest4j*.jar',
-    'org.junit.platform.commons*.jar',
-    'org.junit.platform.engine*.jar',
-    'org.junit.platform.launcher*.jar',
-    'org.junit.platform.runner*.jar',
-    'org.junit.platform.suite.api*.jar',
-    'org.apiguardian*.jar'
-  }
-)
-vim.list_extend(jar_patterns, bundle_list)
-local bundles = {
-      vim.fn.glob(
-    home .. "/.config/nvim/jars/java-debug/com.microsoft.java.debug.plugin-*.jar"
-  ),
-  }
-for _, jar_pattern in ipairs(jar_patterns) do
-  for _, bundle in ipairs(vim.split(vim.fn.glob(home .. jar_pattern), '\n')) do
-    if not vim.endswith(bundle, 'com.microsoft.java.test.runner-jar-with-dependencies.jar')
-      and not vim.endswith(bundle, 'com.microsoft.java.test.runner.jar') then
-      table.insert(bundles, bundle)
-    end
-  end
-end
-
+------------------
+-- Server settings
+------------------
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
@@ -134,7 +103,7 @@ local config = {
     workspace_dir,
   },
 
-  -- on_attach = on_attach,
+  on_attach = on_attach,
 
   -- 💀
   -- This is the default if not provided, you can remove it. Or adjust as needed.
@@ -218,19 +187,18 @@ local config = {
     extendedClientCapabilities = extendedClientCapabilities;
   },
 }
-  jdtls.setup_dap({hotcodereplace = 'auto'})
-  jdtls.setup.add_commands()
+
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
   require("jdtls").start_or_attach(config)
-  -- require('jdtls').setup_dap()
+  require('jdtls').setup_dap()
 
 --
 
 -- vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
 -- vim.cmd "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
--- vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
+vim.cmd "command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()"
 -- vim.cmd "command! -buffer JdtJol lua require('jdtls').jol()"
 -- vim.cmd "command! -buffer JdtBytecode lua require('jdtls').javap()"
 -- vim.cmd "command! -buffer JdtJshell lua require('jdtls').jshell()"

@@ -142,10 +142,9 @@ Release
 3. Added Neoterm to run terminal commands in a new buffer.
 4. Added keymaps to run Maven commands (SPC + m).
 5. Added markdown preview plugin.
-6. Added autosave plugin (https://github.com/Pocco81/auto-save.nvim).
-7. Changed default colorscheme (carbonfox).
-8. Show absolute code line numbers by default.
-9. Cleaned up many old keymaps (ex. shift + Q).
+6. Changed default colorscheme (carbonfox).
+7. Show absolute code line numbers by default.
+8. Cleaned up many old keymaps (ex. shift + Q).
 
 ### 1.11 (05.10.2022)
 
@@ -171,3 +170,4 @@ Release
 1. Removed [lualine](https://github.com/nvim-lualine/lualine.nvim), created custom minimal Status Line for Dusk to gain performance increase.
 2. Removed null-ls, added [formatter.nvim](https://github.com/mhartington/formatter.nvim), for performance, since I used only formatters from that plugin.
 3. Cleaned up LSP-handlers to make the code simpler and more readable.
+4. Lazyload more plugins for performance.

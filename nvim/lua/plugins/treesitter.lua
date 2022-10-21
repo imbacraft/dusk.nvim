@@ -3,9 +3,6 @@ if not status_ok then
 	return
 end
 
---Ensure compilers for treesitter are installed
-require("nvim-treesitter.install").compilers = { "zig", "clang", "gcc" }
-
 configs.setup({
 	ensure_installed = {
 		"java",
