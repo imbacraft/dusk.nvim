@@ -46,15 +46,16 @@ return packer.startup(function(use)
   -- Improve startup time (source: https://alpha2phi.medium.com/neovim-for-beginners-performance-95687714c236)
   use("lewis6991/impatient.nvim")
   use("nvim-lua/plenary.nvim")
-  use("kyazdani42/nvim-web-devicons")
-  -- use("nvim-lua/popup.nvim")
+  use({
+    'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('nvim-web-devicons').setup()
+    end,
+  })
 
   ----------------------
   -- General --
   ----------------------
-
-  -- Key Navigator
-  use("folke/which-key.nvim")
 
   -- Measure nvim startup time
   use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
@@ -77,10 +78,7 @@ return packer.startup(function(use)
   })
 
   --Automatically create any non-existent directories before writing the buffer.
-  use({ "jghauser/mkdir.nvim", event="CursorHold" })
-  -----------------------------------------------
-  -- Themes, Icons, Tree, Statusbar, Bufferbar --
-  -----------------------------------------------
+  use({ "jghauser/mkdir.nvim", event = "CursorHold" })
 
   -- Colorschemes
   use("B4mbus/oxocarbon-lua.nvim")
@@ -92,6 +90,9 @@ return packer.startup(function(use)
   --Dashboard
   use("goolord/alpha-nvim")
 
+  -- Key Navigator
+  use("folke/which-key.nvim")
+
   --------------------------------------
   -- File Navigation and Fuzzy Search --
   --------------------------------------
@@ -100,6 +101,7 @@ return packer.startup(function(use)
   use({
     "nvim-tree/nvim-tree.lua",
     tag = "nightly", -- optional, updated every week. (see issue #1193)
+    event = "CursorHold",
     config = function()
       require("nvim-tree").setup({
         sync_root_with_cwd = true,
@@ -112,73 +114,98 @@ return packer.startup(function(use)
     end,
   })
 
-  -- Telescope
   use({
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    config = function()
-      require("telescope").setup({
-        path_display = { "smart" },
-      })
-    end,
+    {
+      'nvim-telescope/telescope.nvim',
+      cmd = 'Telescope',
+      config = function()
+        require("telescope").setup({
+          path_display = { "smart" },
+        })
+      end,
+    },
+    {
+      "ahmedkhalf/project.nvim",
+      after = 'telescope.nvim',
+      config = function()
+        require("project_nvim").setup()
+        require('telescope').load_extension("projects")
+      end,
+    },
   })
-
-  -- Find projects
-  use({ "ahmedkhalf/project.nvim" })
 
   --------------------------------------
   -- Autocompletion --
   --------------------------------------
-  use("hrsh7th/nvim-cmp") -- Completion (cmp) plugin
-  use("hrsh7th/cmp-buffer") -- Cmp source for buffer words
-  use("hrsh7th/cmp-path") -- Cmp source for path
-  use("hrsh7th/cmp-nvim-lsp") -- Cmp source for LSP client
-  use("hrsh7th/cmp-nvim-lua") -- Cmp source for nvim lua
-  use("saadparwaiz1/cmp_luasnip") -- Luasnip completion source
 
-  -- Snippets
-  use("L3MON4D3/LuaSnip") -- Snippet engine
-  use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
-
- -- use({
- --            {
- --                'hrsh7th/nvim-cmp',
- --                event = 'InsertEnter',
- --                requires = {
- --                    {
- --                        'L3MON4D3/LuaSnip',
- --                        event = 'InsertEnter',
- --                        requires = {
- --                            {
- --                                'rafamadriz/friendly-snippets',
- --                                event = 'CursorHold',
- --                            },
- --                        },
- --                    },
- --                },
- --            },
- --            { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
- --            { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
- --            { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
- --        })
+  use({
+    {
+      'hrsh7th/nvim-cmp',
+      event = 'InsertEnter',
+      config = function()
+        require('plugins.cmp')
+      end,
+      requires = {
+        {
+          'L3MON4D3/LuaSnip',
+          event = 'InsertEnter',
+          requires = {
+            {
+              'rafamadriz/friendly-snippets',
+              event = 'CursorHold',
+            },
+          },
+        },
+      },
+    },
+    { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+    { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+  })
 
 
   --------------------------------------
   -- LSP --
   --------------------------------------
   -- LSP
-  use("neovim/nvim-lspconfig") -- Enable native LSP
-  use("williamboman/mason.nvim") -- New LSP Installer
-  use("williamboman/mason-lspconfig.nvim") -- New LSP server Installer
+  use({
+    'neovim/nvim-lspconfig',
+    event = 'BufRead',
+    config = function()
+      require('plugins.lsp')
+    end,
+    requires = {
+      {
+        -- WARN: Unfortunately we won't be able to lazy load this
+        'hrsh7th/cmp-nvim-lsp',
+      },
+    },
+  })
+
+  use({ "williamboman/mason.nvim" }) -- New LSP Installer
+  use({ "williamboman/mason-lspconfig.nvim" }) -- New LSP server Installer
+
 
   -- Java LSP
-  use({ "mfussenegger/nvim-jdtls" })
+  use({ "mfussenegger/nvim-jdtls", ft = "java" })
+
+  -- DAP (Required to run Java unit tests)--
+  use({ "mfussenegger/nvim-dap", ft = "java" })
+  use({ "Pocco81/DAPInstall.nvim", ft = "java" })
 
   -- Code Runner
-  use({ "is0n/jaq-nvim" })
+  use({ "is0n/jaq-nvim", event="CursorHold", 
+    config = function ()
+    require("plugins.jaq")
+  end })
 
   --  Formatters
-  use { 'mhartington/formatter.nvim' } --Unfortunately could not lazyload this.
+  use { 'mhartington/formatter.nvim',
+    event = "CursorHold",
+    config = function()
+      require("plugins.formatter")
+    end
+  }
 
   --LSP diagnostics
   use({
@@ -200,6 +227,9 @@ return packer.startup(function(use)
   use({
     "NTBBloodbath/rest.nvim",
     ft = "http",
+    config = function()
+      require("plugins.restnvim")
+    end,
     requires = { "nvim-lua/plenary.nvim" },
   })
 
@@ -226,6 +256,7 @@ return packer.startup(function(use)
   -- Check documentation at https://github.com/echasnovski/mini.nvim
   use({
     "echasnovski/mini.nvim",
+    event="CursorHold",
     config = function()
       require("mini.ai").setup()
       require("mini.align").setup()
@@ -279,12 +310,8 @@ return packer.startup(function(use)
   })
 
   use({ "kdheepak/lazygit.nvim", cmd = "LazyGit" })
-  --------------------------------------
-  -- DAP (Required to run unit tests)--
-  --------------------------------------
-  use({ "mfussenegger/nvim-dap" })
-  use({ "Pocco81/DAPInstall.nvim" })
 
+  
   -----------------------------------
   -- Treesitter --
   -----------------------------------

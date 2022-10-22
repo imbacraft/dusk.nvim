@@ -6,15 +6,10 @@ require "settings.options"
 require "settings.keymaps"
 require "settings.colorscheme"
 require "settings.autocommands"
+require "settings.duskline"
 
---Load Plugin settings
-require "plugins.lsp"
-require "plugins.cmp"
-require "plugins.project"
-require "plugins.duskline"
+-- These plugin settings are loaded on startup
+-- The rest not mentioned here are loaded when the plugin is loaded.
 require "plugins.dashboard"
 require "plugins.whichkey"
-require "plugins.jaq"
-require "plugins.restnvim"
 require "plugins.treesitter"
-require "plugins.formatter"
