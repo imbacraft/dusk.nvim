@@ -58,7 +58,7 @@ For Dusk.nvim to work as intended, you need to have the following dependencies i
 1. Neovim version >= 0.8.0
 2. Git 2.23+
 3. Ripgrep (for telescope)
-4. Nodejs (for copilot and treesitter)
+4. Nodejs
 5. Neovim node client (npm install -g neovim) - [neovim/node-client](https://github.com/neovim/node-client) 
 6. "zig", "clang", or "gcc" executables to be able to compile treesitter parsers (check your package manager for one of these)
 7. Treesitter-cli nodejs module (Check your package manager for a treesitter or treesitter-cli package) 
@@ -77,11 +77,12 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
 
 1. Make sure to remove or move your current `nvim` directory (`~/.config/nvim`), if it exists.
 2. `git clone https://github.com/imbacraft/dusk.nvim`
-3. Copy or Move the `nvim` folder from the cloned dusk.nvim project to your `~/.config/` folder. 
+3. Copy or Move the `nvim` folder from the cloned dusk.nvim project (not the dusk.nvim folder!) to your `~/.config/` folder.
+In the end, your folder should look like this: `~/.config/nvim`. Please note, depending on your OS, neovim might search for configuration in a different folder. In this case, run the `:checkhealth` command inside neovim, to see where it looks for configuration and place the nvim folder inside that. 
 4. Run the `nvim` command and wait for the plugins to be installed.
-5. Some plugins will fail to install at this point. Don't be alarmed. Enter the `:qa!` command to exit `nvim`.
+5. Some plugins will fail to install at this point. Don't be alarmed. Enter the `:qa!` command to exit neovim.
 6. Re-run the `nvim` command and run `:PackerSync` (SPC p s).
-7. Now all the plugins should have been installed. If some have not, check the dependencies section above. 
+7. Now all the plugins should have been installed. If some have not, run the `:checkhealth` command check the dependencies section above. 
 8. Ready to go!
 
 ## Credits
