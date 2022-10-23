@@ -101,7 +101,8 @@ return packer.startup(function(use)
   use({
     "nvim-tree/nvim-tree.lua",
     tag = "nightly", -- optional, updated every week. (see issue #1193)
-    event = "CursorHold",
+    cmd="NvimTreeToggle",
+    -- event = "CursorHold",
     config = function()
       require("nvim-tree").setup({
         sync_root_with_cwd = true,
@@ -152,7 +153,7 @@ return packer.startup(function(use)
           requires = {
             {
               'rafamadriz/friendly-snippets',
-              event = 'CursorHold',
+              event = 'BufRead',
             },
           },
         },
