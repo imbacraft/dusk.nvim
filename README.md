@@ -5,6 +5,7 @@ Dusk is a blazing fast Lua config suited for Full Stack Java development.
 ## Showcase
 
 <img src="./showcase/dashboard.png" alt="Dashboard" title="Dashboard">
+<img src="./showcase/startuptine.png" alt="Startuptime" title="Startuptime">
 <img src="./showcase/javacode.png" alt="Javacode" title="Javacode">
 <img src="./showcase/xmlcode.png" alt="xmlcode" title="xmlcode">
 
@@ -38,6 +39,7 @@ I encourage you to try out this config and adjust it to your preferences.
 - Explore files via nvim-tree 
 - Fuzzy finder via Telescope
 - Notes with Markdown
+- Blazing fast performance (~50ms startuptime)
 
 ## Colorschemes
 
