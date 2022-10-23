@@ -5,8 +5,8 @@ Dusk is a blazing fast Lua config suited for Full Stack Java development.
 ## Showcase
 
 <img src="./showcase/dashboard.png" alt="Dashboard" title="Dashboard">
-<img src="./showcase/startuptine.png" alt="Startuptime" title="Startuptime">
 <img src="./showcase/javacode.png" alt="Javacode" title="Javacode">
+<img src="./showcase/startuptine.png" alt="Startuptime" title="Startuptime">
 <img src="./showcase/xmlcode.png" alt="xmlcode" title="xmlcode">
 
 ## Design Philosophy
