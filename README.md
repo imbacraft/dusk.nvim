@@ -74,12 +74,13 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
 |   Linux  |     ✅    |
 
 1. Make sure to remove or move your current `nvim` directory (`~/.config/nvim`), if it exists.
-2. git clone https://github.com/imbacraft/dusk.nvim
+2. `git clone https://github.com/imbacraft/dusk.nvim`
 3. Copy or Move the `nvim` folder from the cloned dusk.nvim project to your `~/.config/` folder. 
 4. Run the `nvim` command and wait for the plugins to be installed.
-5. Enter the :qa! command to exit `nvim`.
-6. Re-run the `nvim` command and run :PackerSync (SPC p s).
-7. Ready to go!
+5. Some plugins will fail to install at this point. Don't be alarmed. Enter the `:qa!` command to exit `nvim`.
+6. Re-run the `nvim` command and run `:PackerSync` (SPC p s).
+7. Now all the plugins should have been installed. If some have not, check the dependencies section above. 
+8. Ready to go!
 
 ## Credits
 
