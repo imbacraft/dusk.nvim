@@ -60,14 +60,6 @@ return packer.startup(function(use)
   -- Measure nvim startup time
   use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
 
-  --Replace native matchparen.vim with a lua alternative for performance
-  use({
-    "monkoose/matchparen.nvim",
-    config = function()
-      require("matchparen").setup()
-    end,
-  })
-
   --Smooth scrolling
   use({
     "karb94/neoscroll.nvim",
@@ -101,7 +93,7 @@ return packer.startup(function(use)
   use({
     "nvim-tree/nvim-tree.lua",
     tag = "nightly", -- optional, updated every week. (see issue #1193)
-    cmd="NvimTreeToggle",
+    cmd = "NvimTreeToggle",
     -- event = "CursorHold",
     config = function()
       require("nvim-tree").setup({
@@ -195,10 +187,10 @@ return packer.startup(function(use)
   use({ "Pocco81/DAPInstall.nvim", ft = "java" })
 
   -- Code Runner
-  use({ "is0n/jaq-nvim", event="CursorHold", 
-    config = function ()
-    require("plugins.jaq")
-  end })
+  use({ "is0n/jaq-nvim", event = "CursorHold",
+    config = function()
+      require("plugins.jaq")
+    end })
 
   --  Formatters
   use { 'mhartington/formatter.nvim',
@@ -257,7 +249,7 @@ return packer.startup(function(use)
   -- Check documentation at https://github.com/echasnovski/mini.nvim
   use({
     "echasnovski/mini.nvim",
-    event="CursorHold",
+    event = "CursorHold",
     config = function()
       require("mini.ai").setup()
       require("mini.align").setup()
@@ -312,7 +304,7 @@ return packer.startup(function(use)
 
   use({ "kdheepak/lazygit.nvim", cmd = "LazyGit" })
 
-  
+
   -----------------------------------
   -- Treesitter --
   -----------------------------------

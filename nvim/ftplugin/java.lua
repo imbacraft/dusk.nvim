@@ -47,11 +47,11 @@ vim.list_extend(bundles, vim.split(vim.fn.glob(home .. "/.config/nvim/jars/vscod
 -------------------------
 
 local on_attach = function(client)
-	if client.name == "jdt.ls" then
-		require("jdtls").setup_dap({ hotcodereplace = "auto" })
-		require("jdtls.dap").setup_dap_main_class_configs()
-		vim.lsp.codelens.refresh()
-	end
+  if client.name == "jdt.ls" then
+    require("jdtls").setup_dap({ hotcodereplace = "auto" })
+    require("jdtls.dap").setup_dap_main_class_configs()
+    vim.lsp.codelens.refresh()
+  end
 end
 
 
@@ -155,7 +155,7 @@ local config = {
       },
     },
     contentProvider = { preferred = "fernflower" },
-    -- extendedClientCapabilities = extendedClientCapabilities,
+    extendedClientCapabilities = extendedClientCapabilities,
     sources = {
       organizeImports = {
         starThreshold = 9999,
@@ -191,8 +191,8 @@ local config = {
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-  require("jdtls").start_or_attach(config)
-  require('jdtls').setup_dap()
+require("jdtls").start_or_attach(config)
+require('jdtls').setup_dap()
 
 --
 
