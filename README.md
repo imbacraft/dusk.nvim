@@ -175,3 +175,9 @@ Release
 2. Removed null-ls, added [formatter.nvim](https://github.com/mhartington/formatter.nvim), for performance, since I used only formatters from that plugin.
 3. Cleaned up LSP-handlers to make the code simpler and more readable.
 4. Lazyload more plugins for performance.
+
+### 1.15 (16.01.2023)
+
+1. Do not lazyload snippets anymore, it doesn't work.
+2. Added [electric indent plugin](https://github.com/NMAC427/guess-indent.nvim) for smoother editing. 
+

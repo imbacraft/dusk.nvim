@@ -85,6 +85,12 @@ return packer.startup(function(use)
   -- Key Navigator
   use("folke/which-key.nvim")
 
+  -- Electric indentation
+  use {
+    'nmac427/guess-indent.nvim',
+    config = function() require('guess-indent').setup {} end,
+  }
+
   --------------------------------------
   -- File Navigation and Fuzzy Search --
   --------------------------------------
@@ -141,11 +147,9 @@ return packer.startup(function(use)
       requires = {
         {
           'L3MON4D3/LuaSnip',
-          event = 'InsertEnter',
           requires = {
             {
               'rafamadriz/friendly-snippets',
-              event = 'BufRead',
             },
           },
         },
@@ -163,7 +167,6 @@ return packer.startup(function(use)
   -- LSP
   use({
     'neovim/nvim-lspconfig',
-    event = 'BufRead',
     config = function()
       require('plugins.lsp')
     end,
