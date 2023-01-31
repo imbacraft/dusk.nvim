@@ -136,6 +136,10 @@ return packer.startup(function(use)
   --------------------------------------
   -- Autocompletion --
   --------------------------------------
+  
+  -- Snippets
+	use("L3MON4D3/LuaSnip") -- Snippet engine
+	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
   use({
     {
