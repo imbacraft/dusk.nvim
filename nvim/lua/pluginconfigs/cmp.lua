@@ -4,7 +4,7 @@ local luasnip = require('luasnip')
 
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
-    ['<CR>'] = cmp.mapping.confirm({select = false}), -- Enter confirms the autocompletion candidate
+    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Enter confirms the autocompletion candidate
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -24,6 +24,7 @@ cmp.setup({
       end
     end,
   }),
-  
+  formatting = {
+    fields = { "abbr", "menu", "kind", },
+  }
 })
-

@@ -33,7 +33,14 @@ require('lazy').setup({
   -- UI --
   --------------------------------------
 
-  { 'folke/which-key.nvim',         lazy = false, opts = {} },
+  {
+    'folke/which-key.nvim',
+    lazy = false,
+    config = function()
+      require("pluginconfigs.whichkey")
+    end
+  },
+
   { 'kyazdani42/nvim-web-devicons', lazy = true },
 
   {
@@ -66,10 +73,12 @@ require('lazy').setup({
 
   {
     'nmac427/guess-indent.nvim',
+    lazy=true,
+    event = { "BufReadPost", "BufAdd", "BufNewFile" },
     opts = {}
   },
 
-  { 'ojroques/nvim-bufdel', event = "CursorHold", opts = {} },
+  { 'ojroques/nvim-bufdel',         event = "CursorHold", opts = {} },
 
   --Dashboard
   {
@@ -80,9 +89,9 @@ require('lazy').setup({
   },
 
   {
-    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
+    lazy = true,
+    event = { "BufReadPost", "BufAdd", "BufNewFile" },
     opts = {
       options = {
         -- icons_enabled = false,
@@ -126,22 +135,25 @@ require('lazy').setup({
     end,
   },
 
-  -- Fuzzy Finder (files, lsp, etc)
+  --Telescope Fuzzy Finder (files, commands, etc)
   {
     'nvim-telescope/telescope.nvim',
+    lazy = true,
+    cmd = "Telescope",
     dependencies = {
-      'nvim-lua/plenary.nvim'
+      'nvim-lua/plenary.nvim',
+      {
+        "ahmedkhalf/project.nvim",
+        event = { "BufReadPost", "BufAdd", "BufNewFile" },
+        config = function()
+          require("project_nvim").setup()
+          require('telescope').load_extension("projects")
+        end
+      },
     },
   },
 
-  {
-    "ahmedkhalf/project.nvim",
-    after = 'telescope.nvim',
-    config = function()
-      require("project_nvim").setup()
-      require('telescope').load_extension("projects")
-    end,
-  },
+
 
   --------------------------------------
   -- LSP & Autocompletion --
@@ -162,7 +174,7 @@ require('lazy').setup({
   },
 
   -- Useful status updates for LSP
-  { 'j-hui/fidget.nvim',    event = "LspAttach", opts = {} },
+  { 'j-hui/fidget.nvim',       event = "LspAttach", opts = {} },
 
   {
     -- Autocompletion
@@ -254,7 +266,7 @@ require('lazy').setup({
         -- are available the tool will be updated. This setting does not
         -- affect :MasonToolsUpdate or :MasonToolsInstall.
         -- Default: false
-        auto_update = true,
+        auto_update = false,
         -- set a delay (in ms) before the installation starts. This is only
         -- effective if run_on_start is set to true.
         -- e.g.: 5000 = 5 second delay, 10000 = 10 second delay, etc...
@@ -270,7 +282,7 @@ require('lazy').setup({
 
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",   ft = "java" },
-  { "rcarriga/nvim-dap-ui",    ft = "java", opts = {} },
+  { "rcarriga/nvim-dap-ui",    ft = "java",         opts = {} },
   { "Pocco81/dap-buddy.nvim",  ft = "java" },
 
   --------------------------------------
@@ -279,6 +291,7 @@ require('lazy').setup({
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = "CursorHold",
     opts = {}
   },
 
@@ -316,7 +329,7 @@ require('lazy').setup({
   },
 
   --Terminal
-  { 'akinsho/toggleterm.nvim', version = "*", opts = {} },
+  { 'akinsho/toggleterm.nvim', version = "*", lazy = true,    cmd = "ToggleTerm", opts = {} },
 
   -- Code Runner
   {
@@ -346,12 +359,11 @@ require('lazy').setup({
   },
 
   --Markdown
-  { "dkarter/bullets.vim",           ft = "markdown" },  -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
-  { "jghauser/follow-md-links.nvim", ft = "markdown" },  --Follow md links with ENTER
+  { "dkarter/bullets.vim",           ft = "markdown" }, -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
+  { "jghauser/follow-md-links.nvim", ft = "markdown" }, --Follow md links with ENTER
 
 }, {})
 
---Load the rest of the plugin configurations
-require "pluginconfigs.whichkey"
+--Load the rest of the plugin configurations that need to be loaded at the end
 require "pluginconfigs.jdtls"
 require "pluginconfigs.cmp"
