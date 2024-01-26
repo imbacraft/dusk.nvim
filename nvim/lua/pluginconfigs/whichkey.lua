@@ -184,7 +184,7 @@ local mappings = {
 
 	c = {
 		name = "Code",
-		a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+		a = { ":lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 		e = { ":Jaq<cr>", "Execute Code" },
 		x = { ":TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
 		X = { ":TroubleToggle document_diagnostics<cr>", "Current buffer Diagnostics" },
