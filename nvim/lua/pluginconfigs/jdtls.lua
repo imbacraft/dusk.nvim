@@ -197,11 +197,11 @@ local function jdtls_setup(event)
 
   local lsp_settings = {
     java = {
-      jdt = {
-        ls = {
-          vmargs = "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms256m"
-        }
-      },
+      -- jdt = {
+      --   ls = {
+      --     vmargs = "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms256m"
+      --   }
+      -- },
       eclipse = {
         downloadSources = true,
       },

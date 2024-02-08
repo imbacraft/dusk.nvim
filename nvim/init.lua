@@ -244,7 +244,7 @@ require('lazy').setup({
     "folke/trouble.nvim",
     lazy = true,
     cmd = "TroubleToggle",
-    opts = {}
+    opts = {auto_preview = false } -- automatically preview the location of the diagnostic
   },
 
   -- This plugin ensures that the necessary tools get automatically installed
