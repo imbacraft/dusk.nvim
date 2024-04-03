@@ -282,7 +282,7 @@ require('lazy').setup({
 
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",   ft = "java" },
-  { "rcarriga/nvim-dap-ui",    ft = "java",         opts = {} },
+  { "rcarriga/nvim-dap-ui",    ft = "java", dependencies= {"nvim-neotest/nvim-nio"}, opts = {} },
   { "Pocco81/dap-buddy.nvim",  ft = "java" },
 
   --------------------------------------
