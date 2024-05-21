@@ -342,15 +342,7 @@ require('lazy').setup({
             -- "java" filetype
             require("formatter.filetypes.java").google_java_format
           },
-          -- Use the special "*" filetype for defining formatter configurations on
-          -- any filetype
-          ["*"] = {
-            -- "formatter.filetypes.any" defines default configurations for any
-            -- filetype
-            require("formatter.filetypes.any").remove_trailing_whitespace
-          }
         }
-
       }
     end
   },
