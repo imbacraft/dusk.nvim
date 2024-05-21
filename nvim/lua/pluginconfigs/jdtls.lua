@@ -141,7 +141,7 @@ local function jdtls_on_attach(client, bufnr)
     hi_parameter = "Search",
     handler_opts = {
       border = "rounded",
-    },
+    }, bufnr
   })
 
 end
