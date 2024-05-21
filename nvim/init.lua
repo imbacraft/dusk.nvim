@@ -73,7 +73,7 @@ require('lazy').setup({
 
   {
     'nmac427/guess-indent.nvim',
-    lazy=true,
+    lazy = true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
     opts = {}
   },
@@ -138,8 +138,8 @@ require('lazy').setup({
   --Telescope Fuzzy Finder (files, commands, etc)
   {
     'nvim-telescope/telescope.nvim',
-    lazy = true,
-    cmd = "Telescope",
+    -- lazy = true,
+    -- cmd = "Telescope",
     dependencies = {
       'nvim-lua/plenary.nvim',
       {
@@ -162,7 +162,6 @@ require('lazy').setup({
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    event = "CursorHold",
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
@@ -210,7 +209,8 @@ require('lazy').setup({
 
       require('mason').setup({})
       require('mason-lspconfig').setup({
-        ensure_installed = { 'jdtls', "tsserver" },
+        -- You can add more ensure installed servers based on the aliases on this list: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
+        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "emmet_ls", "gradle_ls", "html", "cssls" },
         handlers = {
           lsp_zero.default_setup,
           jdtls = lsp_zero.noop, -- This means don't setup jdtls with default setup, because there is special config for it.
@@ -242,9 +242,10 @@ require('lazy').setup({
   --LSP Diagnostics
   {
     "folke/trouble.nvim",
+    branch = "dev",
     lazy = true,
-    cmd = "TroubleToggle",
-    opts = {auto_preview = false } -- automatically preview the location of the diagnostic
+    cmd = "Trouble",
+    opts = { auto_preview = false } -- automatically preview the location of the diagnostic
   },
 
   -- This plugin ensures that the necessary tools get automatically installed
@@ -282,8 +283,10 @@ require('lazy').setup({
 
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",   ft = "java" },
-  { "rcarriga/nvim-dap-ui",    ft = "java", dependencies= {"nvim-neotest/nvim-nio"}, opts = {} },
-  { "Pocco81/dap-buddy.nvim",  ft = "java" },
+  { "rcarriga/nvim-dap-ui",    ft = "java",         dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
+  -- Obsolete plugins, might use later
+  -- { "Pocco81/dap-buddy.nvim",  ft = "java" },
+  -- { 'theHamsta/nvim-dap-virtual-text', ft = "java",         opts = {} },
 
   --------------------------------------
   -- Git --
@@ -326,6 +329,30 @@ require('lazy').setup({
     config = function()
       require("pluginconfigs.treesitter")
     end,
+  },
+
+  -- Formatting tool to define your own custom formatters, besides the default LSP formatter
+  {
+    'mhartington/formatter.nvim',
+    config = function()
+      require("formatter").setup {
+        filetype = {
+          java = {
+            -- "formatter.filetypes.java" defines default configurations for the
+            -- "java" filetype
+            require("formatter.filetypes.java").google_java_format
+          },
+          -- Use the special "*" filetype for defining formatter configurations on
+          -- any filetype
+          ["*"] = {
+            -- "formatter.filetypes.any" defines default configurations for any
+            -- filetype
+            require("formatter.filetypes.any").remove_trailing_whitespace
+          }
+        }
+
+      }
+    end
   },
 
   --Terminal

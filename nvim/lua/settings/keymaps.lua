@@ -9,7 +9,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 --Doom emacs keymap for find file
-keymap("n", "<leader><Space>", "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", opts)
+keymap("n", "<leader><Space>", "<cmd>Telescope find_files hidden=true <cr>", opts)
 
 -- Better window navigation
 keymap("n", "<leader>w<Left>", "<C-w>h", opts)
@@ -38,49 +38,49 @@ keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cWORD>')
 
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    desc = 'LSP actions',
-    callback = function()
-      local bufmap = function(mode, lhs, rhs)
-        local lspopts = { buffer = true }
-        vim.keymap.set(mode, lhs, rhs, lspopts)
-      end
-  
-      -- Displays hover information about the symbol under the cursor
-      bufmap('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
-  
-      -- Jump to the definition
-      bufmap('n', 'gd', '<cmd>Lspsaga peek_definition<cr>')
-  
-      -- Jump to declaration
-      bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<cr>')
-  
-      -- Lists all the implementations for the symbol under the cursor
-      bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
-  
-      -- Jumps to the definition of the type symbol
-      bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
-  
-      -- Lists all the references
-      -- bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
-      bufmap('n', 'gr', '<cmd>Lspsaga finder<cr>')
-  
-      -- Displays a function's signature information
-      bufmap('n', 'L', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-  
-      -- Renames all references to the symbol under the cursor
-      bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
-  
-      -- Selects a code action available at the current cursor position
-      bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-      bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
-  
-      -- Show diagnostics in a floating window
-      bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-  
-      -- Move to the previous diagnostic
-      bufmap('n', 'gp', '<cmd>Lspsaga diagnostic_jump_prev<cr>')
-  
-      -- Move to the next diagnostic
-      bufmap('n', 'gn', '<cmd>Lspsaga diagnostic_jump_next<cr>')
+  desc = 'LSP actions',
+  callback = function()
+    local bufmap = function(mode, lhs, rhs)
+      local lspopts = { buffer = true }
+      vim.keymap.set(mode, lhs, rhs, lspopts)
     end
-  })
+
+    -- Displays hover information about the symbol under the cursor
+    bufmap('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
+
+    -- Jump to the definition
+    bufmap('n', 'gd', '<cmd>Lspsaga peek_definition<cr>')
+
+    -- Jump to declaration
+    bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<cr>')
+
+    -- Lists all the implementations for the symbol under the cursor
+    bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+
+    -- Jumps to the definition of the type symbol
+    bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
+
+    -- Lists all the references
+    -- bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+    bufmap('n', 'gr', '<cmd>Lspsaga finder<cr>')
+
+    -- Displays a function's signature information
+    bufmap('n', 'L', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+
+    -- Renames all references to the symbol under the cursor
+    bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+
+    -- Selects a code action available at the current cursor position
+    bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+    bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
+
+    -- Show diagnostics in a floating window
+    bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+
+    -- Move to the previous diagnostic
+    bufmap('n', 'gp', '<cmd>Lspsaga diagnostic_jump_prev<cr>')
+
+    -- Move to the next diagnostic
+    bufmap('n', 'gn', '<cmd>Lspsaga diagnostic_jump_next<cr>')
+  end
+})

@@ -175,7 +175,6 @@ local function jdtls_setup(event)
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
     '-javaagent:' .. path.java_agent,
-    '-Xms1g',
     '--add-modules=ALL-SYSTEM',
     '--add-opens',
     'java.base/java.util=ALL-UNNAMED',
