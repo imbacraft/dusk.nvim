@@ -1,6 +1,7 @@
 # Dusk Neovim
 
 Dusk.nvim is a blazing fast Lua config suited for Full-stack Java development.
+Optimized for Spring Boot && Angular projects.
 
 ## Showcase
 
@@ -10,14 +11,12 @@ Dusk.nvim is a blazing fast Lua config suited for Full-stack Java development.
 
 ## Design Philosophy
 
-A year after adopting a new code structure inspired by the powerful config of [nvimdots](https://github.com/ayamir/nvimdots), I decided to migrate dusk.nvim back to a simple, minimal structure, that I have the time to maintain.
-
-The design principles of Dusk.nvim are as follows:
-
-- Gotta go fast. Startup and run-time performance are priorities.
-- Out-of-the-box complete. Just works with installation.
-- Intuitive, consistent keybinding. f = find, s = search, b = buffer etc.
-- Not opinionated. Striving for defaults wherever possible.
+Dusk.nvim is designed to be: 
+- minimal (~800 lines of configuration only) 
+- functional (aims to replace your IDE)
+- performant (~70-80ms startup time on modern hardware)
+- Out-of-the-box complete. Works with installation.
+- Not opinionated. Defaults are always preferred.
 
 ## Features
 
@@ -44,9 +43,9 @@ Most colorschemes will be compatible with Dusk.
 
 ## Dependencies
 
-For Dusk.nvim to work as intended, you need to have the following dependencies installed:
+For Dusk.nvim to perform as intended, you need to have the following dependencies installed:
 
-1. Neovim version >= 0.9.0
+1. Neovim version >= 0.9.5
 2. Git 2.23+
 3. Ripgrep for telescope
 4. fd for telescope
@@ -81,32 +80,32 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
 
 ## Java Multiple Runtimes
 
-In jdtls.lua, which you can find under the pluginconfigs folder, you can setup your Java runtimes.
-The commented code for the runtimes is my own configuration.
-Feel free to adjust it to your preferences.
+In init.lua, you will find the following snippet. 
+Here you can configure your multiple java runtimes.
 
-My own config:
+Example:
 
 ```lua
- path.runtimes = {
-    --  {
-    --   name = "JavaSE-1.8",
-    --   path = "/Library/Java/JavaVirtualMachines/zulu-8.jdk/Contents/Home",
-    --  },
-    --  {
-    --   name = "JavaSE-1.8",
-    --   path = "/Library/Java/JavaVirtualMachines/jdk1.8.0_291.jdk/Contents/Home",
-    --  },
-    --  {
-    --   name = "JavaSE-11",
-    --   path = "/opt/homebrew/Cellar/openjdk@11/11.0.18/libexec/openjdk.jdk/Contents/Home",
-    --  },
-    --  {
-    --   name = "JavaSE-19",
-    --   path = "/opt/homebrew/Cellar/openjdk/19.0.2/libexec/openjdk.jdk/Contents/Home",
-    --  },
-
-    },
+            settings = {
+              java = {
+                configuration = {
+                  runtimes = {
+                     {
+                      name = "JavaSE-1.8",
+                      path = "/Library/Java/JavaVirtualMachines/jdk1.8.0_291.jdk/Contents/Home",
+                     },
+                     {
+                      name = "JavaSE-11",
+                      path = "/opt/homebrew/Cellar/openjdk@11/11.0.18/libexec/openjdk.jdk/Contents/Home",
+                      default = true
+                     },
+                     {
+                      name = "JavaSE-19",
+                      path = "/opt/homebrew/Cellar/openjdk/19.0.2/libexec/openjdk.jdk/Contents/Home",
+                     },
+                  }
+                }
+              }
+            }
                 
-
 ```
