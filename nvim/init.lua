@@ -1,4 +1,4 @@
--- Set <space> as the leader key
+--- Set <space> as the leader key
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -155,7 +155,7 @@ require('lazy').setup({
         respect_buf_cwd = true,
         update_focused_file = {
           enable = true,
-          update_root = false
+          update_root = true
         },
         view = {
           width = 50,
@@ -173,9 +173,20 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
       {
         "ahmedkhalf/project.nvim",
-        event = { "BufReadPost", "BufAdd", "BufNewFile" },
+        -- event = { "BufReadPost", "BufAdd", "BufNewFile" },
         config = function()
-          require("project_nvim").setup()
+          require("project_nvim").setup({
+            -- Methods of detecting the root directory. **"lsp"** uses the native neovim
+            -- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
+            -- order matters: if one is not detected, the other is used as fallback. You
+            -- can also delete or rearangne the detection methods.
+            detection_methods = { "pattern", "lsp" },
+
+            -- All the patterns used to detect root dir, when **"pattern"** is in
+            -- detection_methods
+            patterns = { ".git" },
+
+          })
           require('telescope').load_extension("projects")
         end
       },
@@ -206,8 +217,6 @@ require('lazy').setup({
     end
   },
 
-
-
   --------------------------------------
   -- LSP & Autocompletion --
   --------------------------------------
@@ -236,6 +245,13 @@ require('lazy').setup({
     },
     config = function()
       require('java').setup({
+        root_markers = {
+          '.git',
+          'mvnw',
+          'gradlew',
+          'pom.xml',
+          'build.gradle',
+        },
         jdk = {
           -- Choose whether to install jdk automatically using mason.nvim
           auto_install = false,
@@ -318,6 +334,7 @@ require('lazy').setup({
           function(server_name)
             require('lspconfig')[server_name].setup({})
           end,
+
           -- lsp_zero.default_setup,
           -- jdtls = lsp_zero.noop, -- This means don't setup jdtls with default setup, because there is special config for it.
         }

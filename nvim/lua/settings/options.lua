@@ -74,6 +74,8 @@ vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.opt.fillchars:append({ eob = " " })                                        -- hide tildes at the end of buffers
 vim.opt.fillchars:append({ vert = " " })                                       -- hide borders of split vertical windows (e.g. nvim tree)
 
+vim.opt.autochdir = true
+
 vim.cmd("highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE")          --requred to hide tildes at the end of buffer
 vim.cmd("highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE") -- required to hide borders of split vertical windows
 
