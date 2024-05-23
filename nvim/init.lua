@@ -359,6 +359,10 @@ require('lazy').setup({
       symbol_in_winbar = {
         enable = false,
         folder_level = 6,
+      },
+      outline = {
+        auto_preview = false,
+        win_width = 40
       }
     }
   },
