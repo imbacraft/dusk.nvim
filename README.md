@@ -1,7 +1,8 @@
 # Dusk Neovim
 
 Dusk.nvim is a blazing fast Lua config suited for Full-stack Java development.
-Optimized for Spring Boot && Angular projects.
+
+Optimized with Spring Boot && Angular projects in mind.
 
 ## Showcase
 

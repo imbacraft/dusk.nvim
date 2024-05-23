@@ -11,7 +11,7 @@ require('nvim-treesitter.configs').setup {
 	-- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
 	modules = {},
 	highlight = { enable = true,
-		disable = { "markdown" }, -- list of language that highlighting will be disabled
+		-- disable = { "markdown" }, -- list of language that highlighting will be disabled
 		additional_vim_regex_highlighting = true,
 
 	},

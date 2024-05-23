@@ -326,7 +326,7 @@ require('lazy').setup({
   },
 
   -- Useful status updates for LSP
-  { 'j-hui/fidget.nvim',       event = "LspAttach", opts = {} },
+  { 'j-hui/fidget.nvim',                 event = "LspAttach", opts = {} },
 
 
   {
@@ -399,7 +399,7 @@ require('lazy').setup({
 
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",   ft = "java" },
-  { "rcarriga/nvim-dap-ui",    ft = "java",         dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
+  { "rcarriga/nvim-dap-ui",    ft = "java", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
 
   -- Obsolete plugins, might re-use later
   -- { "Pocco81/dap-buddy.nvim",  ft = "java" },
@@ -414,7 +414,7 @@ require('lazy').setup({
     event = "CursorHold",
     opts = {
       current_line_blame = true,
-      current_line_blame_opts = { delay = 1200, virtual_text_pos = "eol"}
+      current_line_blame_opts = { delay = 1200, virtual_text_pos = "eol" }
     }
   },
 
@@ -468,20 +468,10 @@ require('lazy').setup({
   },
 
   --Terminal
-  { 'akinsho/toggleterm.nvim', version = "*", lazy = true,    cmd = "ToggleTerm", opts = {} },
-
-  -- Code Runner
-  {
-    "is0n/jaq-nvim",
-    lazy = true,
-    cmd = "Jaq",
-    config = function()
-      require("pluginconfigs.jaq")
-    end,
-  },
+  { 'akinsho/toggleterm.nvim', version = "*", lazy = true,     cmd = "ToggleTerm", opts = {} },
 
   --Search & replace string
-  { "nvim-pack/nvim-spectre",        lazy = true,    cmd = "Spectre", opts = {} },
+  { "nvim-pack/nvim-spectre",  lazy = true,   cmd = "Spectre", opts = {} },
 
   {
     "kylechui/nvim-surround",
@@ -521,5 +511,11 @@ require('lazy').setup({
   --Markdown
   { "dkarter/bullets.vim",           ft = "markdown" }, -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
   { "jghauser/follow-md-links.nvim", ft = "markdown" }, --Follow md links with ENTER
-
+  -- install without yarn or npm
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+  }
 }, {})
