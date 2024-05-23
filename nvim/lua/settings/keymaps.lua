@@ -1,12 +1,5 @@
 local opts = { noremap = true, silent = true }
-
--- Shorten function name
 local keymap = vim.api.nvim_set_keymap
-
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 --Doom emacs keymap for find file
 keymap("n", "<leader><Space>", "<cmd>Telescope find_files hidden=true <cr>", opts)
@@ -19,8 +12,8 @@ keymap("n", "<leader>w<Right>", "<C-w>l", opts)
 keymap("n", "<leader>ww", "<C-w>w", opts)
 
 -- Navigate buffers
-keymap("n", "<TAB>", ":bnext<CR>", opts)
-keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
+-- keymap("n", "<TAB>", ":bnext<CR>", opts)
+-- keymap("n", "<S-TAB>", ":bprevious<CR>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -36,7 +29,10 @@ keymap("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts)
 -- Open file under cursor with system app
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cWORD>'), 1)<CR>]], opts)
 
+-- ESC to clear highlights after search
+keymap("n", "<Esc>", ":noh<CR> :helpclose<CR>", opts)
 
+--LSP basic keymaps
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function()

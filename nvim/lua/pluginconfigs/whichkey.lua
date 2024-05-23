@@ -4,66 +4,66 @@ if not status_ok then
 end
 
 --------------------------------------
-  -- Custom Helper Functions --
+-- Custom Helper Functions --
 --------------------------------------
 
 local function toggle_option(option)
-  local value = not vim.api.nvim_get_option_value(option, {})
-  vim.opt[option] = value
-  vim.notify(option .. " set to " .. tostring(value))
+	local value = not vim.api.nvim_get_option_value(option, {})
+	vim.opt[option] = value
+	vim.notify(option .. " set to " .. tostring(value))
 end
 
 -- Telescope live_grep in git root
-  -- Function to find the git root directory based on the current buffer's path
-  local function find_git_root()
-    -- Use the current buffer's path as the starting point for the git search
-    local current_file = vim.api.nvim_buf_get_name(0)
-    local current_dir
-    local cwd = vim.fn.getcwd()
-    -- If the buffer is not associated with a file, return nil
-    if current_file == '' then
-      current_dir = cwd
-    else
-      -- Extract the directory from the current file's path
-      current_dir = vim.fn.fnamemodify(current_file, ':h')
-    end
-  
-    -- Find the Git root directory from the current file's path
-    local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
-    if vim.v.shell_error ~= 0 then
-      print 'Not a git repository. Searching on current working directory'
-      return cwd
-    end
-    return git_root
-  end
-  
-  -- Custom live_grep function to search in git root
-  local function live_grep_git_root()
-    local git_root = find_git_root()
-    if git_root then
-      require('telescope.builtin').live_grep {
-        search_dirs = { git_root },
-      }
-    end
-  end
-  
-  vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
+-- Function to find the git root directory based on the current buffer's path
+local function find_git_root()
+	-- Use the current buffer's path as the starting point for the git search
+	local current_file = vim.api.nvim_buf_get_name(0)
+	local current_dir
+	local cwd = vim.fn.getcwd()
+	-- If the buffer is not associated with a file, return nil
+	if current_file == '' then
+		current_dir = cwd
+	else
+		-- Extract the directory from the current file's path
+		current_dir = vim.fn.fnamemodify(current_file, ':h')
+	end
 
-  local function telescope_live_grep_open_files()
-    require('telescope.builtin').live_grep {
-      grep_open_files = true,
-      prompt_title = 'Live Grep in Open Files',
-    }
-  end
+	-- Find the Git root directory from the current file's path
+	local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
+	if vim.v.shell_error ~= 0 then
+		print 'Not a git repository. Searching on current working directory'
+		return cwd
+	end
+	return git_root
+end
+
+-- Custom live_grep function to search in git root
+local function live_grep_git_root()
+	local git_root = find_git_root()
+	if git_root then
+		require('telescope.builtin').live_grep {
+			search_dirs = { git_root },
+		}
+	end
+end
+
+vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
+
+local function telescope_live_grep_open_files()
+	require('telescope.builtin').live_grep {
+		grep_open_files = true,
+		prompt_title = 'Live Grep in Open Files',
+	}
+end
 
 
-  --------------------------------------
-  -- Keymaps --
-  --------------------------------------
+--------------------------------------
+-- Keymaps --
+--------------------------------------
 
 local setup = {
 	plugins = {
-		marks = false, -- shows a list of your marks on ' and `
+		marks = false,   -- shows a list of your marks on ' and `
 		registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
 		spelling = {
 			enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
@@ -73,12 +73,12 @@ local setup = {
 		-- No actual key bindings are created
 		presets = {
 			operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-			motions = true, -- adds help for motions
+			motions = true,   -- adds help for motions
 			text_objects = true, -- help for text objects triggered after entering an operator
-			windows = false, -- default bindings on <c-w>
-			nav = false, -- misc bindings to work with windows
-			z = true, -- bindings for folds, spelling and others prefixed with z
-			g = true, -- bindings for prefixed with g
+			windows = false,  -- default bindings on <c-w>
+			nav = false,      -- misc bindings to work with windows
+			z = true,         -- bindings for folds, spelling and others prefixed with z
+			g = true,         -- bindings for prefixed with g
 		},
 	},
 	-- add operators that will trigger motion and text object completion
@@ -101,22 +101,22 @@ local setup = {
 		scroll_up = "<c-u>", -- binding to scroll up inside the popup
 	},
 	window = {
-		border = "none", -- none, single, double, shadow
-		position = "bottom", -- bottom, top
+		border = "none",        -- none, single, double, shadow
+		position = "bottom",    -- bottom, top
 		margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
 		padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
 		winblend = 0,
 	},
 	layout = {
-		height = { min = 4, max = 25 }, -- min and max height of the columns
-		width = { min = 20, max = 50 }, -- min and max width of the columns
-		spacing = 3, -- spacing between columns
-		align = "center", -- align columns left, center or right
+		height = { min = 4, max = 25 },                                        -- min and max height of the columns
+		width = { min = 20, max = 50 },                                        -- min and max width of the columns
+		spacing = 3,                                                           -- spacing between columns
+		align = "center",                                                      -- align columns left, center or right
 	},
-	ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+	ignore_missing = true,                                                   -- enable this to hide mappings for which you didn't specify a label
 	hidden = { "<silent>", ":", "<Cmd>", "<cr>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-	show_help = true, -- show help message on the command line when the popup is visible
-	triggers = "auto", -- automatically setup triggers
+	show_help = true,                                                        -- show help message on the command line when the popup is visible
+	triggers = "auto",                                                       -- automatically setup triggers
 	-- triggers = {"<leader>"} -- or specify a list manually
 	triggers_blacklist = {
 		-- list of mode / prefixes that should never be hooked by WhichKey
@@ -128,9 +128,9 @@ local setup = {
 }
 
 local opts = {
-	mode = "n", -- NORMAL mode
+	mode = "n",    -- NORMAL mode
 	prefix = "<leader>",
-	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+	buffer = nil,  -- Global mappings. Specify a buffer number for buffer local mappings
 	silent = true, -- use `silent` when creating keymaps
 	noremap = true, -- use `noremap` when creating keymaps
 	nowait = true, -- use `nowait` when creating keymaps
@@ -146,9 +146,11 @@ local mappings = {
 		name = "Buffer",
 		p = { "<Cmd>bprevious<cr>", "Previous buffer" },
 		n = { "<Cmd>bnext<cr>", "Next buffer" },
-		k = { "<Cmd>BufDel<Cr>", "Kill current buffer" },
-		K = { "<cmd>BufDelOthers<cr>", "Kill all buffers except current" },
-		b = { "<cmd>Telescope buffers<cr>", "Buffer List" },
+		k = { "<Cmd>BufferClose<Cr>", "Close current buffer" },
+		K = { "<cmd>BufferCloseAllButCurrent<cr>", "Close all buffers except current" },
+		b = { "<cmd>Telescope buffers theme=dropdown<cr>", "Buffer List" },
+		r = { "<cmd>BufferCloseBuffersRight<cr>", "Close Buffers to the right" },
+		l = { "<cmd>BufferCloseBuffersLeft<cr>", "Close Buffers to the left" },
 	},
 
 	p = {
@@ -213,38 +215,38 @@ local mappings = {
 		name = "Java",
 		t = {
 			"<Cmd>lua require'jdtls'.test_nearest_method({ config = { console = 'console' }})<CR>",
-			"Test Method (without Maven)",
+			"Test Method",
 		},
 		T = {
 			"<Cmd>lua require'jdtls'.test_class({ config = { console = 'console' }})<CR>",
-			"Test Class (without Maven)",
+			"Test Class",
 		},
-		f = { "<cmd>FormatWrite<cr>", "Format with Google Java Format" },
-		u = { "<Cmd>JdtUpdateConfig<CR>", "Update Config" },
-		d = { "<Cmd>JdtRefreshDebugConfigs<CR>", "Refresh debug config" },
-		r = { "<Cmd>Jaq<CR>", "Execute Java" },
+		f = { "<cmd>lua require('conform').format()<cr>", "Format with Google Java Format" },
+		d = { "<Cmd>JavaDapConfig<CR>", "Refresh debug config" },
+		e = { "<Cmd>JavaRunnerRunMain<CR>", "Execute Java" },
+		p = { "<Cmd>JavaProfile<CR>", "Active Profile" },
+		r = { "<Cmd>JavaTestViewLastReport<CR>", "View Last Test Report" },
 		R = { "<cmd>JdtWipeDataAndRestart<cr>", "Wipe project data and Restart server" },
-		x = { "<cmd>JdtRestart<cr>", "Restart server" },
-		v = { "<cmd>JdtSetRuntime<cr>", "Set runtime" },
 		s = {
-			":lua require('jdtls').setup_dap({ hotcodereplace = 'auto' })<cr>; :lua require'jdtls.dap'.setup_dap_main_class_configs()<cr>",
-			"Setup DAP Debugger",
+			"<cmd>JavaRunnerStopMain<CR>",
+			"Stop running application",
 		},
 	},
 
-	
+
 	s = {
 		name = "Search String",
 		b = { function()
 			-- You can pass additional configuration to telescope to change theme, layout, etc.
 			require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-			  winblend = 10,
-			  previewer = false,
-			})  end, "In current buffer" },
-		p = {"<cmd>LiveGrepGitRoot<cr>", "In Git root (Project)"},
+				winblend = 10,
+				previewer = false,
+			})
+		end, "In current buffer" },
+		p = { "<cmd>LiveGrepGitRoot<cr>", "In Git root (Project)" },
 		c = { "<cmd>Telescope live_grep theme=ivy<cr>", "In current working directory" },
 		l = { "<cmd>Telescope resume<cr>", "Resume last Search" },
-		o = {telescope_live_grep_open_files, "In currently open files"}
+		o = { telescope_live_grep_open_files, "In currently open files" }
 	},
 
 	g = {
@@ -280,12 +282,12 @@ local mappings = {
 		f = { ":lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
 		i = { ":LspInfo<cr>", "Info" },
 		m = { ":Mason<cr>", "Install Language" },
-		w =	{
+		w = {
 			name = "LSP Workspace",
-			l = {function()
+			l = { function()
 				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-			  end, "List Workspace Folders"}
-			},
+			end, "List Workspace Folders" }
+		},
 	},
 
 	d = {

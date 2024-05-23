@@ -1,5 +1,4 @@
 -- Set <space> as the leader key
--- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -20,7 +19,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-
 --Load Vim Settings
 require "settings.options"
 require "settings.keymaps"
@@ -33,6 +31,22 @@ require('lazy').setup({
   -- UI --
   --------------------------------------
 
+  { 'nvim-lua/plenary.nvim',        lazy = true },
+  { 'kyazdani42/nvim-web-devicons', lazy = true },
+  {
+    'rcarriga/nvim-notify',
+    lazy = true,
+    event = "VeryLazy",
+    config = function()
+      require("notify").setup {
+        stages = 'fade_in_slide_out',
+        background_colour = 'FloatShadow',
+        timeout = 3000,
+      }
+      vim.notify = require('notify')
+    end
+  },
+
   {
     'folke/which-key.nvim',
     lazy = false,
@@ -41,7 +55,6 @@ require('lazy').setup({
     end
   },
 
-  { 'kyazdani42/nvim-web-devicons', lazy = true },
 
   {
     -- Theme inspired by Atom
@@ -78,8 +91,6 @@ require('lazy').setup({
     opts = {}
   },
 
-  { 'ojroques/nvim-bufdel',         event = "CursorHold", opts = {} },
-
   --Dashboard
   {
     "goolord/alpha-nvim",
@@ -88,6 +99,7 @@ require('lazy').setup({
     end
   },
 
+  -- Status Line
   {
     'nvim-lualine/lualine.nvim',
     lazy = true,
@@ -101,15 +113,32 @@ require('lazy').setup({
       },
 
       sections = {
-        lualine_b = { 'branch', 'diff', {
-          "diagnostics",
-          sources = { "nvim_workspace_diagnostic" }
+        lualine_b = {
+          'branch',
+          'diff',
+          {
+            "diagnostics",
+            sources = { "nvim_workspace_diagnostic" }
+          }
         },
-        }
-      },
+        lualine_c = { { 'filename', path = 3 } },
+      }
     }
   },
 
+  -- Tab Line
+  {
+    'romgrk/barbar.nvim',
+    lazy = true,
+    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    dependencies = {
+      'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+    },
+  },
   --------------------------------------
   -- File explorer and Finder --
   --------------------------------------
@@ -126,7 +155,7 @@ require('lazy').setup({
         respect_buf_cwd = true,
         update_focused_file = {
           enable = true,
-          update_root = true
+          update_root = false
         },
         view = {
           width = 50,
@@ -151,6 +180,30 @@ require('lazy').setup({
         end
       },
     },
+    config = function()
+      require('telescope').setup({
+        defaults = {
+          path_display = { "smart" },
+        },
+        pickers = {
+          find_files = {
+            theme = "dropdown",
+            previewer = false
+          },
+          oldfiles = {
+            theme = "dropdown",
+            previewer = false
+          },
+          live_grep = {
+            theme = "ivy"
+          },
+          buffers = {
+            theme = "dropdown",
+            previewer = false
+          }
+        },
+      })
+    end
   },
 
 
@@ -160,24 +213,43 @@ require('lazy').setup({
   --------------------------------------
 
   {
-    -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
+    'nvim-java/nvim-java',
+    lazy = false,
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      'nvim-java/lua-async-await',
+      'nvim-java/nvim-java-refactor',
+      'nvim-java/nvim-java-core',
+      'nvim-java/nvim-java-test',
+      'nvim-java/nvim-java-dap',
+      'MunifTanjim/nui.nvim',
+      'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap',
+      {
+        'williamboman/mason.nvim',
+        opts = {
+          registries = {
+            'github:nvim-java/mason-registry',
+            'github:mason-org/mason-registry',
+          },
+        },
+      }
     },
+    config = function()
+      require('java').setup({
+        jdk = {
+          -- Choose whether to install jdk automatically using mason.nvim
+          auto_install = false,
+        },
+      })
+    end
   },
 
-  -- Useful status updates for LSP
-  { 'j-hui/fidget.nvim',       event = "LspAttach", opts = {} },
+  { "williamboman/mason-lspconfig.nvim", lazy = true },
 
+  -- Autocompletion
   {
-    -- Autocompletion
     'hrsh7th/nvim-cmp',
+    lazy = true,
     event = "InsertEnter",
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
@@ -186,17 +258,22 @@ require('lazy').setup({
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'amarakon/nvim-cmp-buffer-lines',
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
+    config = function()
+      require "pluginconfigs.cmp"
+    end
   },
 
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
     lazy = true,
+    branch = 'v3.x',
     config = function()
       local lsp_zero = require('lsp-zero')
       lsp_zero.extend_lspconfig()
@@ -210,23 +287,61 @@ require('lazy').setup({
       require('mason').setup({})
       require('mason-lspconfig').setup({
         -- You can add more ensure installed servers based on the aliases on this list: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
-        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "emmet_ls", "gradle_ls", "html", "cssls" },
+        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "marksman", "emmet_ls", "gradle_ls", "html", "cssls", "bashls" },
         handlers = {
-          lsp_zero.default_setup,
-          jdtls = lsp_zero.noop, -- This means don't setup jdtls with default setup, because there is special config for it.
+          jdtls = function()
+            require('lspconfig').jdtls.setup({
+              capabilities = {
+                textDocument = {
+                  completion = {
+                    completionItem = {
+                      snippetSupport = true
+                    }
+                  }
+                }
+              },
+              settings = {
+                java = {
+                  configuration = {
+                    runtimes = {
+                      -- {
+                      --   name = "JavaSE-17",
+                      --   path = "/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
+                      --   default = true,
+                      -- }
+                    }
+                  }
+                }
+              }
+            })
+          end,
+          function(server_name)
+            require('lspconfig')[server_name].setup({})
+          end,
+          -- lsp_zero.default_setup,
+          -- jdtls = lsp_zero.noop, -- This means don't setup jdtls with default setup, because there is special config for it.
         }
       })
     end
   },
 
+  -- Useful status updates for LSP
+  { 'j-hui/fidget.nvim',       event = "LspAttach", opts = {} },
+
+
   {
     'nvimdev/lspsaga.nvim',
     event = "LspAttach",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter', -- optional
+      'nvim-tree/nvim-web-devicons',     -- optional
+    },
     opts = {
       lightbulb = {
         enable = false,
       },
       symbol_in_winbar = {
+        enable = false,
         folder_level = 6,
       }
     }
@@ -235,7 +350,7 @@ require('lazy').setup({
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = { hint_enable = false },
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
 
@@ -261,7 +376,8 @@ require('lazy').setup({
           'shellcheck',
           'shfmt',
           'java-test',
-          'java-debug-adapter'
+          'java-debug-adapter',
+          'markdown-toc'
         },
         -- if set to true this will check each tool for updates. If updates
         -- are available the tool will be updated. This setting does not
@@ -284,7 +400,8 @@ require('lazy').setup({
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",   ft = "java" },
   { "rcarriga/nvim-dap-ui",    ft = "java",         dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
-  -- Obsolete plugins, might use later
+
+  -- Obsolete plugins, might re-use later
   -- { "Pocco81/dap-buddy.nvim",  ft = "java" },
   -- { 'theHamsta/nvim-dap-virtual-text', ft = "java",         opts = {} },
 
@@ -295,7 +412,10 @@ require('lazy').setup({
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     event = "CursorHold",
-    opts = {}
+    opts = {
+      current_line_blame = true,
+      current_line_blame_opts = { delay = 1200, virtual_text_pos = "eol"}
+    }
   },
 
   {
@@ -324,6 +444,8 @@ require('lazy').setup({
     event = "CursorHold",
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      'andymass/vim-matchup',
     },
     build = ':TSUpdate',
     config = function()
@@ -331,19 +453,17 @@ require('lazy').setup({
     end,
   },
 
-  -- Formatting tool to define your own custom formatters, besides the default LSP formatter
+  -- Custom Formatters
   {
-    'mhartington/formatter.nvim',
+    'stevearc/conform.nvim',
+    lazy = true,
+    event = "LspAttach",
     config = function()
-      require("formatter").setup {
-        filetype = {
-          java = {
-            -- "formatter.filetypes.java" defines default configurations for the
-            -- "java" filetype
-            require("formatter.filetypes.java").google_java_format
-          },
-        }
-      }
+      require("conform").setup({
+        formatters_by_ft = {
+          java = { "google-java-format" },
+        },
+      })
     end
   },
 
@@ -363,18 +483,39 @@ require('lazy').setup({
   --Search & replace string
   { "nvim-pack/nvim-spectre",        lazy = true,    cmd = "Spectre", opts = {} },
 
-  --Handy package with many lightweight editing tools. Choose those that fit you.
-  -- Check documentation at https://github.com/echasnovski/mini.nvim
   {
-    "echasnovski/mini.nvim",
-    event = "CursorHold",
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
     config = function()
-      require("mini.ai").setup()
-      require("mini.align").setup()
-      require("mini.pairs").setup()
-      require("mini.comment").setup()
-      require("mini.surround").setup()
-    end,
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+
+  {
+    'numToStr/Comment.nvim',
+    event = "CursorHold",
+    opts = {
+      -- add any options here
+    },
+  },
+
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+  },
+
+  {
+    'windwp/nvim-ts-autotag',
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter'
+    },
+    opts = {}
+
   },
 
   --Markdown
@@ -382,7 +523,3 @@ require('lazy').setup({
   { "jghauser/follow-md-links.nvim", ft = "markdown" }, --Follow md links with ENTER
 
 }, {})
-
---Load the rest of the plugin configurations that need to be loaded at the end
-require "pluginconfigs.jdtls"
-require "pluginconfigs.cmp"
