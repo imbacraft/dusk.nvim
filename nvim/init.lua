@@ -32,7 +32,6 @@ require('lazy').setup({
   --------------------------------------
 
   { 'nvim-lua/plenary.nvim',        lazy = true },
-  { 'kyazdani42/nvim-web-devicons', lazy = true },
   {
     'rcarriga/nvim-notify',
     lazy = true,
