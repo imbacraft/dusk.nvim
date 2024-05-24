@@ -1,5 +1,11 @@
 local cmp = require('cmp')
 local cmp_action = require('lsp-zero').cmp_action()
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
 -- import luasnip plugin safely
 local luasnip_status, luasnip = pcall(require, "luasnip")
@@ -16,7 +22,7 @@ cmp.setup({
     documentation = cmp.config.window.bordered(),
   },
   completion = {
-    completeopt = 'menu,menuone,noinsert'
+    completeopt = 'menu,menuone,noselect,noinsert'
   },
   sources = {
     { name = "nvim_lsp" },

@@ -213,6 +213,7 @@ local mappings = {
 
 	j = {
 		name = "Java",
+		o = { "<Cmd>lua require'jdtls'.organize_imports()<CR>", "Organize Imports" },
 		t = {
 			"<Cmd>lua require'jdtls'.test_nearest_method({ config = { console = 'console' }})<CR>",
 			"Test Method",
@@ -223,14 +224,18 @@ local mappings = {
 		},
 		f = { "<cmd>lua require('conform').format()<cr>", "Format with Google Java Format" },
 		d = { "<Cmd>JavaDapConfig<CR>", "Refresh debug config" },
-		e = { "<Cmd>JavaRunnerRunMain<CR>", "Execute Java" },
+		r = { "<Cmd>JavaRunnerRunMain<CR>", "Run Java" },
 		p = { "<Cmd>JavaProfile<CR>", "Active Profile" },
-		r = { "<Cmd>JavaTestViewLastReport<CR>", "View Last Test Report" },
 		R = { "<cmd>JdtWipeDataAndRestart<cr>", "Wipe project data and Restart server" },
 		s = {
 			"<cmd>JavaRunnerStopMain<CR>",
 			"Stop running application",
 		},
+		v = { "<Cmd>lua require('jdtls').extract_variable()<CR>", "Extract Variable" },
+		c = { "<Cmd>lua require('jdtls').extract_constant()<CR>", "Extract Constant" },
+		u = { "<Cmd>lua require('jdtls').update_project_config()<CR>", "Refresh java config" },
+		e = { "<Cmd>JdtSetRuntime<CR>", "Choose Java Runtime" },
+		C = { "<Cmd>JdtCompile<CR>", "Compile Java" }
 	},
 
 

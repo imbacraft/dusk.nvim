@@ -31,7 +31,7 @@ require('lazy').setup({
   -- UI --
   --------------------------------------
 
-  { 'nvim-lua/plenary.nvim',        lazy = true },
+  { 'nvim-lua/plenary.nvim',             lazy = true },
   {
     'rcarriga/nvim-notify',
     lazy = true,
@@ -294,6 +294,11 @@ require('lazy').setup({
       lsp_zero.extend_lspconfig()
 
       lsp_zero.on_attach(function(client, bufnr)
+        -- disable semanticTokens because they interfere with treesitter
+        if client.supports_method "textDocument/semanticTokens" then
+          client.server_capabilities.semanticTokensProvider = nil
+        end
+
         -- see :help lsp-zero-keybindings
         -- to learn the available actions
         lsp_zero.default_keymaps({ buffer = bufnr })
@@ -330,8 +335,14 @@ require('lazy').setup({
               }
             })
           end,
+
+          -- This is the default configuration for all servers except jdtls
           function(server_name)
-            require('lspconfig')[server_name].setup({})
+            require('lspconfig')[server_name].setup({
+              defaults = require("pluginconfigs.lsp").defaults(),
+              capabilities = require("pluginconfigs.lsp").capabilities,
+
+            })
           end,
 
           -- lsp_zero.default_setup,
@@ -342,7 +353,7 @@ require('lazy').setup({
   },
 
   -- Useful status updates for LSP
-  { 'j-hui/fidget.nvim',                 event = "LspAttach", opts = {} },
+  { 'j-hui/fidget.nvim',       event = "LspAttach", opts = {} },
 
 
   {
@@ -397,7 +408,8 @@ require('lazy').setup({
           'shfmt',
           'java-test',
           'java-debug-adapter',
-          'markdown-toc'
+          'markdown-toc',
+          'lombok-nightly'
         },
         -- if set to true this will check each tool for updates. If updates
         -- are available the tool will be updated. This setting does not
@@ -419,7 +431,7 @@ require('lazy').setup({
 
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",   ft = "java" },
-  { "rcarriga/nvim-dap-ui",    ft = "java", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
+  { "rcarriga/nvim-dap-ui",    ft = "java",         dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
 
   -- Obsolete plugins, might re-use later
   -- { "Pocco81/dap-buddy.nvim",  ft = "java" },
@@ -539,3 +551,5 @@ require('lazy').setup({
     build = function() vim.fn["mkdp#util#install"]() end,
   }
 }, {})
+
+require("pluginconfigs.jdtls")
