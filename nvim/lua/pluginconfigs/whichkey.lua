@@ -193,7 +193,7 @@ local mappings = {
 		R = { ":Lspsaga rename ++project<cr>", "Rename in Project" },
 		r = { ":Lspsaga rename<cr>", "Rename in current buffer" },
 		o = { ":Lspsaga outline<cr>", "Code Outline" },
-		f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
+		f = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format" },
 		n = {
 			":Lspsaga diagnostic_jump_next<cr>",
 			"Next Diagnostic",
@@ -222,7 +222,7 @@ local mappings = {
 			"<Cmd>lua require'jdtls'.test_class({ config = { console = 'console' }})<CR>",
 			"Test Class",
 		},
-		f = { "<cmd>lua require('conform').format()<cr>", "Format with Google Java Format" },
+		f = { "<cmd>lua require('conform').format({async = true})<cr>", "Format with Google Java Format" },
 		d = { "<Cmd>JavaDapConfig<CR>", "Refresh debug config" },
 		r = { "<Cmd>JavaRunnerRunMain<CR>", "Run Java" },
 		p = { "<Cmd>JavaProfile<CR>", "Active Profile" },

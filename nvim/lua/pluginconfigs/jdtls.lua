@@ -1,8 +1,53 @@
 -- Configure nvim-jdtls specific keymaps and functionality
 local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 
-local function jdtls_setup()
+local extendedClientCapabilities = require 'jdtls'.extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
+local jdtls_settings = {
+
+  capabilities = {
+    workspace = {
+      configuration = true
+    },
+    textDocument = {
+      completion = {
+        completionItem = {
+          snippetSupport = true
+        }
+      }
+    }
+  },
+
+  settings = {
+    java = {
+      references = {
+        includeDecompiledSources = true,
+      },
+      configuration = {
+        runtimes = {
+          -- {
+          --   name = "JavaSE-17",
+          --   path = "/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
+          --   default = true,
+          -- }
+        }
+      }
+    }
+  },
+
+  init_options = {
+    extendedClientCapabilities = extendedClientCapabilities
+  }
+
+
+}
+
+
+
+
+
+local function jdtls_setup()
   require("jdtls.setup").add_commands()
 
   -- NOTE: Java specific keymaps with which key
@@ -23,12 +68,12 @@ local function jdtls_setup()
   end
 
   local vopts = {
-    mode = "v",   -- VISUAL mode
+    mode = "v",     -- VISUAL mode
     prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
   }
 
   local vmappings = {
@@ -49,3 +94,6 @@ vim.api.nvim_create_autocmd('FileType', {
   desc = 'Setup jdtls',
   callback = jdtls_setup,
 })
+
+
+return jdtls_settings

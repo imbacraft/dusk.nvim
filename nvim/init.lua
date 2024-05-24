@@ -311,28 +311,9 @@ require('lazy').setup({
         handlers = {
           jdtls = function()
             require('lspconfig').jdtls.setup({
-              capabilities = {
-                textDocument = {
-                  completion = {
-                    completionItem = {
-                      snippetSupport = true
-                    }
-                  }
-                }
-              },
-              settings = {
-                java = {
-                  configuration = {
-                    runtimes = {
-                      -- {
-                      --   name = "JavaSE-17",
-                      --   path = "/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
-                      --   default = true,
-                      -- }
-                    }
-                  }
-                }
-              }
+              capabilities = require("pluginconfigs.jdtls").capabilities,
+              settings = require("pluginconfigs.jdtls").settings,
+              init_options = require("pluginconfigs.jdtls").init_options
             })
           end,
 
