@@ -1,9 +1,29 @@
 -- Configure nvim-jdtls specific keymaps and functionality
 local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 
-local extendedClientCapabilities = require 'jdtls'.extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+-- Extend JDTLS capabilities
+local extendedClientCapabilities = {
+  resolveAdditionalTextEditsSupport = true,
+  classFileContentsSupport = true,
+  generateToStringPromptSupport = true,
+  hashCodeEqualsPromptSupport = true,
+  advancedExtractRefactoringSupport = true,
+  advancedOrganizeImportsSupport = true,
+  generateConstructorsPromptSupport = true,
+  generateDelegateMethodsPromptSupport = true,
+  moveRefactoringSupport = true,
+  overrideMethodsPromptSupport = true,
+  executeClientCommandSupport = true,
+  inferSelectionSupport = {
+    'extractMethod',
+    'extractVariable',
+    'extractConstant',
+    'extractVariableAllOccurrence',
+  },
+}
 
+
+-- Customize java settings here
 local jdtls_settings = {
 
   capabilities = {
@@ -24,16 +44,66 @@ local jdtls_settings = {
       references = {
         includeDecompiledSources = true,
       },
+      eclipse = {
+        downloadSources = true,
+      },
+      maven = {
+        downloadSources = true,
+      },
+      signatureHelp = { enabled = true },
+      contentProvider = { preferred = "fernflower" },
+      completion = {
+        favoriteStaticMembers = {
+          "org.hamcrest.MatcherAssert.assertThat",
+          "org.hamcrest.Matchers.*",
+          "org.hamcrest.CoreMatchers.*",
+          "org.junit.jupiter.api.Assertions.*",
+          "java.util.Objects.requireNonNull",
+          "java.util.Objects.requireNonNullElse",
+          "org.mockito.Mockito.*",
+        },
+        filteredTypes = {
+          "com.sun.*",
+          "io.micrometer.shaded.*",
+          "java.awt.*",
+          "jdk.*",
+          "sun.*",
+        },
+        importOrder = {
+          "java",
+          "javax",
+          "com",
+          "org",
+        },
+      },
+      sources = {
+        organizeImports = {
+          starThreshold = 9999,
+          staticStarThreshold = 9999,
+        },
+      },
+      codeGeneration = {
+        toString = {
+          template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+        },
+        useBlocks = true,
+      },
       configuration = {
-        runtimes = {
-          -- {
-          --   name = "JavaSE-17",
-          --   path = "/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
-          --   default = true,
+          -- runtimes = {
+          --     {
+          --         name = "java-17-openjdk",
+          --         path = "/usr/lib/jvm/default-runtime/bin/java"
+          --     }
           -- }
-        }
       }
-    }
+
+      -- Here you can manually add dependency jars you might have
+      -- project = {
+      -- 	referencedLibraries = {
+      -- 		"**/lib/*.jar",
+      -- 	},
+      -- },
+    },
   },
 
   init_options = {
@@ -43,11 +113,8 @@ local jdtls_settings = {
 
 }
 
-
-
-
-
-local function jdtls_setup()
+-- Adds custom keymaps from nvim-jdtls plugin
+local function add_jdtls_keymaps()
   require("jdtls.setup").add_commands()
 
   -- NOTE: Java specific keymaps with which key
@@ -91,8 +158,8 @@ end
 vim.api.nvim_create_autocmd('FileType', {
   group = java_cmds,
   pattern = { 'java' },
-  desc = 'Setup jdtls',
-  callback = jdtls_setup,
+  desc = 'Adds keymaps custom to nvim-jdtls plugin',
+  callback = add_jdtls_keymaps,
 })
 
 
