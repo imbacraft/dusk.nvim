@@ -153,17 +153,18 @@ require('lazy').setup({
     dependencies = {
       -- Rename packages and imports also when renaming/moving files via nvim-tree.
       -- Currently works only for tsserver (used in Angular development)
-      {
-        "antosha417/nvim-lsp-file-operations",
-        config = function()
-          require("lsp-file-operations").setup()
-        end,
-      },
+      -- {
+      --   "antosha417/nvim-lsp-file-operations",
+      --   config = function()
+      --     require("lsp-file-operations").setup()
+      --   end,
+      -- },
       -- This plugin doesnt work for now - will revisit
       -- {
       --   'simaxme/java.nvim',
+      --   dependencies = { "mfussenegger/nvim-jdtls" },
       --   config = function()
-      --     require("java").setup()
+      --     require("simaxme-java").setup()
       --   end
       -- }
     },
@@ -349,7 +350,18 @@ require('lazy').setup({
   },
 
   -- Useful status updates for LSP
-  { 'j-hui/fidget.nvim',                 event = "LspAttach", opts = {} },
+  {
+    'j-hui/fidget.nvim',
+    event = "LspAttach",
+    opts = {
+      progress = {
+        poll_rate = 200,             -- How and when to poll for progress messages
+        suppress_on_insert = true,   -- Suppress new messages while in insert mode
+        ignore_done_already = true,  -- Ignore new tasks that are already complete
+        ignore_empty_message = true, -- Ignore new tasks that don't contain a message
+      }
+    }
+  },
 
   -- Improves LSP UI
   {
@@ -406,7 +418,8 @@ require('lazy').setup({
           'java-test',
           'java-debug-adapter',
           'markdown-toc',
-          'lombok-nightly'
+          'lombok-nightly',
+          'sonarlint-language-server'
         },
         -- if set to true this will check each tool for updates. If updates
         -- are available the tool will be updated. This setting does not
@@ -424,8 +437,47 @@ require('lazy').setup({
   },
 
   -- Java LSP
-  { "mfussenegger/nvim-jdtls",         ft = "java" },
-
+  { "mfussenegger/nvim-jdtls",           ft = "java" },
+  -- {
+  --   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+  --   ft = "java",
+  --   -- after = "mfussenegger/nvim-jdtls",
+  --   dependencies = { "mfussenegger/nvim-jdtls" },
+  --   -- event = { "BufRead", "BufNewFile" },
+  --   opts = {
+  --     handlers = {},
+  --   },
+  --   config = function()
+  --     require("sonarlint").setup({
+  --       server = {
+  --         -- root_dir = vim.fn.getcwd(),
+  --         -- autostart = true,
+  --         cmd = {
+  --           "sonarlint-language-server",
+  --           -- Ensure that sonarlint-language-server uses stdio channel
+  --           "-stdio",
+  --           "-analyzers",
+  --           -- paths to the analyzers you need, using those for python and java in this example
+  --           vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
+  --           vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
+  --           vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjava.jar"),
+  --         },
+  --         settings = {
+  --           sonarlint = {
+  --             pathToCompileCommands = vim.fn.getcwd() .. "/compile_commands.json",
+  --           },
+  --         },
+  --       },
+  --       filetypes = {
+  --         -- Tested and working
+  --         "python",
+  --         "cpp",
+  --         -- Requires nvim-jdtls, otherwise an error message will be printed
+  --         "java",
+  --       },
+  --     })
+  --   end,
+  -- },
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",           ft = "java" },
   { "rcarriga/nvim-dap-ui",            ft = "java", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
