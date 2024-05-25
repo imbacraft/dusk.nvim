@@ -153,20 +153,20 @@ require('lazy').setup({
     dependencies = {
       -- Rename packages and imports also when renaming/moving files via nvim-tree.
       -- Currently works only for tsserver (used in Angular development)
-      -- {
-      --   "antosha417/nvim-lsp-file-operations",
-      --   config = function()
-      --     require("lsp-file-operations").setup()
-      --   end,
-      -- },
-      -- This plugin doesnt work for now - will revisit
-      -- {
-      --   'simaxme/java.nvim',
-      --   dependencies = { "mfussenegger/nvim-jdtls" },
-      --   config = function()
-      --     require("simaxme-java").setup()
-      --   end
-      -- }
+      {
+        "antosha417/nvim-lsp-file-operations",
+        config = function()
+          require("lsp-file-operations").setup()
+        end,
+      },
+      -- Rename packages and imports when renaming via nvim-tree for java
+      {
+        'simaxme/java.nvim',
+        dependencies = { "mfussenegger/nvim-jdtls" },
+        config = function()
+          require("simaxme-java").setup()
+        end
+      }
     },
     config = function()
       require("nvim-tree").setup({
@@ -438,46 +438,44 @@ require('lazy').setup({
 
   -- Java LSP
   { "mfussenegger/nvim-jdtls",           ft = "java" },
-  -- {
-  --   "https://gitlab.com/schrieveslaach/sonarlint.nvim",
-  --   ft = "java",
-  --   -- after = "mfussenegger/nvim-jdtls",
-  --   dependencies = { "mfussenegger/nvim-jdtls" },
-  --   -- event = { "BufRead", "BufNewFile" },
-  --   opts = {
-  --     handlers = {},
-  --   },
-  --   config = function()
-  --     require("sonarlint").setup({
-  --       server = {
-  --         -- root_dir = vim.fn.getcwd(),
-  --         -- autostart = true,
-  --         cmd = {
-  --           "sonarlint-language-server",
-  --           -- Ensure that sonarlint-language-server uses stdio channel
-  --           "-stdio",
-  --           "-analyzers",
-  --           -- paths to the analyzers you need, using those for python and java in this example
-  --           vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
-  --           vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
-  --           vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjava.jar"),
-  --         },
-  --         settings = {
-  --           sonarlint = {
-  --             pathToCompileCommands = vim.fn.getcwd() .. "/compile_commands.json",
-  --           },
-  --         },
-  --       },
-  --       filetypes = {
-  --         -- Tested and working
-  --         "python",
-  --         "cpp",
-  --         -- Requires nvim-jdtls, otherwise an error message will be printed
-  --         "java",
-  --       },
-  --     })
-  --   end,
-  -- },
+  {
+    "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+    ft = {"java", "python", "cpp"},
+    dependencies = { "mfussenegger/nvim-jdtls" },
+    opts = {
+      handlers = {},
+    },
+    config = function()
+      require("sonarlint").setup({
+        server = {
+          root_dir = require('jdtls.setup').find_root({ 'gradlew', '.git', 'pom.xml', 'mvnw' }),
+          autostart = true,
+          cmd = {
+            "sonarlint-language-server",
+            -- Ensure that sonarlint-language-server uses stdio channel
+            "-stdio",
+            "-analyzers",
+            -- paths to the analyzers you need, using those for python and java in this example
+            vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
+            vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
+            vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjava.jar"),
+          },
+          settings = {
+            sonarlint = {
+              pathToCompileCommands = vim.fn.getcwd() .. "/compile_commands.json",
+            },
+          },
+        },
+        filetypes = {
+          -- Tested and working
+          "python",
+          "cpp",
+          -- Requires nvim-jdtls, otherwise an error message will be printed
+          "java",
+        },
+      })
+    end,
+  },
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",           ft = "java" },
   { "rcarriga/nvim-dap-ui",            ft = "java", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
