@@ -162,6 +162,7 @@ require('lazy').setup({
       -- Rename packages and imports when renaming via nvim-tree for java
       {
         'simaxme/java.nvim',
+        ft = "java",
         dependencies = { "mfussenegger/nvim-jdtls" },
         config = function()
           require("simaxme-java").setup()
@@ -333,6 +334,7 @@ require('lazy').setup({
             require('lspconfig').jdtls.setup({
               capabilities = require("pluginconfigs.jdtls").capabilities,
               settings = require("pluginconfigs.jdtls").settings,
+              init_options = require("pluginconfigs.jdtls").init_options
             })
           end,
 
