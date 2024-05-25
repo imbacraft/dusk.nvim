@@ -150,6 +150,23 @@ require('lazy').setup({
     lazy = true,
     cmd = "NvimTreeToggle",
     -- event = "CursorHold",
+    dependencies = {
+      -- Rename packages and imports also when renaming/moving files via nvim-tree.
+      -- Currently works only for tsserver (used in Angular development)
+      {
+        "antosha417/nvim-lsp-file-operations",
+        config = function()
+          require("lsp-file-operations").setup()
+        end,
+      },
+      -- This plugin doesnt work for now - will revisit
+      -- {
+      --   'simaxme/java.nvim',
+      --   config = function()
+      --     require("java").setup()
+      --   end
+      -- }
+    },
     config = function()
       require("nvim-tree").setup({
         sync_root_with_cwd = true,

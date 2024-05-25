@@ -1,6 +1,5 @@
 require('nvim-treesitter.configs').setup {
 	-- Add languages to be installed here that you want installed for treesitter
-	ensure_installed = { 'lua', 'java', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', "markdown", "markdown_inline" },
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = false,
@@ -10,7 +9,8 @@ require('nvim-treesitter.configs').setup {
 	ignore_install = {},
 	-- You can specify additional Treesitter modules here: -- For example: -- playground = {--enable = true,-- },
 	modules = {},
-	highlight = { enable = true,
+	highlight = {
+		enable = true,
 		-- disable = { "markdown" }, -- list of language that highlighting will be disabled
 		additional_vim_regex_highlighting = true,
 
@@ -18,15 +18,6 @@ require('nvim-treesitter.configs').setup {
 	indent = { enable = true },
 	autopairs = { enable = true },
 	matchup = { enable = true },
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = '<c-space>',
-			node_incremental = '<c-space>',
-			scope_incremental = '<c-s>',
-			node_decremental = '<M-space>',
-		},
-	},
 	textobjects = {
 		select = {
 			enable = true,
