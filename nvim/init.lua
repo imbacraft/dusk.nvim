@@ -31,7 +31,9 @@ require('lazy').setup({
   -- UI --
   --------------------------------------
 
-  { 'nvim-lua/plenary.nvim',             lazy = true },
+  { 'nvim-lua/plenary.nvim',       lazy = true },
+  { 'nvim-tree/nvim-web-devicons', lazy = true },
+
   {
     'rcarriga/nvim-notify',
     lazy = true,
@@ -298,22 +300,21 @@ require('lazy').setup({
         if client.supports_method "textDocument/semanticTokens" then
           client.server_capabilities.semanticTokensProvider = nil
         end
-
-        -- see :help lsp-zero-keybindings
-        -- to learn the available actions
-        lsp_zero.default_keymaps({ buffer = bufnr })
       end)
 
       require('mason').setup({})
       require('mason-lspconfig').setup({
+
         -- You can add more ensure installed servers based on the aliases on this list: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
-        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "marksman", "emmet_ls", "gradle_ls", "html", "cssls", "bashls" },
+        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "marksman", "emmet_ls", "gradle_ls", "html", "cssls", "bashls", "angularls" },
         handlers = {
+
+          -- This is custom configuration for jdtls.
+          -- Take a look at the config there to adjust it to your preferences
           jdtls = function()
             require('lspconfig').jdtls.setup({
               capabilities = require("pluginconfigs.jdtls").capabilities,
               settings = require("pluginconfigs.jdtls").settings,
-              init_options = require("pluginconfigs.jdtls").init_options
             })
           end,
 
@@ -325,18 +326,15 @@ require('lazy').setup({
 
             })
           end,
-
-          -- lsp_zero.default_setup,
-          -- jdtls = lsp_zero.noop, -- This means don't setup jdtls with default setup, because there is special config for it.
         }
       })
     end
   },
 
   -- Useful status updates for LSP
-  { 'j-hui/fidget.nvim',       event = "LspAttach", opts = {} },
+  { 'j-hui/fidget.nvim',                 event = "LspAttach", opts = {} },
 
-
+  -- Improves LSP UI
   {
     'nvimdev/lspsaga.nvim',
     event = "LspAttach",
@@ -354,11 +352,12 @@ require('lazy').setup({
       },
       outline = {
         auto_preview = false,
-        win_width = 40
+        win_width = 50
       }
     }
   },
 
+  -- Shows signature as you type
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
@@ -375,7 +374,7 @@ require('lazy').setup({
     opts = { auto_preview = false } -- automatically preview the location of the diagnostic
   },
 
-  -- This plugin ensures that the necessary tools get automatically installed
+  -- This plugin ensures that the necessary dependencies for Dusk.nvim get automatically installed
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     config = function()
@@ -408,15 +407,15 @@ require('lazy').setup({
   },
 
   -- Java LSP
-  { "mfussenegger/nvim-jdtls", ft = "java" },
+  { "mfussenegger/nvim-jdtls",         ft = "java" },
 
   -- DAP (Required to run Java unit tests and Debugging)--
-  { "mfussenegger/nvim-dap",   ft = "java" },
-  { "rcarriga/nvim-dap-ui",    ft = "java",         dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
+  { "mfussenegger/nvim-dap",           ft = "java" },
+  { "rcarriga/nvim-dap-ui",            ft = "java", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
+  { 'theHamsta/nvim-dap-virtual-text', ft = "java", opts = {} },
 
   -- Obsolete plugins, might re-use later
   -- { "Pocco81/dap-buddy.nvim",  ft = "java" },
-  -- { 'theHamsta/nvim-dap-virtual-text', ft = "java",         opts = {} },
 
   --------------------------------------
   -- Git --
@@ -513,10 +512,7 @@ require('lazy').setup({
 
   {
     'windwp/nvim-ts-autotag',
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter'
-    },
+    event = { "InsertEnter" },
     opts = {}
 
   },

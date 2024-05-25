@@ -235,7 +235,8 @@ local mappings = {
 		c = { "<Cmd>lua require('jdtls').extract_constant()<CR>", "Extract Constant" },
 		u = { "<Cmd>lua require('jdtls').update_project_config()<CR>", "Refresh java config" },
 		e = { "<Cmd>JdtSetRuntime<CR>", "Choose Java Runtime" },
-		C = { "<Cmd>JdtCompile<CR>", "Compile Java" }
+		C = { "<Cmd>JdtCompile<CR>", "Compile Java" },
+		l = { "<Cmd>JavaRunnerToggleLogs<CR>", "Toggle Java Runner Panel" },
 	},
 
 
@@ -305,6 +306,8 @@ local mappings = {
 		r = { ":lua require'dap'.repl.open()<cr>", "Repl Console" },
 		d = { ":lua require'dapui'.toggle()<cr>", "Dap UI" },
 		t = { ":lua require'dap'.terminate()<cr>", "Terminate session" },
+		m = { ":JavaTestDebugCurrentMethod<cr>", "Java - Debug method" },
+		C = { ":JavaTestDebugCurrentClass<cr>", "Java - Debug Class" },
 	},
 
 	o = {

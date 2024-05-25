@@ -78,10 +78,26 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
 7. Now all the plugins should have been installed. If some have not, run the `:checkhealth` command and check the dependencies section above to see what you might be missing.
 8. Happy editing!
 
+## State of Java experience
+
+Dusk.nvim provides a java development experience with the following advantages:
+
+- Eclipse level editing and refactoring capabilities in neovim
+- Autocomplete candidates from the current buffer, which includes comments
+- Superb coding navigation - searches references in decompiled sources also
+- Support for running and debugging applications with JVM Args (including Spring active profiles)
+- Execute and debug test methods and classes
+
+Features curently not supported (these are what you will miss from your IDE - but also shows the room for improvement):
+
+- No option for running all tests in test resource folders
+- No support for editing many projects in the same neovim instance. Right now for each project you should open new neovim instance.
+- Referenced external libraries not available in file explorer tree
+- Refactoring of java packages and filenames not supported
 
 ## Java Multiple Runtimes
 
-In init.lua, you will find the following snippet. 
+In jdtls.lua, you will find the following snippet. 
 Here you can configure your multiple java runtimes.
 
 Example:

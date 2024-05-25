@@ -1,28 +1,6 @@
 -- Configure nvim-jdtls specific keymaps and functionality
 local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 
--- Extend JDTLS capabilities
-local extendedClientCapabilities = {
-  resolveAdditionalTextEditsSupport = true,
-  classFileContentsSupport = true,
-  generateToStringPromptSupport = true,
-  hashCodeEqualsPromptSupport = true,
-  advancedExtractRefactoringSupport = true,
-  advancedOrganizeImportsSupport = true,
-  generateConstructorsPromptSupport = true,
-  generateDelegateMethodsPromptSupport = true,
-  moveRefactoringSupport = true,
-  overrideMethodsPromptSupport = true,
-  executeClientCommandSupport = true,
-  inferSelectionSupport = {
-    'extractMethod',
-    'extractVariable',
-    'extractConstant',
-    'extractVariableAllOccurrence',
-  },
-}
-
-
 -- Customize java settings here
 local jdtls_settings = {
 
@@ -89,13 +67,23 @@ local jdtls_settings = {
         useBlocks = true,
       },
       configuration = {
-          -- runtimes = {
-          --     {
-          --         name = "java-17-openjdk",
-          --         path = "/usr/lib/jvm/default-runtime/bin/java"
-          --     }
-          -- }
-      }
+        -- Here you can specify all your java runtimes
+        -- runtimes = {
+        --   {
+        --     name = "JavaSE-1.8",
+        --     path = "/Library/Java/JavaVirtualMachines/jdk1.8.0_291.jdk/Contents/Home",
+        --   },
+        --   {
+        --     name = "JavaSE-11",
+        --     path = "/opt/homebrew/Cellar/openjdk@11/11.0.18/libexec/openjdk.jdk/Contents/Home",
+        --     default = true
+        --   },
+        --   {
+        --     name = "JavaSE-19",
+        --     path = "/opt/homebrew/Cellar/openjdk/19.0.2/libexec/openjdk.jdk/Contents/Home",
+        --   },
+        -- }
+      },
 
       -- Here you can manually add dependency jars you might have
       -- project = {
@@ -106,12 +94,8 @@ local jdtls_settings = {
     },
   },
 
-  init_options = {
-    extendedClientCapabilities = extendedClientCapabilities
-  }
-
-
 }
+
 
 -- Adds custom keymaps from nvim-jdtls plugin
 local function add_jdtls_keymaps()
