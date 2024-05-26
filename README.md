@@ -13,8 +13,8 @@ Optimized with Spring Boot && Angular projects in mind.
 ## Design Philosophy
 
 Dusk.nvim is designed to be: 
-- minimal (~800 lines of configuration only) 
-- functional (aims to replace your IDE)
+- minimal (~1500 lines of code in total) 
+- functional (has almost all the features you expect from your IDE)
 - performant (~70-80ms startup time on modern hardware)
 - Out-of-the-box complete. Works with installation.
 - Not opinionated. Defaults are always preferred.

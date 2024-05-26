@@ -336,6 +336,12 @@ local mappings = {
 		w = { "<C-w>w", "Last window" },
 		q = { "<cmd>q!<cr>", "Kill window" },
 	},
+
+	m = {
+		name = "Markdown",
+		p = { ":MarkdownPreview<CR>", "Preview in browser" },
+		s = { ":MarkdownPreviewStop<CR>", "Stop Preview" },
+	},
 }
 
 

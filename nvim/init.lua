@@ -33,21 +33,6 @@ require('lazy').setup({
 
   { 'nvim-lua/plenary.nvim',       lazy = true },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
-
-  {
-    'rcarriga/nvim-notify',
-    lazy = true,
-    event = "VeryLazy",
-    config = function()
-      require("notify").setup {
-        stages = 'fade_in_slide_out',
-        background_colour = 'FloatShadow',
-        timeout = 3000,
-      }
-      vim.notify = require('notify')
-    end
-  },
-
   {
     'folke/which-key.nvim',
     lazy = false,
@@ -55,7 +40,6 @@ require('lazy').setup({
       require("pluginconfigs.whichkey")
     end
   },
-
 
   {
     -- Theme inspired by Atom
@@ -76,13 +60,6 @@ require('lazy').setup({
     config = function()
       vim.cmd.colorscheme 'vscode'
     end,
-  },
-
-  {
-    "EdenEast/nightfox.nvim",
-    lazy = true,
-    event = "CursorHold"
-
   },
 
   {
@@ -107,8 +84,6 @@ require('lazy').setup({
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
     opts = {
       options = {
-        -- icons_enabled = false,
-        -- theme = 'onedark',
         component_separators = '|',
         section_separators = '',
       },
@@ -133,8 +108,8 @@ require('lazy').setup({
     lazy = true,
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
     dependencies = {
-      'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
     init = function() vim.g.barbar_auto_setup = false end,
     opts = {
@@ -286,7 +261,7 @@ require('lazy').setup({
   {
     'hrsh7th/nvim-cmp',
     lazy = true,
-    event = "InsertEnter",
+    event = {"InsertEnter", "CmdLineEnter"},
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
@@ -296,6 +271,7 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
       'amarakon/nvim-cmp-buffer-lines',
 
       -- Adds a number of user-friendly snippets
@@ -438,11 +414,13 @@ require('lazy').setup({
 
   },
 
-  -- Java LSP
+  -- nvim-jdtls enhances the functionality of Java lsp server (jdtls)
   { "mfussenegger/nvim-jdtls",           ft = "java" },
+
+  -- Sonarlint plugin
   {
     "https://gitlab.com/schrieveslaach/sonarlint.nvim",
-    ft = {"java", "python", "cpp"},
+    ft = { "java", "python", "cpp" },
     dependencies = { "mfussenegger/nvim-jdtls" },
     opts = {
       handlers = {},
@@ -450,8 +428,8 @@ require('lazy').setup({
     config = function()
       require("sonarlint").setup({
         server = {
-          root_dir = require('jdtls.setup').find_root({ 'gradlew', '.git', 'pom.xml', 'mvnw' }),
-          autostart = true,
+          -- root_dir = require('jdtls.setup').find_root({ 'gradlew', '.git', 'pom.xml', 'mvnw' }),
+          -- autostart = true,
           cmd = {
             "sonarlint-language-server",
             -- Ensure that sonarlint-language-server uses stdio channel
@@ -478,6 +456,7 @@ require('lazy').setup({
       })
     end,
   },
+
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",           ft = "java" },
   { "rcarriga/nvim-dap-ui",            ft = "java", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
@@ -565,20 +544,21 @@ require('lazy').setup({
     end
   },
 
+  -- gcc to comment
   {
     'numToStr/Comment.nvim',
     event = "CursorHold",
-    opts = {
-      -- add any options here
-    },
+    opts = {},
   },
 
+  -- autoclose (), {} etc
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     config = true
   },
 
+  -- autoclose tags
   {
     'windwp/nvim-ts-autotag',
     event = { "InsertEnter" },
@@ -589,13 +569,11 @@ require('lazy').setup({
   --Markdown
   { "dkarter/bullets.vim",           ft = "markdown" }, -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
   { "jghauser/follow-md-links.nvim", ft = "markdown" }, --Follow md links with ENTER
-  -- install without yarn or npm
   {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
+    -- install without yarn or npm
     build = function() vim.fn["mkdp#util#install"]() end,
   }
 }, {})
-
-require("pluginconfigs.jdtls")
