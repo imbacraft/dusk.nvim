@@ -69,6 +69,142 @@ require('lazy').setup({
     opts = {}
   },
 
+  {
+    "folke/zen-mode.nvim",
+    dependencies = { "folke/twilight.nvim" },
+    event = "VeryLazy",
+  },
+
+  {
+    "tris203/hawtkeys.nvim",
+    cmd = { "Hawtkeys", "HawtkeysAll", "HawtkeysDupes" },
+    config = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
+
+  {
+    "gen740/SmoothCursor.nvim",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      local default = {
+        autostart = true,
+        cursor = "", -- cursor shape (need nerd font)
+        intervals = 35, -- tick interval
+        linehl = nil, -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
+        type = "exp", -- define cursor movement calculate function, "default" or "exp" (exponential).
+        fancy = {
+          enable = true, -- enable fancy mode
+          head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
+          body = {
+            { cursor = "", texthl = "SmoothCursorRed" },
+            { cursor = "", texthl = "SmoothCursorOrange" },
+            { cursor = "●", texthl = "SmoothCursorYellow" },
+            { cursor = "●", texthl = "SmoothCursorGreen" },
+            { cursor = "•", texthl = "SmoothCursorAqua" },
+            { cursor = ".", texthl = "SmoothCursorBlue" },
+            { cursor = ".", texthl = "SmoothCursorPurple" },
+          },
+          tail = { cursor = nil, texthl = "SmoothCursor" },
+        },
+        priority = 10, -- set marker priority
+        speed = 25, -- max is 100 to stick to your current position
+        texthl = "SmoothCursor", -- highlight group, default is { bg = nil, fg = "#FFD400" }
+        threshold = 3,
+        timeout = 3000,
+        disable_float_win = true, -- disable on float window
+      }
+      require("smoothcursor").setup(default)
+    end,
+  },
+
+  {
+    "RRethy/vim-illuminate",
+    event = "VeryLazy",
+    config = function()
+      local illuminate = require("illuminate")
+      vim.g.Illuminate_ftblacklist = { "NvimTree" }
+
+      illuminate.configure({
+        providers = {
+          "lsp",
+          "treesitter",
+          "regex",
+        },
+        delay = 200,
+        filetypes_denylist = {
+          "dirvish",
+          "fugitive",
+          "alpha",
+          "NvimTree",
+          "packer",
+          "neogitstatus",
+          "Trouble",
+          "lir",
+          "Outline",
+          "spectre_panel",
+          "toggleterm",
+          "DressingSelect",
+          "TelescopePrompt",
+          "sagafinder",
+          "sagacallhierarchy",
+          "sagaincomingcalls",
+          "sagapeekdefinition",
+        },
+        filetypes_allowlist = {},
+        modes_denylist = {},
+        modes_allowlist = {},
+        providers_regex_syntax_denylist = {},
+        providers_regex_syntax_allowlist = {},
+        under_cursor = true,
+      })
+    end,
+  },
+
+  {
+    "https://gitlab.com/yorickpeterse/nvim-pqf.git",
+    event = "VeryLazy",
+    opts = {
+      handlers = {},
+    },
+    config = function()
+      require("pqf").setup()
+    end,
+  },
+
+  {
+    "tris203/precognition.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("precognition").setup({
+        startVisible = true,
+        showBlankVirtLine = false,
+        -- highlightColor = { link = "Comment"),
+        -- hints = {
+        --      Caret = { text = "^", prio = 2 },
+        --      Dollar = { text = "$", prio = 1 },
+        --      MatchingPair = { text = "%", prio = 5 },
+        --      Zero = { text = "0", prio = 1 },
+        --      w = { text = "w", prio = 10 },
+        --      b = { text = "b", prio = 9 },
+        --      e = { text = "e", prio = 8 },
+        --      W = { text = "W", prio = 7 },
+        --      B = { text = "B", prio = 6 },
+        --      E = { text = "E", prio = 5 },
+        -- },
+        -- gutterHints = {
+        --     -- prio is not currently used for gutter hints
+        --     G = { text = "G", prio = 1 },
+        --     gg = { text = "gg", prio = 1 },
+        --     PrevParagraph = { text = "{", prio = 1 },
+        --     NextParagraph = { text = "}", prio = 1 },
+        -- },
+      })
+    end,
+  },
+
   --Dashboard
   {
     "goolord/alpha-nvim",
@@ -115,6 +251,17 @@ require('lazy').setup({
     opts = {
     },
   },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {},
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+    },
+  },
+
   --------------------------------------
   -- File explorer and Finder --
   --------------------------------------
@@ -210,6 +357,44 @@ require('lazy').setup({
         },
       })
     end
+  },
+
+  {
+    "smartpde/telescope-recent-files",
+    event = "VeryLazy",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    opts = {
+      handlers = {},
+    },
+    config = function()
+      require("telescope").load_extension("recent_files")
+    end,
+  },
+
+  {
+    "debugloop/telescope-undo.nvim",
+    dependencies = { -- note how they're inverted to above example
+      {
+        "nvim-telescope/telescope.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+      },
+    },
+    opts = {
+      -- don't use `defaults = { }` here, do this in the main telescope spec
+      extensions = {
+        undo = {
+          -- telescope-undo.nvim config, see below
+        },
+        -- no other extensions here, they can have their own spec too
+      },
+    },
+    config = function(_, opts)
+      -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
+      -- configs for us. We won't use data, as everything is in it's own namespace (telescope
+      -- defaults, as well as each extension).
+      require("telescope").setup(opts)
+      require("telescope").load_extension("undo")
+    end,
   },
 
   --------------------------------------
@@ -368,6 +553,23 @@ require('lazy').setup({
     event = "VeryLazy",
     opts = { hint_enable = false, time_interval = 50 },
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
+  },
+
+  {
+    "rockerBOO/symbols-outline.nvim",
+    event = "VeryLazy",
+    config = function(_, opts)
+      require("symbols-outline").setup(opts)
+    end,
+  },
+
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    branch = "main",
+    event = "BufEnter",
+    config = function()
+      require("lsp_lines").setup()
+    end,
   },
 
   --LSP Diagnostics
@@ -553,6 +755,59 @@ require('lazy').setup({
         },
       })
     end
+  },
+
+  -- auto save
+  {
+    "okuuva/auto-save.nvim",
+    cmd = "ASToggle", -- optional for lazy loading on command
+    event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
+    opts = {
+      execution_message = {
+        enabled = false,
+      },
+      debounce_delay = 5000,
+    },
+  },
+
+  {
+    "saccarosium/nvim-whitespaces",
+    lazy = false,
+    opts = {
+      handlers = {},
+    },
+  },
+
+  {
+    "booperlv/nvim-gomove",
+    event = "VeryLazy",
+    opts = {
+      handlers = {},
+    },
+  },
+
+  -- Docker
+  -- LazyDocker app is required https://github.com/mgierada/lazydocker.nvim?tab=readme-ov-file#-installation
+  {
+    "mgierada/lazydocker.nvim",
+    event = "VeryLazy",
+    dependencies = { "akinsho/toggleterm.nvim" },
+    config = function()
+      require("lazydocker").setup({})
+    end
+  },
+
+  -- Database
+  {
+    "tpope/vim-dadbod",
+    event = "VeryLazy",
+    dependencies = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion",
+    },
+    config = function()
+      require("pluginconfigs.dadbod").setup()
+    end,
   },
 
   --Terminal
