@@ -310,7 +310,6 @@ require('lazy').setup({
             require('lspconfig').jdtls.setup({
               capabilities = require("pluginconfigs.jdtls").capabilities,
               settings = require("pluginconfigs.jdtls").settings,
-              init_options = require("pluginconfigs.jdtls").init_options
             })
           end,
 

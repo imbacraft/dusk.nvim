@@ -1,9 +1,5 @@
 -- Configure nvim-jdtls specific keymaps and functionality
 
--- Add extra JDTLS capabilities
-local extendedClientCapabilities = require 'jdtls'.extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
-
 -- Customize java settings here
 local jdtls_settings = {
 
@@ -91,12 +87,6 @@ local jdtls_settings = {
     },
   },
 
-  init_options = {
-    extendedClientCapabilities = extendedClientCapabilities
-  }
 }
-
-
-
 
 return jdtls_settings
