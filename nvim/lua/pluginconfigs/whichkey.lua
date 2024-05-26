@@ -153,6 +153,14 @@ local mappings = {
 		l = { "<cmd>BufferCloseBuffersLeft<cr>", "Close Buffers to the left" },
 	},
 
+	D = {
+		name = "Database",
+		t = { "<cmd>DBUIToggle<cr>", "Toggle UI" },
+		b = { "<cmd>DBUIFindBuffer<cr>", "Find Buffer" },
+		r = { "<cmd>DBUIRenameBuffer<cr>", "Rename Buffer" },
+		i = { "<cmd>DBUILastQueryInfo<cr>", "Last Query Info" },
+	},
+
 	p = {
 		name = "Package Manager",
 		x = { ":Lazy clean<cr>", "Clean" },
@@ -329,6 +337,11 @@ local mappings = {
 			"Absolute Code Line Numbers",
 		},
 		c = { "<cmd>let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>", "ConcealLevel" },
+	},
+
+	T = {
+		name = "Developer tools",
+		d = { "<cmd>Lazydocker<cr>", "Run LazyDocker" },
 	},
 
 	w = {
