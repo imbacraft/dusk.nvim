@@ -74,10 +74,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
 
     -- Move to the previous diagnostic
-    bufmap('n', 'gp', '<cmd>Lspsaga diagnostic_jump_prev<cr>')
+    bufmap('n', 'gp', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
 
     -- Move to the next diagnostic
-    bufmap('n', 'gn', '<cmd>Lspsaga diagnostic_jump_next<cr>')
+    bufmap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
 

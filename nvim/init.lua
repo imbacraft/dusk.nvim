@@ -325,19 +325,19 @@ require('lazy').setup({
     end
   },
 
-  -- Useful status updates for LSP
-  {
-    'j-hui/fidget.nvim',
-    event = "LspAttach",
-    opts = {
-      progress = {
-        poll_rate = 200,             -- How and when to poll for progress messages
-        suppress_on_insert = true,   -- Suppress new messages while in insert mode
-        ignore_done_already = true,  -- Ignore new tasks that are already complete
-        ignore_empty_message = true, -- Ignore new tasks that don't contain a message
-      }
-    }
-  },
+  -- Status updates for LSP - Not very useful - probably unnecessary
+  -- {
+  --   'j-hui/fidget.nvim',
+  --   event = "LspAttach",
+  --   opts = {
+  --     progress = {
+  --       poll_rate = 200,             -- How and when to poll for progress messages
+  --       suppress_on_insert = true,   -- Suppress new messages while in insert mode
+  --       ignore_done_already = true,  -- Ignore new tasks that are already complete
+  --       ignore_empty_message = true, -- Ignore new tasks that don't contain a message
+  --     }
+  --   }
+  -- },
 
   -- Improves LSP UI
   {
@@ -366,7 +366,7 @@ require('lazy').setup({
   {
     "ray-x/lsp_signature.nvim",
     event = "VeryLazy",
-    opts = { hint_enable = false },
+    opts = { hint_enable = false, time_interval = 50 },
     config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
 
@@ -418,7 +418,7 @@ require('lazy').setup({
   -- Sonarlint plugin
   {
     "https://gitlab.com/schrieveslaach/sonarlint.nvim",
-    ft = { "java", "python", "cpp" },
+    ft = { "java", "python", "cpp", "typescript", "typescriptreact", "html" },
     dependencies = { "mfussenegger/nvim-jdtls" },
     opts = {
       handlers = {},
@@ -437,6 +437,8 @@ require('lazy').setup({
             vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
             vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
             vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjava.jar"),
+            vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarjs.jar"),
+            vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarhtml.jar"),
           },
           settings = {
             sonarlint = {
@@ -450,6 +452,8 @@ require('lazy').setup({
           "cpp",
           -- Requires nvim-jdtls, otherwise an error message will be printed
           "java",
+          "typescript",
+          "html",
         },
       })
     end,
@@ -459,29 +463,23 @@ require('lazy').setup({
   -- -- Linters
   -- {
   --   "mfussenegger/nvim-lint",
+  --   event = "LspAttach",
   --   config = function()
-  --     require('lint').linters_by_ft = {
-  --       markdown = { 'vale', },
-  --       javascript = { 'eslint', 'eslint_d' },
-  --       typescript = { 'eslint', 'eslint_d' }
-  --     }
-  --     local eslint = require('lint').linters.eslint_d
+  --     local lint = require("lint")
   --
-  --     -- Required so eslint_d does not require project config
-  --     eslint.args = {
-  --       "--no-warn-ignored", -- <-- this is the key argument
-  --       "--format",
-  --       "json",
-  --       "--stdin",
-  --       "--stdin-filename",
-  --       function()
-  --         return vim.api.nvim_buf_get_name(0)
-  --       end,
+  --     lint.linters_by_ft = {
+  --       -- javascript = { "eslint_d" },
+  --       -- typescript = { "eslint_d" },
+  --       -- javascriptreact = { "eslint_d" },
+  --       -- typescriptreact = { "eslint_d" },
+  --       java = { "checkstyle" },
   --     }
+  --     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
   --
-  --     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  --     vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+  --       group = lint_augroup,
   --       callback = function()
-  --         require('lint').try_lint()
+  --         lint.try_lint()
   --       end,
   --     })
   --   end
