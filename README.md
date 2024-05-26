@@ -23,9 +23,10 @@ Dusk.nvim is designed to be:
 
 - Native LSP and autocompletion
 - Syntax highlighting via nvim-treesitter
-- Java code runner with jaq
+- Java code runner
 - Java Unit Testing with vscode-java-test
 - Java Debugging via nvim-dap
+- Sonarlint support
 - Git integration with LazyGit
 - Explore files via nvim-tree
 - Fuzzy finder via Telescope
@@ -83,7 +84,8 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
 Dusk.nvim provides a java development experience with the following advantages:
 
 - Eclipse level editing and refactoring capabilities in neovim
-- Autocomplete candidates from the current buffer, which includes comments
+- Support for Sonarlint
+- Autocomplete candidates from the current buffer, which includes comments (no other IDE has this)
 - Superb coding navigation - searches references in decompiled sources also
 - Support for running and debugging applications with JVM Args (including Spring active profiles)
 - Execute and debug test methods and classes
@@ -93,7 +95,6 @@ Features curently not supported (these are what you will miss from your IDE - bu
 - No option for running all tests in test resource folders
 - No support for editing many projects in the same neovim instance. Right now for each project you should open new neovim instance.
 - Referenced external libraries not available in file explorer tree
-- Refactoring of java packages and filenames not supported
 
 ## Java Multiple Runtimes
 

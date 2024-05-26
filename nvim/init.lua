@@ -261,7 +261,7 @@ require('lazy').setup({
   {
     'hrsh7th/nvim-cmp',
     lazy = true,
-    event = {"InsertEnter", "CmdLineEnter"},
+    event = { "InsertEnter", "CmdLineEnter" },
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
@@ -301,7 +301,7 @@ require('lazy').setup({
       require('mason-lspconfig').setup({
 
         -- You can add more ensure installed servers based on the aliases on this list: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
-        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "marksman", "emmet_ls", "gradle_ls", "html", "cssls", "bashls", "angularls" },
+        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "marksman", "emmet_ls", "gradle_ls", "html", "cssls", "bashls", "angularls", 'quick_lint_js' },
         handlers = {
 
           -- This is custom configuration for jdtls.
@@ -319,7 +319,6 @@ require('lazy').setup({
             require('lspconfig')[server_name].setup({
               defaults = require("pluginconfigs.lsp").defaults(),
               capabilities = require("pluginconfigs.lsp").capabilities,
-
             })
           end,
         }
@@ -429,7 +428,7 @@ require('lazy').setup({
       require("sonarlint").setup({
         server = {
           -- root_dir = require('jdtls.setup').find_root({ 'gradlew', '.git', 'pom.xml', 'mvnw' }),
-          -- autostart = true,
+          autostart = true,
           cmd = {
             "sonarlint-language-server",
             -- Ensure that sonarlint-language-server uses stdio channel
@@ -456,6 +455,38 @@ require('lazy').setup({
       })
     end,
   },
+
+  -- -- NOTE: if you want additional linters, try this plugin
+  -- -- Linters
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   config = function()
+  --     require('lint').linters_by_ft = {
+  --       markdown = { 'vale', },
+  --       javascript = { 'eslint', 'eslint_d' },
+  --       typescript = { 'eslint', 'eslint_d' }
+  --     }
+  --     local eslint = require('lint').linters.eslint_d
+  --
+  --     -- Required so eslint_d does not require project config
+  --     eslint.args = {
+  --       "--no-warn-ignored", -- <-- this is the key argument
+  --       "--format",
+  --       "json",
+  --       "--stdin",
+  --       "--stdin-filename",
+  --       function()
+  --         return vim.api.nvim_buf_get_name(0)
+  --       end,
+  --     }
+  --
+  --     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  --       callback = function()
+  --         require('lint').try_lint()
+  --       end,
+  --     })
+  --   end
+  -- },
 
   -- DAP (Required to run Java unit tests and Debugging)--
   { "mfussenegger/nvim-dap",           ft = "java" },
