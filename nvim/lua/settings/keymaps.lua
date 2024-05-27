@@ -44,11 +44,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Displays hover information about the symbol under the cursor
     bufmap('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
 
-    -- Jump to the definition
-    bufmap('n', 'gd', '<cmd>Lspsaga peek_definition<cr>')
+    -- Peek definition
+    bufmap('n', 'gD', '<cmd>Lspsaga peek_definition<cr>')
 
-    -- Jump to declaration
-    bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<cr>')
+    -- Jump to definition
+    bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 
     -- Lists all the implementations for the symbol under the cursor
     bufmap('n', 'gi', '<cmd>Lspsaga finder imp<cr>')

@@ -1,3 +1,8 @@
+-- disable netrw at the very start of the init.lua
+-- Check https://github.com/nvim-tree/nvim-tree.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 --- Set <space> as the leader key
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
@@ -31,178 +36,17 @@ require('lazy').setup({
   -- UI --
   --------------------------------------
 
+  -- Essential lua functions
   { 'nvim-lua/plenary.nvim',       lazy = true },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
+
+  -- Shows available keys
   {
     'folke/which-key.nvim',
-    lazy = false,
+    event = "VeryLazy",
     config = function()
       require("pluginconfigs.whichkey")
     end
-  },
-
-  {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    lazy = true,
-    event = "CursorHold"
-  },
-
-  {
-    "nyoom-engineering/oxocarbon.nvim",
-    lazy = true,
-    event = "CursorHold"
-  },
-
-  {
-    "Mofiqul/vscode.nvim",
-    lazy = false,
-    config = function()
-      vim.cmd.colorscheme 'vscode'
-    end,
-  },
-
-  {
-    'nmac427/guess-indent.nvim',
-    lazy = true,
-    event = { "BufReadPost", "BufAdd", "BufNewFile" },
-    opts = {}
-  },
-
-  {
-    "folke/zen-mode.nvim",
-    dependencies = { "folke/twilight.nvim" },
-    event = "VeryLazy",
-  },
-
-  {
-    "tris203/hawtkeys.nvim",
-    cmd = { "Hawtkeys", "HawtkeysAll", "HawtkeysDupes" },
-    config = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-  },
-
-  {
-    "gen740/SmoothCursor.nvim",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      local default = {
-        autostart = true,
-        cursor = "", -- cursor shape (need nerd font)
-        intervals = 35, -- tick interval
-        linehl = nil, -- highlight sub-cursor line like 'cursorline', "CursorLine" recommended
-        type = "exp", -- define cursor movement calculate function, "default" or "exp" (exponential).
-        fancy = {
-          enable = true, -- enable fancy mode
-          head = { cursor = "▷", texthl = "SmoothCursor", linehl = nil },
-          body = {
-            { cursor = "", texthl = "SmoothCursorRed" },
-            { cursor = "", texthl = "SmoothCursorOrange" },
-            { cursor = "●", texthl = "SmoothCursorYellow" },
-            { cursor = "●", texthl = "SmoothCursorGreen" },
-            { cursor = "•", texthl = "SmoothCursorAqua" },
-            { cursor = ".", texthl = "SmoothCursorBlue" },
-            { cursor = ".", texthl = "SmoothCursorPurple" },
-          },
-          tail = { cursor = nil, texthl = "SmoothCursor" },
-        },
-        priority = 10, -- set marker priority
-        speed = 25, -- max is 100 to stick to your current position
-        texthl = "SmoothCursor", -- highlight group, default is { bg = nil, fg = "#FFD400" }
-        threshold = 3,
-        timeout = 3000,
-        disable_float_win = true, -- disable on float window
-      }
-      require("smoothcursor").setup(default)
-    end,
-  },
-
-  {
-    "RRethy/vim-illuminate",
-    event = "VeryLazy",
-    config = function()
-      local illuminate = require("illuminate")
-      vim.g.Illuminate_ftblacklist = { "NvimTree" }
-
-      illuminate.configure({
-        providers = {
-          "lsp",
-          "treesitter",
-          "regex",
-        },
-        delay = 200,
-        filetypes_denylist = {
-          "dirvish",
-          "fugitive",
-          "alpha",
-          "NvimTree",
-          "packer",
-          "neogitstatus",
-          "Trouble",
-          "lir",
-          "Outline",
-          "spectre_panel",
-          "toggleterm",
-          "DressingSelect",
-          "TelescopePrompt",
-          "sagafinder",
-          "sagacallhierarchy",
-          "sagaincomingcalls",
-          "sagapeekdefinition",
-        },
-        filetypes_allowlist = {},
-        modes_denylist = {},
-        modes_allowlist = {},
-        providers_regex_syntax_denylist = {},
-        providers_regex_syntax_allowlist = {},
-        under_cursor = true,
-      })
-    end,
-  },
-
-  {
-    "https://gitlab.com/yorickpeterse/nvim-pqf.git",
-    event = "VeryLazy",
-    opts = {
-      handlers = {},
-    },
-    config = function()
-      require("pqf").setup()
-    end,
-  },
-
-  {
-    "tris203/precognition.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("precognition").setup({
-        startVisible = true,
-        showBlankVirtLine = false,
-        -- highlightColor = { link = "Comment"),
-        -- hints = {
-        --      Caret = { text = "^", prio = 2 },
-        --      Dollar = { text = "$", prio = 1 },
-        --      MatchingPair = { text = "%", prio = 5 },
-        --      Zero = { text = "0", prio = 1 },
-        --      w = { text = "w", prio = 10 },
-        --      b = { text = "b", prio = 9 },
-        --      e = { text = "e", prio = 8 },
-        --      W = { text = "W", prio = 7 },
-        --      B = { text = "B", prio = 6 },
-        --      E = { text = "E", prio = 5 },
-        -- },
-        -- gutterHints = {
-        --     -- prio is not currently used for gutter hints
-        --     G = { text = "G", prio = 1 },
-        --     gg = { text = "gg", prio = 1 },
-        --     PrevParagraph = { text = "{", prio = 1 },
-        --     NextParagraph = { text = "}", prio = 1 },
-        -- },
-      })
-    end,
   },
 
   --Dashboard
@@ -252,14 +96,96 @@ require('lazy').setup({
     },
   },
 
+  --------------------------------------
+  -- Colorschemes --
+  --------------------------------------
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {},
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
+    -- Theme inspired by Atom
+    'navarasu/onedark.nvim',
+    lazy = true,
+    event = "CursorHold"
+  },
+
+  {
+    "nyoom-engineering/oxocarbon.nvim",
+    lazy = true,
+    event = "CursorHold"
+  },
+
+  {
+    "Mofiqul/vscode.nvim",
+    lazy = false,
+    config = function()
+      vim.cmd.colorscheme 'vscode'
+    end,
+  },
+
+  --------------------------------------
+  -- General Features --
+  --------------------------------------
+
+  -- auto save
+  {
+    "okuuva/auto-save.nvim",
+    cmd = "ASToggle", -- Use this cmd if you want to enable auto-save
+    opts = {
+      execution_message = {
+        enabled = false,
+      },
+      debounce_delay = 5000,
     },
+  },
+
+  -- Electric indentation
+  {
+    'nmac427/guess-indent.nvim',
+    lazy = true,
+    event = { "BufReadPost", "BufAdd", "BufNewFile" },
+    opts = {}
+  },
+
+  -- Highlight word under cursor
+  {
+    "RRethy/vim-illuminate",
+    event = "VeryLazy",
+    config = function()
+      local illuminate = require("illuminate")
+      vim.g.Illuminate_ftblacklist = { "NvimTree" }
+
+      illuminate.configure({
+        providers = {
+          "lsp",
+          "treesitter",
+          "regex",
+        },
+        delay = 200,
+        filetypes_denylist = {
+          "dirvish",
+          "fugitive",
+          "alpha",
+          "NvimTree",
+          "packer",
+          "neogitstatus",
+          "Trouble",
+          "lir",
+          "Outline",
+          "spectre_panel",
+          "toggleterm",
+          "DressingSelect",
+          "TelescopePrompt",
+          "sagafinder",
+          "sagacallhierarchy",
+          "sagaincomingcalls",
+          "sagapeekdefinition",
+        },
+        filetypes_allowlist = {},
+        modes_denylist = {},
+        modes_allowlist = {},
+        providers_regex_syntax_denylist = {},
+        providers_regex_syntax_allowlist = {},
+        under_cursor = true,
+      })
+    end,
   },
 
   --------------------------------------
@@ -269,9 +195,6 @@ require('lazy').setup({
   -- Nvim Tree
   {
     "nvim-tree/nvim-tree.lua",
-    lazy = true,
-    cmd = "NvimTreeToggle",
-    -- event = "CursorHold",
     dependencies = {
       -- Rename packages and imports also when renaming/moving files via nvim-tree.
       -- Currently works only for tsserver (used in Angular development)
@@ -281,11 +204,9 @@ require('lazy').setup({
           require("lsp-file-operations").setup()
         end,
       },
-      -- Rename packages and imports when renaming via nvim-tree for java
+      -- Rename packages and imports also when renaming/moving files via nvim-tree (for Java)
       {
         'simaxme/java.nvim',
-        ft = "java",
-        dependencies = { "mfussenegger/nvim-jdtls" },
         config = function()
           require("simaxme-java").setup()
         end
@@ -297,7 +218,7 @@ require('lazy').setup({
         respect_buf_cwd = true,
         update_focused_file = {
           enable = true,
-          update_root = true
+          update_root = false
         },
         view = {
           width = 50,
@@ -353,24 +274,18 @@ require('lazy').setup({
           buffers = {
             theme = "dropdown",
             previewer = false
+          },
+          recent_files = {
+            theme = "dropdown",
+            previewer = false
           }
+
         },
       })
     end
   },
 
-  {
-    "smartpde/telescope-recent-files",
-    event = "VeryLazy",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    opts = {
-      handlers = {},
-    },
-    config = function()
-      require("telescope").load_extension("recent_files")
-    end,
-  },
-
+  -- Search in file history
   {
     "debugloop/telescope-undo.nvim",
     dependencies = { -- note how they're inverted to above example
@@ -400,47 +315,56 @@ require('lazy').setup({
   --------------------------------------
   -- LSP & Autocompletion --
   --------------------------------------
+  {
+    -- LSP Configuration & Plugins
+    'neovim/nvim-lspconfig',
+    lazy = true,
+    dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      { 'williamboman/mason.nvim', config = true },
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Additional lua configuration, makes nvim stuff amazing!
+      { 'folke/neodev.nvim',       opts = {} },
+    },
+  },
 
   {
-    'nvim-java/nvim-java',
-    lazy = false,
-    dependencies = {
-      'nvim-java/lua-async-await',
-      'nvim-java/nvim-java-refactor',
-      'nvim-java/nvim-java-core',
-      'nvim-java/nvim-java-test',
-      'nvim-java/nvim-java-dap',
-      'MunifTanjim/nui.nvim',
-      'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-dap',
-      {
-        'williamboman/mason.nvim',
-        opts = {
-          registries = {
-            'github:nvim-java/mason-registry',
-            'github:mason-org/mason-registry',
-          },
-        },
-      }
-    },
+    'VonHeikemen/lsp-zero.nvim',
+    lazy = true,
+    branch = 'v3.x',
     config = function()
-      require('java').setup({
-        root_markers = {
-          '.git',
-          'mvnw',
-          'gradlew',
-          'pom.xml',
-          'build.gradle',
-        },
-        jdk = {
-          -- Choose whether to install jdk automatically using mason.nvim
-          auto_install = false,
-        },
+      local lsp_zero = require('lsp-zero')
+      lsp_zero.extend_lspconfig()
+
+      lsp_zero.on_attach(function(client, bufnr)
+        -- disable semanticTokens because they interfere with treesitter
+        if client.supports_method "textDocument/semanticTokens" then
+          client.server_capabilities.semanticTokensProvider = nil
+        end
+      end)
+
+      require('mason').setup({})
+      require('mason-lspconfig').setup({
+
+        -- You can add more ensure installed servers based on the aliases on this list: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
+        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "marksman", "emmet_ls", "gradle_ls", "html", "cssls", "bashls", "angularls", 'quick_lint_js' },
+        handlers = {
+
+          -- Don't setup jdtls here, it's configured in pluginconfigs/jdtls.lua
+          jdtls = lsp_zero.noop,
+
+          -- This is the default configuration for all servers except jdtls
+          function(server_name)
+            require('lspconfig')[server_name].setup({
+              defaults = require("pluginconfigs.lsp").defaults(),
+              capabilities = require("pluginconfigs.lsp").capabilities,
+            })
+          end,
+        }
       })
     end
   },
-
-  { "williamboman/mason-lspconfig.nvim", lazy = true },
 
   -- Autocompletion
   {
@@ -467,62 +391,6 @@ require('lazy').setup({
     end
   },
 
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    lazy = true,
-    branch = 'v3.x',
-    config = function()
-      local lsp_zero = require('lsp-zero')
-      lsp_zero.extend_lspconfig()
-
-      lsp_zero.on_attach(function(client, bufnr)
-        -- disable semanticTokens because they interfere with treesitter
-        if client.supports_method "textDocument/semanticTokens" then
-          client.server_capabilities.semanticTokensProvider = nil
-        end
-      end)
-
-      require('mason').setup({})
-      require('mason-lspconfig').setup({
-
-        -- You can add more ensure installed servers based on the aliases on this list: https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
-        ensure_installed = { 'jdtls', "tsserver", "lua_ls", "jsonls", "lemminx", "marksman", "emmet_ls", "gradle_ls", "html", "cssls", "bashls", "angularls", 'quick_lint_js' },
-        handlers = {
-
-          -- This is custom configuration for jdtls.
-          -- Take a look at the config there to adjust it to your preferences
-          jdtls = function()
-            require('lspconfig').jdtls.setup({
-              capabilities = require("pluginconfigs.jdtls").capabilities,
-              settings = require("pluginconfigs.jdtls").settings,
-            })
-          end,
-
-          -- This is the default configuration for all servers except jdtls
-          function(server_name)
-            require('lspconfig')[server_name].setup({
-              defaults = require("pluginconfigs.lsp").defaults(),
-              capabilities = require("pluginconfigs.lsp").capabilities,
-            })
-          end,
-        }
-      })
-    end
-  },
-
-  -- Status updates for LSP - Not very useful - probably unnecessary
-  -- {
-  --   'j-hui/fidget.nvim',
-  --   event = "LspAttach",
-  --   opts = {
-  --     progress = {
-  --       poll_rate = 200,             -- How and when to poll for progress messages
-  --       suppress_on_insert = true,   -- Suppress new messages while in insert mode
-  --       ignore_done_already = true,  -- Ignore new tasks that are already complete
-  --       ignore_empty_message = true, -- Ignore new tasks that don't contain a message
-  --     }
-  --   }
-  -- },
 
   -- Improves LSP UI
   {
@@ -556,19 +424,17 @@ require('lazy').setup({
   },
 
   {
-    "rockerBOO/symbols-outline.nvim",
-    event = "VeryLazy",
-    config = function(_, opts)
-      require("symbols-outline").setup(opts)
-    end,
-  },
-
-  {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     branch = "main",
-    event = "BufEnter",
     config = function()
-      require("lsp_lines").setup()
+      require("lsp_lines").setup({
+        vim.keymap.set(
+          "",
+          "<Leader>X",
+          require("lsp_lines").toggle,
+          { desc = "Toggle lsp_lines plugin" }
+        )
+      })
     end,
   },
 
@@ -596,7 +462,6 @@ require('lazy').setup({
           'java-test',
           'java-debug-adapter',
           'markdown-toc',
-          'lombok-nightly',
           'sonarlint-language-server'
         },
         -- if set to true this will check each tool for updates. If updates
@@ -615,7 +480,7 @@ require('lazy').setup({
   },
 
   -- nvim-jdtls enhances the functionality of Java lsp server (jdtls)
-  { "mfussenegger/nvim-jdtls",           ft = "java" },
+  { "mfussenegger/nvim-jdtls",         ft = "java" },
 
   -- Sonarlint plugin
   {
@@ -628,8 +493,8 @@ require('lazy').setup({
     config = function()
       require("sonarlint").setup({
         server = {
-          -- root_dir = require('jdtls.setup').find_root({ 'gradlew', '.git', 'pom.xml', 'mvnw' }),
-          autostart = true,
+          root_dir = require('jdtls.setup').find_root({ 'gradlew', '.git', 'pom.xml', 'mvnw' }),
+          -- autostart = true,
           cmd = {
             "sonarlint-language-server",
             -- Ensure that sonarlint-language-server uses stdio channel
@@ -652,13 +517,37 @@ require('lazy').setup({
           -- Tested and working
           "python",
           "cpp",
-          -- Requires nvim-jdtls, otherwise an error message will be printed
           "java",
           "typescript",
           "html",
         },
       })
     end,
+  },
+
+
+  -- DAP (Required to run Java unit tests and Debugging)--
+  { "mfussenegger/nvim-dap",           ft = "java" },
+  { "rcarriga/nvim-dap-ui",            ft = "java", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
+  { 'theHamsta/nvim-dap-virtual-text', ft = "java", opts = {} },
+
+
+  --------------------------------------
+  -- Linters and Formatters --
+  --------------------------------------
+
+  -- Custom Formatters
+  {
+    'stevearc/conform.nvim',
+    lazy = true,
+    event = "LspAttach",
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          java = { "google-java-format" },
+        },
+      })
+    end
   },
 
   -- -- NOTE: if you want additional linters, try this plugin
@@ -678,7 +567,7 @@ require('lazy').setup({
   --     }
   --     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
   --
-  --     vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+  --     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
   --       group = lint_augroup,
   --       callback = function()
   --         lint.try_lint()
@@ -686,14 +575,6 @@ require('lazy').setup({
   --     })
   --   end
   -- },
-
-  -- DAP (Required to run Java unit tests and Debugging)--
-  { "mfussenegger/nvim-dap",           ft = "java" },
-  { "rcarriga/nvim-dap-ui",            ft = "java", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
-  { 'theHamsta/nvim-dap-virtual-text', ft = "java", opts = {} },
-
-  -- Obsolete plugins, might re-use later
-  -- { "Pocco81/dap-buddy.nvim",  ft = "java" },
 
   --------------------------------------
   -- Git --
@@ -725,7 +606,7 @@ require('lazy').setup({
   { "kdheepak/lazygit.nvim",   lazy = true,   cmd = "LazyGit" },
 
   --------------------------------------
-  -- Tools --
+  -- Editing Tools --
   --------------------------------------
 
   -- Syntax highliting
@@ -743,41 +624,15 @@ require('lazy').setup({
     end,
   },
 
-  -- Custom Formatters
-  {
-    'stevearc/conform.nvim',
-    lazy = true,
-    event = "LspAttach",
-    config = function()
-      require("conform").setup({
-        formatters_by_ft = {
-          java = { "google-java-format" },
-        },
-      })
-    end
-  },
-
-  -- auto save
-  {
-    "okuuva/auto-save.nvim",
-    cmd = "ASToggle", -- optional for lazy loading on command
-    event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
-    opts = {
-      execution_message = {
-        enabled = false,
-      },
-      debounce_delay = 5000,
-    },
-  },
-
+  -- Delete whitespaces
   {
     "saccarosium/nvim-whitespaces",
-    lazy = false,
     opts = {
       handlers = {},
     },
   },
 
+  -- Move blocks
   {
     "booperlv/nvim-gomove",
     event = "VeryLazy",
@@ -786,28 +641,11 @@ require('lazy').setup({
     },
   },
 
-  -- Docker
-  -- LazyDocker app is required https://github.com/mgierada/lazydocker.nvim?tab=readme-ov-file#-installation
+  -- Distraction free mode
   {
-    "mgierada/lazydocker.nvim",
-    event = "VeryLazy",
-    dependencies = { "akinsho/toggleterm.nvim" },
-    config = function()
-      require("lazydocker").setup({})
-    end
-  },
-
-  -- Database
-  {
-    "tpope/vim-dadbod",
-    event = "VeryLazy",
-    dependencies = {
-      "kristijanhusak/vim-dadbod-ui",
-      "kristijanhusak/vim-dadbod-completion",
-    },
-    config = function()
-      require("pluginconfigs.dadbod").setup()
-    end,
+    "folke/zen-mode.nvim",
+    dependencies = { "folke/twilight.nvim" },
+    cmd = "ZenMode"
   },
 
   --Terminal
@@ -816,6 +654,7 @@ require('lazy').setup({
   --Search & replace string
   { "nvim-pack/nvim-spectre",  lazy = true,   cmd = "Spectre", opts = {} },
 
+  -- Add/remove/change surrounding {}, (), "" etc
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -849,6 +688,39 @@ require('lazy').setup({
 
   },
 
+  --------------------------------------
+  -- Developer Tools --
+  --------------------------------------
+
+  -- Docker
+  -- LazyDocker app is required https://github.com/mgierada/lazydocker.nvim?tab=readme-ov-file#-installation
+  {
+    "mgierada/lazydocker.nvim",
+    cmd = "LazyDocker",
+    dependencies = { "akinsho/toggleterm.nvim" },
+    config = function()
+      require("lazydocker").setup({})
+    end
+  },
+
+  -- Database Management
+  {
+    "tpope/vim-dadbod",
+    event = "VeryLazy",
+    dependencies = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion",
+    },
+    config = function()
+      require("pluginconfigs.dadbod").setup()
+    end,
+  },
+
+
+  --------------------------------------
+  -- Language specific --
+  --------------------------------------
+
   --Markdown
   { "dkarter/bullets.vim",           ft = "markdown" }, -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
   { "jghauser/follow-md-links.nvim", ft = "markdown" }, --Follow md links with ENTER
@@ -860,3 +732,6 @@ require('lazy').setup({
     build = function() vim.fn["mkdp#util#install"]() end,
   }
 }, {})
+
+-- Load JDTLS config
+require("pluginconfigs.jdtls")

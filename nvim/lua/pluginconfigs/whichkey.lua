@@ -7,12 +7,6 @@ end
 -- Custom Helper Functions --
 --------------------------------------
 
-local function toggle_option(option)
-	local value = not vim.api.nvim_get_option_value(option, {})
-	vim.opt[option] = value
-	vim.notify(option .. " set to " .. tostring(value))
-end
-
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
@@ -56,6 +50,15 @@ local function telescope_live_grep_open_files()
 	}
 end
 
+-- Function to toggle diagnostic virtual text
+local function ToggleVirtualText()
+	local config = vim.diagnostic.config()
+	local new_value = not config.virtual_text
+	vim.diagnostic.config({ virtual_text = new_value })
+	print("Virtual text " .. (new_value and "enabled" or "disabled"))
+end
+
+vim.api.nvim_create_user_command('ToggleVirtualText', ToggleVirtualText, {})
 
 --------------------------------------
 -- Keymaps --
@@ -72,13 +75,13 @@ local setup = {
 		-- the presets plugin, adds help for a bunch of default keybindings in Neovim
 		-- No actual key bindings are created
 		presets = {
-			operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-			motions = true,   -- adds help for motions
+			operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+			motions = false,  -- adds help for motions
 			text_objects = true, -- help for text objects triggered after entering an operator
 			windows = false,  -- default bindings on <c-w>
 			nav = false,      -- misc bindings to work with windows
 			z = true,         -- bindings for folds, spelling and others prefixed with z
-			g = true,         -- bindings for prefixed with g
+			g = false,        -- bindings for prefixed with g
 		},
 	},
 	-- add operators that will trigger motion and text object completion
@@ -196,8 +199,8 @@ local mappings = {
 		name = "Code",
 		a = { ":lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 		e = { ":Jaq<cr>", "Execute Code" },
-		x = { ":Trouble diagnostics toggle<cr>", "Workspace Diagnostics" },
-		X = { ":Trouble diagnostics toggle filter.buf=0<cr>", "Current buffer Diagnostics" },
+		x = { ":Trouble diagnostics toggle focus = true<cr>", "Workspace Diagnostics" },
+		X = { ":Trouble diagnostics toggle filter.buf=0 focus = true<cr>", "Current buffer Diagnostics" },
 		R = { ":Lspsaga rename ++project<cr>", "Rename in Project" },
 		r = { ":Lspsaga rename<cr>", "Rename in current buffer" },
 		o = { ":Lspsaga outline<cr>", "Code Outline" },
@@ -210,6 +213,8 @@ local mappings = {
 			":Lspsaga diagnostic_jump_prev<cr>",
 			"Prev Diagnostic",
 		},
+		q = { ":Trouble quickfix focus = true<cr>", "Diagnostics Quickfix" },
+
 	},
 
 	r = {
@@ -231,20 +236,16 @@ local mappings = {
 			"Test Class",
 		},
 		f = { "<cmd>lua require('conform').format({async = true})<cr>", "Format with Google Java Format" },
-		d = { "<Cmd>JavaDapConfig<CR>", "Refresh debug config" },
-		r = { "<Cmd>JavaRunnerRunMain<CR>", "Run Java" },
-		p = { "<Cmd>JavaProfile<CR>", "Active Profile" },
 		R = { "<cmd>JdtWipeDataAndRestart<cr>", "Wipe project data and Restart server" },
-		s = {
-			"<cmd>JavaRunnerStopMain<CR>",
-			"Stop running application",
-		},
 		v = { "<Cmd>lua require('jdtls').extract_variable()<CR>", "Extract Variable" },
 		c = { "<Cmd>lua require('jdtls').extract_constant()<CR>", "Extract Constant" },
 		u = { "<Cmd>lua require('jdtls').update_project_config()<CR>", "Refresh java config" },
 		e = { "<Cmd>JdtSetRuntime<CR>", "Choose Java Runtime" },
 		C = { "<Cmd>JdtCompile<CR>", "Compile Java" },
-		l = { "<Cmd>JavaRunnerToggleLogs<CR>", "Toggle Java Runner Panel" },
+		d = {
+			":lua require('jdtls').setup_dap({ hotcodereplace = 'auto' })<cr>; :lua require'jdtls.dap'.setup_dap_main_class_configs()<cr>",
+			"Refresh DAP Debugger",
+		},
 	},
 
 
@@ -259,8 +260,9 @@ local mappings = {
 		end, "In current buffer" },
 		p = { "<cmd>LiveGrepGitRoot<cr>", "In Git root (Project)" },
 		c = { "<cmd>Telescope live_grep theme=ivy<cr>", "In current working directory" },
-		l = { "<cmd>Telescope resume<cr>", "Resume last Search" },
-		o = { telescope_live_grep_open_files, "In currently open files" }
+		r = { "<cmd>Telescope resume<cr>", "Resume last Search" },
+		o = { telescope_live_grep_open_files, "In currently open files" },
+		u = { "<cmd>Telescope undo<cr>", "In File History" }
 	},
 
 	g = {
@@ -327,6 +329,8 @@ local mappings = {
 
 	t = {
 		name = "Toggle option",
+		s = { '<cmd>ASToggle<cr>', "Toggle Autosave" },
+		l = { '<cmd>lua require("lsp_lines").toggle()<cr>', "Toggle Lsp_Lines plugin" },
 		w = { '<cmd>lua require("settings.options").toggle_option("wrap")<cr>', "Wrap Text" },
 		r = {
 			'<cmd>lua require("settings.options").toggle_option("relativenumber")<cr>',
@@ -337,11 +341,12 @@ local mappings = {
 			"Absolute Code Line Numbers",
 		},
 		c = { "<cmd>let &cole=(&cole == 2) ? 0 : 2 <bar> echo 'conceallevel ' . &cole <CR>", "ConcealLevel" },
+		v = { '<cmd>ToggleVirtualText<cr>', "Toggle Diagnostic Virtual Lines" },
 	},
 
-	T = {
-		name = "Developer tools",
-		d = { "<cmd>Lazydocker<cr>", "Run LazyDocker" },
+	C = {
+		name = "Containers - Docker",
+		d = { "<cmd>LazyDocker<cr>", "Run LazyDocker" },
 	},
 
 	w = {
