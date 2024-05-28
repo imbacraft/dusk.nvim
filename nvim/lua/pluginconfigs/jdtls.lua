@@ -11,7 +11,7 @@ local root_markers = {
 
 local features = {
   -- change this to `true` to enable codelens
-  codelens = true,
+  codelens = false,
 
   -- change this to `true` if you have `nvim-dap`,
   -- `java-test` and `java-debug-adapter` installed
@@ -184,24 +184,23 @@ local function jdtls_on_attach(client, bufnr)
   end
 end
 
+local basic_capabilities = {
+  textDocument = {
+    completion = {
+      completionItem = {
+        snippetSupport = true
+      }
+    }
+  }
+}
+
 local function jdtls_setup(event)
   local jdtls = require('jdtls')
 
   local path = get_jdtls_paths()
   local workspace_dir = path.workspace_dir .. '/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
-  -- Determine the appropriate path separator
-  local path_separator = package.config:sub(1, 1) -- Gets the path separator ("/" on Unix, "\\" on Windows)
-
-  -- Function to replace forward slashes with backslashes on Windows
-  local function adjust_path_for_Windows(p)
-    if path_separator == "\\" then
-      p = p:gsub("/", "\\")
-    end
-    return p
-  end
-
-  local project_root_dir = adjust_path_for_Windows(require('jdtls.setup').find_root(root_markers))
+  local project_root_dir = require('jdtls.setup').find_root(root_markers)
 
   if cache_vars.capabilities == nil then
     jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -297,7 +296,6 @@ local function jdtls_setup(event)
     contentProvider = {
       preferred = 'fernflower',
     },
-    extendedClientCapabilities = jdtls.extendedClientCapabilities,
     sources = {
       organizeImports = {
         starThreshold = 9999,
@@ -306,19 +304,23 @@ local function jdtls_setup(event)
     },
   }
 
+  local extendedClientCapabilities = require 'jdtls'.extendedClientCapabilities
+  extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
   -- This starts a new client & server,
   -- or attaches to an existing client & server depending on the `root_dir`.
   jdtls.start_or_attach({
     cmd = cmd,
     settings = lsp_settings,
     on_attach = jdtls_on_attach,
-    capabilities = cache_vars.capabilities,
+    capabilities = basic_capabilities,
     root_dir = project_root_dir,
     flags = {
       allow_incremental_sync = true,
     },
     init_options = {
       bundles = path.bundles,
+      extendedClientCapabilities = extendedClientCapabilities
     },
   })
 end
