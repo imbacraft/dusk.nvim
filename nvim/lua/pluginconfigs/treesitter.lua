@@ -13,6 +13,7 @@ require('nvim-treesitter.configs').setup {
 		enable = true,
 		-- disable = { "markdown" }, -- list of language that highlighting will be disabled
 		additional_vim_regex_highlighting = true,
+		use_languagetree = true,
 
 	},
 	indent = { enable = true },
