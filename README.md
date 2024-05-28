@@ -12,36 +12,55 @@ Optimized with Spring Boot && Angular projects in mind.
 
 ## Design Philosophy
 
-Dusk.nvim is designed to be: 
-- minimal (~1500 lines of code in total) 
-- functional (has almost all the features you expect from your IDE)
-- performant (~70-80ms startup time on modern hardware)
+Dusk.nvim is designed to be:
+- minimal. 1700 lines of code in total and you have a full IDE.
+- performant. ~70-80ms startup time on modern hardware.
 - Out-of-the-box complete. Works with installation.
 - Not opinionated. Defaults are always preferred.
+- Extensible. The codebase is very easy to understand and extend.
 
 ## Features
 
 - Native LSP and autocompletion
 - Syntax highlighting via nvim-treesitter
-- Java code runner
 - Java Unit Testing with vscode-java-test
 - Java Debugging via nvim-dap
 - Sonarlint support
 - Git integration with LazyGit
 - Explore files via nvim-tree
 - Fuzzy finder via Telescope
-- Notes with Markdown
-- Blazing fast performance
+- Good markdown support
 
-## Colorschemes
+## Project Structure
 
-Supported colorschemes are:
+```sh
 
-1. Default - [Vscode](https://github.com/Mofiqul/vscode.nvim).
-2. [Nightfox](https://github.com/EdenEast/nightfox.nvim)
+nvim
+├── init.lua
+└── lua
+    ├── pluginconfigs
+    │   ├── cmp.lua
+    │   ├── dadbod.lua
+    │   ├── dashboard.lua
+    │   ├── jdtls.lua
+    │   ├── lsp.lua
+    │   ├── treesitter.lua
+    │   └── whichkey.lua
+    └── settings
+        ├── autocommands.lua
+        ├── keymaps.lua
+        └── options.lua
 
-Feel free to add your own colorschemes.
-Most colorschemes will be compatible with Dusk.
+```
+The project structure is very simple:
+
+- Plugins with minimal configuration are loaded in init.lua. \
+Basically, go through init.lua and you have understood the whole codebase.
+- Vim options are in options.lua
+- Non-whichkey registered keymaps are in keymaps.lua. The rest are in whichkey.lua.
+- Autocommands are in autocommands.lua
+- The more extensive configuration that some plugins require are in pluginconfigs folder. \
+Pay special attention to jdtls.lua, because there you can choose your Java server options
 
 ## Dependencies
 
@@ -85,20 +104,18 @@ Dusk.nvim provides a java development experience with the following advantages:
 
 - Eclipse level editing and refactoring capabilities in neovim
 - Support for Sonarlint
-- Autocomplete candidates from the current buffer, which includes comments (no other IDE has this)
+- Autocomplete candidates from the current buffer, which includes comments
 - Superb coding navigation - searches references in decompiled sources also
-- Support for running and debugging applications with JVM Args (including Spring active profiles)
 - Execute and debug test methods and classes
 
 Features curently not supported (these are what you will miss from your IDE - but also shows the room for improvement):
 
 - No option for running all tests in test resource folders
-- No support for editing many projects in the same neovim instance. Right now for each project you should open new neovim instance.
 - Referenced external libraries not available in file explorer tree
 
 ## Java Multiple Runtimes
 
-In jdtls.lua, you will find the following snippet. 
+In jdtls.lua, you will find the following snippet.
 Here you can configure your multiple java runtimes.
 
 Example:
@@ -125,5 +142,5 @@ Example:
                 }
               }
             }
-                
+
 ```
