@@ -92,8 +92,7 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons',
     },
     init = function() vim.g.barbar_auto_setup = false end,
-    opts = {
-    },
+    opts = {},
   },
 
   --------------------------------------
@@ -211,7 +210,7 @@ require('lazy').setup({
         respect_buf_cwd = true,
         update_focused_file = {
           enable = true,
-          update_root = false
+          update_root = true
         },
         view = {
           width = 50,
@@ -229,20 +228,8 @@ require('lazy').setup({
       'nvim-lua/plenary.nvim',
       {
         "ahmedkhalf/project.nvim",
-        -- event = { "BufReadPost", "BufAdd", "BufNewFile" },
         config = function()
-          require("project_nvim").setup({
-            -- Methods of detecting the root directory. **"lsp"** uses the native neovim
-            -- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
-            -- order matters: if one is not detected, the other is used as fallback. You
-            -- can also delete or rearangne the detection methods.
-            detection_methods = { "pattern", "lsp" },
-
-            -- All the patterns used to detect root dir, when **"pattern"** is in
-            -- detection_methods
-            patterns = { ".git" },
-
-          })
+          require("project_nvim").setup()
           require('telescope').load_extension("projects")
         end
       },
@@ -250,7 +237,7 @@ require('lazy').setup({
     config = function()
       require('telescope').setup({
         defaults = {
-          path_display = { "smart" },
+          path_display = { "filename_first" },
         },
         pickers = {
           find_files = {
@@ -418,6 +405,7 @@ require('lazy').setup({
 
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    event = "LspAttach",
     branch = "main",
     config = function()
       require("lsp_lines").setup({
@@ -485,7 +473,7 @@ require('lazy').setup({
   {
     'simaxme/java.nvim',
     ft = "java",
-    dependencies = { "mfussenegger/nvim-jdtls" },
+    after = { "mfussenegger/nvim-jdtls" },
     config = function()
       require("simaxme-java").setup()
     end
@@ -636,6 +624,7 @@ require('lazy').setup({
   -- Delete whitespaces
   {
     "saccarosium/nvim-whitespaces",
+    event = "BufWritePre",
     opts = {
       handlers = {},
     },
@@ -741,5 +730,3 @@ require('lazy').setup({
     build = function() vim.fn["mkdp#util#install"]() end,
   }
 }, {})
-
--- Load JDTLS config

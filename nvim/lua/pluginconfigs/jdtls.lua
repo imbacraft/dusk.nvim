@@ -1,7 +1,7 @@
 local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
 
-local root_files = {
+local root_markers = {
   '.git',
   'mvnw',
   'gradlew',
@@ -25,7 +25,7 @@ local function get_jdtls_paths()
 
   local path = {}
 
-  path.data_dir = vim.fn.stdpath('cache') .. '/nvim-jdtls'
+  path.workspace_dir = vim.fn.stdpath('cache') .. '/nvim-jdtls'
 
   local jdtls_install = require('mason-registry')
       .get_package('jdtls')
@@ -110,7 +110,10 @@ local function get_jdtls_paths()
 end
 
 local function enable_codelens(bufnr)
-  pcall(vim.lsp.codelens.refresh)
+  local status_ok = pcall(vim.lsp.codelens.refresh)
+  if not status_ok then
+    return
+  end
 
   vim.api.nvim_create_autocmd('BufWritePost', {
     buffer = bufnr,
@@ -185,7 +188,20 @@ local function jdtls_setup(event)
   local jdtls = require('jdtls')
 
   local path = get_jdtls_paths()
-  local data_dir = path.data_dir .. '/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+  local workspace_dir = path.workspace_dir .. '/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+
+  -- Determine the appropriate path separator
+  local path_separator = package.config:sub(1, 1) -- Gets the path separator ("/" on Unix, "\\" on Windows)
+
+  -- Function to replace forward slashes with backslashes on Windows
+  local function adjust_path_for_Windows(p)
+    if path_separator == "\\" then
+      p = p:gsub("/", "\\")
+    end
+    return p
+  end
+
+  local project_root_dir = adjust_path_for_Windows(require('jdtls.setup').find_root(root_markers))
 
   if cache_vars.capabilities == nil then
     jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -219,7 +235,7 @@ local function jdtls_setup(event)
 
     -- 💀
     '-data',
-    data_dir,
+    workspace_dir,
   }
 
   local lsp_settings = {
@@ -297,7 +313,7 @@ local function jdtls_setup(event)
     settings = lsp_settings,
     on_attach = jdtls_on_attach,
     capabilities = cache_vars.capabilities,
-    root_dir = jdtls.setup.find_root(root_files),
+    root_dir = project_root_dir,
     flags = {
       allow_incremental_sync = true,
     },

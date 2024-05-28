@@ -81,7 +81,7 @@ local setup = {
 			windows = false,  -- default bindings on <c-w>
 			nav = false,      -- misc bindings to work with windows
 			z = true,         -- bindings for folds, spelling and others prefixed with z
-			g = false,        -- bindings for prefixed with g
+			g = true,        -- bindings for prefixed with g
 		},
 	},
 	-- add operators that will trigger motion and text object completion
@@ -144,6 +144,7 @@ local mappings = {
 	["R"] = { ":%d+<cr>", "Remove All Text" },
 	["y"] = { ":%y+<cr>", "Yank All Text" },
 	["e"] = { ":NvimTreeToggle<cr>", "Tree Explorer" },
+	["z"] = { ":ZenMode<cr>", "Zen Mode" },
 
 	b = {
 		name = "Buffer",
@@ -316,8 +317,6 @@ local mappings = {
 		r = { ":lua require'dap'.repl.open()<cr>", "Repl Console" },
 		d = { ":lua require'dapui'.toggle()<cr>", "Dap UI" },
 		t = { ":lua require'dap'.terminate()<cr>", "Terminate session" },
-		m = { ":JavaTestDebugCurrentMethod<cr>", "Java - Debug method" },
-		C = { ":JavaTestDebugCurrentClass<cr>", "Java - Debug Class" },
 	},
 
 	o = {

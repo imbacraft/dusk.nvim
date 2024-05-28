@@ -15,7 +15,7 @@ local options = {
 	splitright = true,                      -- force all vertical splits to go to the right of current window
 	swapfile = false,                       -- creates a swapfile
 	termguicolors = true,                   -- set term gui colors (most terminals support this)
-	timeoutlen = 250,                       -- time to wait for a mapped sequence to complete (in milliseconds)
+	timeoutlen = 300,                       -- time to wait for a mapped sequence to complete (in milliseconds)
 	undofile = true,                        -- enable persistent undo
 	updatetime = 180,                       -- faster completion (4000ms default)
 	writebackup = false,                    -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
@@ -74,8 +74,6 @@ vim.g.markdown_folding = 1
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.opt.fillchars:append({ eob = " " })  -- hide tildes at the end of buffers
 vim.opt.fillchars:append({ vert = " " }) -- hide borders of split vertical windows (e.g. nvim tree)
-
-vim.opt.autochdir = true
 
 vim.cmd("highlight EndOfBuffer ctermfg=NONE ctermbg=NONE guibg=NONE")          --requred to hide tildes at the end of buffer
 vim.cmd("highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE") -- required to hide borders of split vertical windows
