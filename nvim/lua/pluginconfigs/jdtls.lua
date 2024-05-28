@@ -202,10 +202,6 @@ local function jdtls_setup(event)
 
   local project_root_dir = require('jdtls.setup').find_root(root_markers)
 
-  if cache_vars.capabilities == nil then
-    jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
-  end
-
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   local cmd = {
