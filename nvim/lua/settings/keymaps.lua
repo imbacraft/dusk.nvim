@@ -45,10 +45,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
 
     -- Peek definition
-    bufmap('n', 'gD', '<cmd>Lspsaga peek_definition<cr>')
+    bufmap('n', 'gd', '<cmd>Lspsaga peek_definition<cr>')
 
     -- Jump to definition
-    bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+    bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<cr>')
 
     -- Lists all the implementations for the symbol under the cursor
     bufmap('n', 'gi', '<cmd>Lspsaga finder imp<cr>')
@@ -80,51 +80,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     bufmap('n', 'gn', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 })
-
-
--- Adds custom keymaps from nvim-jdtls plugin
-local function add_jdtls_keymaps()
-
-  vim.cmd(
-    "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)"
-  )
-  vim.cmd(
-    "command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)"
-  )
-  vim.cmd("command! -buffer JdtUpdateConfig lua require('jdtls').update_project_config()")
-  vim.cmd("command! -buffer JdtJol lua require('jdtls').jol()")
-  vim.cmd("command! -buffer JdtBytecode lua require('jdtls').javap()")
-  vim.cmd("command! -buffer JdtJshell lua require('jdtls').jshell()")
-
-  local status_ok, which_key = pcall(require, "which-key")
-  if not status_ok then
-    return
-  end
-
-  local vopts = {
-    mode = "v",     -- VISUAL mode
-    prefix = "<leader>",
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true,  -- use `nowait` when creating keymaps
-  }
-
-  local vmappings = {
-    J = {
-      name = "Java",
-      v = { "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", "Extract Variable" },
-      c = { "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", "Extract Constant" },
-      m = { "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", "Extract Method" },
-    },
-  }
-
-  which_key.register(vmappings, vopts)
-end
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'java' },
-  desc = 'Adds keymaps custom to nvim-jdtls plugin',
-  callback = add_jdtls_keymaps,
-})
-

@@ -127,7 +127,38 @@ local function enable_debugger(bufnr)
   require('jdtls.dap').setup_dap_main_class_configs()
 end
 
+local function add_jdtls_keymaps()
+  local status_ok, which_key = pcall(require, "which-key")
+  if not status_ok then
+    return
+  end
+
+  local vopts = {
+    mode = "v",     -- VISUAL mode
+    prefix = "<leader>",
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
+  }
+
+  local vmappings = {
+    J = {
+      name = "Java",
+      v = { "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", "Extract Variable" },
+      c = { "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", "Extract Constant" },
+      m = { "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", "Extract Method" },
+    },
+  }
+
+  which_key.register(vmappings, vopts)
+end
+
 local function jdtls_on_attach(client, bufnr)
+  local jdtls = require('jdtls')
+  jdtls.setup.add_commands()
+  add_jdtls_keymaps()
+
   require("lsp_signature").on_attach({
     bind = true,
     use_lspsaga = false,
@@ -238,6 +269,13 @@ local function jdtls_setup(event)
         'java.util.Objects.requireNonNull',
         'java.util.Objects.requireNonNullElse',
         'org.mockito.Mockito.*',
+      },
+      filteredTypes = {
+        "com.sun.*",
+        "io.micrometer.shaded.*",
+        "java.awt.*",
+        "jdk.*",
+        "sun.*",
       },
     },
     contentProvider = {

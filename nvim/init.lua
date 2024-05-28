@@ -204,13 +204,6 @@ require('lazy').setup({
           require("lsp-file-operations").setup()
         end,
       },
-      -- Rename packages and imports also when renaming/moving files via nvim-tree (for Java)
-      {
-        'simaxme/java.nvim',
-        config = function()
-          require("simaxme-java").setup()
-        end
-      }
     },
     config = function()
       require("nvim-tree").setup({
@@ -479,8 +472,24 @@ require('lazy').setup({
 
   },
 
-  -- nvim-jdtls enhances the functionality of Java lsp server (jdtls)
-  { "mfussenegger/nvim-jdtls",         ft = "java" },
+  -- The Java LSP server
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java",
+    config = function()
+      require("pluginconfigs.jdtls")
+    end
+  },
+
+  -- Rename packages and imports also when renaming/moving files via nvim-tree (for Java)
+  {
+    'simaxme/java.nvim',
+    ft = "java",
+    dependencies = { "mfussenegger/nvim-jdtls" },
+    config = function()
+      require("simaxme-java").setup()
+    end
+  },
 
   -- Sonarlint plugin
   {
@@ -734,4 +743,3 @@ require('lazy').setup({
 }, {})
 
 -- Load JDTLS config
-require("pluginconfigs.jdtls")
