@@ -17,7 +17,7 @@ local options = {
 	termguicolors = true,                   -- set term gui colors (most terminals support this)
 	timeoutlen = 300,                       -- time to wait for a mapped sequence to complete (in milliseconds)
 	undofile = true,                        -- enable persistent undo
-	updatetime = 180,                       -- faster completion (4000ms default)
+	updatetime = 200,                       -- faster completion (4000ms default)
 	writebackup = false,                    -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 	expandtab = true,                       -- convert tabs to spaces
 	shiftwidth = 2,                         -- the number of spaces inserted for each indentation
@@ -84,6 +84,22 @@ vim.diagnostic.config({
 	virtual_text = false
 })
 
+-- go to previous/next line with h,l,left arrow and right arrow
+-- when cursor reaches end/beginning of line
+vim.opt.whichwrap:append "<>[]hl"
+
+-- disable nvim intro
+vim.opt.shortmess:append "sI"
+
+-- disable some default providers
+vim.g["loaded_node_provider"] = 0
+vim.g["loaded_python3_provider"] = 0
+vim.g["loaded_perl_provider"] = 0
+vim.g["loaded_ruby_provider"] = 0
+
+-- add binaries installed by mason.nvim to path
+local is_windows = vim.fn.has("win32") ~= 0
+vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
 local M = {}
 
 function M.toggle_option(option)

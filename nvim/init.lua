@@ -84,15 +84,13 @@ require('lazy').setup({
 
   -- Tab Line
   {
-    'romgrk/barbar.nvim',
-    lazy = true,
+    'akinsho/bufferline.nvim',
     event = { "BufReadPost", "BufAdd", "BufNewFile" },
-    dependencies = {
-      'lewis6991/gitsigns.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    init = function() vim.g.barbar_auto_setup = false end,
-    opts = {},
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require("bufferline").setup {}
+    end
   },
 
   --------------------------------------
@@ -208,6 +206,9 @@ require('lazy').setup({
       require("nvim-tree").setup({
         sync_root_with_cwd = true,
         respect_buf_cwd = true,
+        git = {
+          enable = false
+        },
         update_focused_file = {
           enable = true,
           update_root = false
