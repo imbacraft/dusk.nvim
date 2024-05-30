@@ -38,6 +38,8 @@ require("lazy").setup({
 
 	-- Essential lua functions
 	{ "nvim-lua/plenary.nvim",       lazy = true },
+	-- Functions for buffer management
+	{ 'ojroques/nvim-bufdel',        cmd = { "BufDel", "BufDelOthers" } },
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 
 	-- Shows available keys
@@ -301,7 +303,6 @@ require("lazy").setup({
 					"cssls",
 					"bashls",
 					"angularls",
-					"quick_lint_js",
 				},
 				handlers = {
 
@@ -440,7 +441,7 @@ require("lazy").setup({
 	{
 		"simaxme/java.nvim",
 		ft = "java",
-		after = { "mfussenegger/nvim-jdtls" },
+		dependencies = { "mfussenegger/nvim-jdtls" },
 		config = function()
 			require("simaxme-java").setup()
 		end,

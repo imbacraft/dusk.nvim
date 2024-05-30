@@ -160,10 +160,8 @@ local mappings = {
 		p = { "<Cmd>bprevious<cr>", "Previous buffer" },
 		n = { "<Cmd>bnext<cr>", "Next buffer" },
 		k = { "<Cmd>bd<Cr>", "Close current buffer" },
-		K = { "<cmd>BufferLineCloseOthers<cr>", "Close all buffers except current" },
+		K = { "<cmd>BufDelOthers<cr>", "Close all buffers except current" },
 		b = { "<cmd>Telescope buffers theme=dropdown<cr>", "Buffer List" },
-		r = { "<cmd>BufferLineCloseRight<cr>", "Close Buffers to the right" },
-		l = { "<cmd>BufferLineCloseLeft<cr>", "Close Buffers to the left" },
 	},
 
 	D = {
