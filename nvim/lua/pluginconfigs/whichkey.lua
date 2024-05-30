@@ -60,6 +60,15 @@ end
 
 vim.api.nvim_create_user_command('ToggleVirtualText', ToggleVirtualText, {})
 
+-- Open test results after execution
+local function print_test_results(items)
+	if #items > 0 then
+		vim.cmd([[Trouble quickfix]])
+	else
+		vim.cmd([[TroubleClose quickfix]])
+	end
+end
+
 --------------------------------------
 -- Keymaps --
 --------------------------------------
@@ -81,7 +90,7 @@ local setup = {
 			windows = false,  -- default bindings on <c-w>
 			nav = false,      -- misc bindings to work with windows
 			z = true,         -- bindings for folds, spelling and others prefixed with z
-			g = true,        -- bindings for prefixed with g
+			g = true,         -- bindings for prefixed with g
 		},
 	},
 	-- add operators that will trigger motion and text object completion
@@ -231,23 +240,28 @@ local mappings = {
 		o = { "<Cmd>lua require'jdtls'.organize_imports()<CR>", "Organize Imports" },
 		t = {
 			"<Cmd>lua require'jdtls'.test_nearest_method({ config = { console = 'console' }})<CR>",
-			"Test Method",
+			"Test/Debug Method",
 		},
 		T = {
 			"<Cmd>lua require'jdtls'.test_class({ config = { console = 'console' }})<CR>",
-			"Test Class",
+			"Test/Debug Class",
 		},
 		f = { "<cmd>lua require('conform').format({async = true})<cr>", "Format with Google Java Format" },
+		g = { "<cmd>lua require('jdtls.tests').generate()<cr>", "Generate tests for current Class" },
+		i = { "<cmd>lua require('jdtls.tests').goto_subjects()<cr>", "Go to corresponding Test/Subject Class" },
 		R = { "<cmd>JdtWipeDataAndRestart<cr>", "Wipe project data and Restart server" },
 		v = { "<Cmd>lua require('jdtls').extract_variable()<CR>", "Extract Variable" },
 		c = { "<Cmd>lua require('jdtls').extract_constant()<CR>", "Extract Constant" },
 		u = { "<Cmd>lua require('jdtls').update_project_config()<CR>", "Refresh java config" },
 		e = { "<Cmd>JdtSetRuntime<CR>", "Choose Java Runtime" },
-		C = { "<Cmd>JdtCompile<CR>", "Compile Java" },
+		C = { "<Cmd>JdtCompile full<CR>", "Compile Java" },
 		d = {
 			":lua require('jdtls').setup_dap({ hotcodereplace = 'auto' })<cr>; :lua require'jdtls.dap'.setup_dap_main_class_configs()<cr>",
-			"Refresh DAP Debugger",
-		},
+			"Refresh DAP Debugger" },
+		r = { function()
+			require("jdtls").pick_test({ after_test = print_test_results })
+		end, "Run test and open results" }
+
 	},
 
 
