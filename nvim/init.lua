@@ -37,7 +37,7 @@ require("lazy").setup({
 	--------------------------------------
 
 	-- Essential lua functions
-	{ "nvim-lua/plenary.nvim", lazy = true },
+	{ "nvim-lua/plenary.nvim",       lazy = true },
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 
 	-- Shows available keys
@@ -82,15 +82,26 @@ require("lazy").setup({
 		},
 	},
 
-	-- Tab Line
+	-- Breadcrumbs
 	{
-		"akinsho/bufferline.nvim",
-		event = { "BufReadPost", "BufAdd", "BufNewFile" },
-		version = "*",
-		dependencies = "nvim-tree/nvim-web-devicons",
+		"LunarVim/breadcrumbs.nvim",
+		event = "LspAttach",
+		dependencies = {
+			{
+				"SmiteshP/nvim-navic",
+				config = function()
+					require("nvim-navic").setup {
+						lsp = {
+							auto_attach = true,
+						},
+					}
+				end
+			},
+		},
 		config = function()
-			require("bufferline").setup({})
-		end,
+			require("breadcrumbs").setup()
+		end
+
 	},
 
 	--------------------------------------
@@ -118,103 +129,11 @@ require("lazy").setup({
 	},
 
 	--------------------------------------
-	-- General Features --
+	-- Optional Features --
 	--------------------------------------
 
-	-- auto save and restore the last session
-
-	{
-		"olimorris/persisted.nvim",
-		lazy = false,
-		config = function()
-			require("persisted").setup({
-				ignored_dirs = {
-					"~/.config",
-					"~/.local/nvim",
-					{ "/", exact = true },
-					{ "/tmp", exact = true },
-				},
-				autoload = true,
-				on_autoload_no_session = function()
-					vim.notify("No existing session to load.")
-				end,
-			})
-		end,
-	},
-
-	{
-		"okuuva/auto-save.nvim",
-		cmd = "ASToggle", -- Use this cmd if you want to enable auto-save
-		opts = {
-			execution_message = {
-				enabled = false,
-			},
-			debounce_delay = 5000,
-		},
-	},
-
-	-- Tmux
-	-- {
-	-- 	"alexghergh/nvim-tmux-navigation",
-	-- 	lazy = false,
-	-- 	config = function()
-	-- 		require("nvim-tmux-navigation").setup({
-	-- 			disable_when_zoomed = true, -- defaults to false
-	-- 		})
-	-- 	end,
-	-- },
-
-	-- Electric indentation
-	{
-		"nmac427/guess-indent.nvim",
-		lazy = true,
-		event = { "BufReadPost", "BufAdd", "BufNewFile" },
-		opts = {},
-	},
-
-	-- Highlight word under cursor
-	{
-		"RRethy/vim-illuminate",
-		event = "VeryLazy",
-		config = function()
-			local illuminate = require("illuminate")
-			vim.g.Illuminate_ftblacklist = { "NvimTree" }
-
-			illuminate.configure({
-				providers = {
-					"lsp",
-					"treesitter",
-					"regex",
-				},
-				delay = 200,
-				filetypes_denylist = {
-					"dirvish",
-					"fugitive",
-					"alpha",
-					"NvimTree",
-					"packer",
-					"neogitstatus",
-					"Trouble",
-					"lir",
-					"Outline",
-					"spectre_panel",
-					"toggleterm",
-					"DressingSelect",
-					"TelescopePrompt",
-					"sagafinder",
-					"sagacallhierarchy",
-					"sagaincomingcalls",
-					"sagapeekdefinition",
-				},
-				filetypes_allowlist = {},
-				modes_denylist = {},
-				modes_allowlist = {},
-				providers_regex_syntax_denylist = {},
-				providers_regex_syntax_allowlist = {},
-				under_cursor = true,
-			})
-		end,
-	},
+	-- Take a look at this file to see what features you need enabled
+	{ import = "optionalconfigs.editorfeatures" },
 
 	--------------------------------------
 	-- File explorer and Finder --
@@ -266,11 +185,11 @@ require("lazy").setup({
 						-- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
 						-- order matters: if one is not detected, the other is used as fallback. You
 						-- can also delete or rearangne the detection methods.
-						detection_methods = { "pattern", "lsp" },
+						-- detection_methods = { "pattern", "lsp" },
 
 						-- All the patterns used to detect root dir, when **"pattern"** is in
 						-- detection_methods
-						patterns = { ".git" },
+						-- patterns = { ".git" },
 					})
 					require("telescope").load_extension("projects")
 				end,
@@ -333,18 +252,6 @@ require("lazy").setup({
 		end,
 	},
 
-	{
-		"smartpde/telescope-recent-files",
-		event = "VeryLazy",
-		dependencies = { "nvim-telescope/telescope.nvim" },
-		opts = {
-			handlers = {},
-		},
-		config = function()
-			require("telescope").load_extension("recent_files")
-		end,
-	},
-
 	--------------------------------------
 	-- LSP & Autocompletion --
 	--------------------------------------
@@ -358,7 +265,7 @@ require("lazy").setup({
 			"williamboman/mason-lspconfig.nvim",
 
 			-- Additional lua configuration, makes nvim stuff amazing!
-			{ "folke/neodev.nvim", opts = {} },
+			{ "folke/neodev.nvim",       opts = {} },
 		},
 	},
 
@@ -444,7 +351,7 @@ require("lazy").setup({
 		event = "LspAttach",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter", -- optional
-			"nvim-tree/nvim-web-devicons", -- optional
+			"nvim-tree/nvim-web-devicons",  -- optional
 		},
 		opts = {
 			lightbulb = {
@@ -465,30 +372,28 @@ require("lazy").setup({
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
-		opts = { hint_enable = false, time_interval = 50 },
+		opts = { hint_enable = false, cursorhold_update = false },
 		config = function(_, opts)
 			require("lsp_signature").setup(opts)
 		end,
 	},
 
+	-- Improves the way errors are shown in the buffer
 	{
 		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 		event = "LspAttach",
 		branch = "main",
 		config = function()
-			require("lsp_lines").setup({
-				vim.keymap.set("", "<Leader>X", require("lsp_lines").toggle, { desc = "Toggle lsp_lines plugin" }),
-			})
+			require("lsp_lines").setup({})
 		end,
 	},
 
 	--LSP Diagnostics
 	{
 		"folke/trouble.nvim",
-		branch = "dev",
 		lazy = true,
 		cmd = "Trouble",
-		opts = { auto_preview = false }, -- automatically preview the location of the diagnostic
+		opts = { auto_preview = false, focus = true }, -- automatically preview the location of the diagnostic
 	},
 
 	-- This plugin ensures that the necessary dependencies for Dusk.nvim get automatically installed
@@ -584,29 +489,14 @@ require("lazy").setup({
 		end,
 	},
 
-	-- DAP (Required to run Java unit tests and Debugging)--
-	{ "mfussenegger/nvim-dap", ft = "java" },
-	{
-		"rcarriga/nvim-dap-ui",
-		ft = "java",
-		dependencies = { "nvim-neotest/nvim-nio" },
-		opts = {},
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
-			dapui.setup()
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open()
-			end
-			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close()
-			end
-			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close()
-			end
-		end,
-	},
-	{ "theHamsta/nvim-dap-virtual-text", ft = "java", opts = {} },
+
+	--------------------------------------
+	-- DAP - Debuggers  --
+	--------------------------------------
+
+	-- You can configure the DAP for your language there
+	{ import = "pluginconfigs.dap" },
+
 
 	--------------------------------------
 	-- Linters and Formatters --
@@ -620,6 +510,7 @@ require("lazy").setup({
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
+					lua = { "stylua" },
 					java = { "google-java-format" },
 				},
 			})
@@ -679,7 +570,7 @@ require("lazy").setup({
 		cmd = { "DiffviewOpen", "DiffviewClose" },
 	},
 
-	{ "kdheepak/lazygit.nvim", lazy = true, cmd = "LazyGit" },
+	{ "kdheepak/lazygit.nvim",   lazy = true,   cmd = "LazyGit" },
 
 	--------------------------------------
 	-- Editing Tools --
@@ -700,15 +591,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Delete whitespaces
-	{
-		"saccarosium/nvim-whitespaces",
-		event = "BufWritePre",
-		opts = {
-			handlers = {},
-		},
-	},
-
 	-- Move blocks
 	{
 		"booperlv/nvim-gomove",
@@ -726,10 +608,10 @@ require("lazy").setup({
 	},
 
 	--Terminal
-	{ "akinsho/toggleterm.nvim", version = "*", lazy = true, cmd = "ToggleTerm", opts = {} },
+	{ "akinsho/toggleterm.nvim", version = "*", lazy = true,     cmd = "ToggleTerm", opts = {} },
 
 	--Search & replace string
-	{ "nvim-pack/nvim-spectre", lazy = true, cmd = "Spectre", opts = {} },
+	{ "nvim-pack/nvim-spectre",  lazy = true,   cmd = "Spectre", opts = {} },
 
 	-- Add/remove/change surrounding {}, (), "" etc
 	{
@@ -797,7 +679,7 @@ require("lazy").setup({
 	--------------------------------------
 
 	--Markdown
-	{ "dkarter/bullets.vim", ft = "markdown" }, -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
+	{ "dkarter/bullets.vim",           ft = "markdown" }, -- Automatic ordered lists. For reordering messed list, use :RenumberSelection cmd
 	{ "jghauser/follow-md-links.nvim", ft = "markdown" }, --Follow md links with ENTER
 	{
 		"iamcco/markdown-preview.nvim",
