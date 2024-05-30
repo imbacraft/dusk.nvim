@@ -199,7 +199,8 @@ local mappings = {
 	c = {
 		name = "Code",
 		a = { ":lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-		e = { ":Jaq<cr>", "Execute Code" },
+		-- e = { ":Jaq<cr>", "Execute Code" },
+		e = { ":Trouble diagnostics filter.severity=vim.diagnostic.severity.ERROR<cr>", "Show Workspace Errors" },
 		x = { ":Trouble diagnostics toggle focus = true<cr>", "Workspace Diagnostics" },
 		X = { ":Trouble diagnostics toggle filter.buf=0 focus = true<cr>", "Current buffer Diagnostics" },
 		R = { ":Lspsaga rename ++project<cr>", "Rename in Project" },
