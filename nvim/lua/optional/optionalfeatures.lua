@@ -1,16 +1,16 @@
 return {
 
-  -- Autosave feature
-  {
-    "okuuva/auto-save.nvim",
-    cmd = "ASToggle", -- Use this cmd if you want to enable or Space + t + s
-    opts = {
-      execution_message = {
-        enabled = false,
-      },
-      debounce_delay = 5000,
-    },
-  },
+	-- Autosave feature
+	{
+		"okuuva/auto-save.nvim",
+		cmd = "ASToggle", -- Use this cmd if you want to enable or Space + t + s
+		opts = {
+			execution_message = {
+				enabled = false,
+			},
+			debounce_delay = 5000,
+		},
+	},
 
 	-- Electric indentation
 	{
@@ -73,36 +73,47 @@ return {
 		},
 	},
 
-  -- Session management
-  -- auto save and restore the last session
-  -- {
-  -- 	"olimorris/persisted.nvim",
-  -- 	lazy = false,
-  -- 	config = function()
-  -- 		require("persisted").setup({
-  -- 			ignored_dirs = {
-  -- 				"~/.config",
-  -- 				"~/.local/nvim",
-  -- 				{ "/",    exact = true },
-  -- 				{ "/tmp", exact = true },
-  -- 			},
-  -- 			autoload = true,
-  -- 			on_autoload_no_session = function()
-  -- 				vim.notify("No existing session to load.")
-  -- 			end,
-  -- 		})
-  -- 	end,
-  -- },
+	{
+		"NStefan002/visual-surround.nvim",
+		config = function()
+			require("visual-surround").setup({
+				-- your config
+			})
+		end,
+		-- or if you don't want to change defaults
+		-- config = true
+	},
+
+	-- Session management
+	-- auto save and restore the last session
+	-- {
+	-- 	"olimorris/persisted.nvim",
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		require("persisted").setup({
+	-- 			ignored_dirs = {
+	-- 				"~/.config",
+	-- 				"~/.local/nvim",
+	-- 				{ "/",    exact = true },
+	-- 				{ "/tmp", exact = true },
+	-- 			},
+	-- 			autoload = true,
+	-- 			on_autoload_no_session = function()
+	-- 				vim.notify("No existing session to load.")
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 
 
-  -- Tmux Integration
-  -- {
-  -- 	"alexghergh/nvim-tmux-navigation",
-  -- 	lazy = false,
-  -- 	config = function()
-  -- 		require("nvim-tmux-navigation").setup({
-  -- 			disable_when_zoomed = true, -- defaults to false
-  -- 		})
-  -- 	end,
-  -- },
+	-- Tmux Integration
+	-- {
+	-- 	"alexghergh/nvim-tmux-navigation",
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		require("nvim-tmux-navigation").setup({
+	-- 			disable_when_zoomed = true, -- defaults to false
+	-- 		})
+	-- 	end,
+	-- },
 }
