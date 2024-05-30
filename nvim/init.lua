@@ -133,7 +133,7 @@ require("lazy").setup({
 	--------------------------------------
 
 	-- Take a look at this file to see what features you need enabled
-	{ import = "optionalconfigs.editorfeatures" },
+	{ import = "optional.optionalfeatures" },
 
 	--------------------------------------
 	-- File explorer and Finder --
