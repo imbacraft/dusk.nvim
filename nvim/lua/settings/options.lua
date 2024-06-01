@@ -91,6 +91,10 @@ vim.opt.whichwrap:append "<>[]hl"
 -- disable nvim intro
 vim.opt.shortmess:append "sI"
 
+-- disable lsp logs to save resources of huge logs
+-- Enable if you need to debug something
+vim.lsp.set_log_level(vim.lsp.log_levels.OFF)
+
 -- disable some default providers
 vim.g["loaded_node_provider"] = 0
 vim.g["loaded_python3_provider"] = 0

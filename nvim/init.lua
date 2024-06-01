@@ -437,6 +437,7 @@ require("lazy").setup({
 		"mfussenegger/nvim-jdtls",
 		ft = "java",
 		config = function()
+			require("pluginconfigs.jdtls")
 		end,
 	},
 
@@ -695,6 +696,3 @@ require("lazy").setup({
 		end,
 	},
 }, {})
-
--- Always load jdtls setup autocommand
-require("pluginconfigs.jdtls")

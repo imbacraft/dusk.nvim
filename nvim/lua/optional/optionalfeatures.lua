@@ -15,21 +15,16 @@ return {
 	-- Lsp server status updates
 	{
 		"j-hui/fidget.nvim",
+		event = "LspAttach",
 		opts = {},
 	},
 
 	-- Electric indentation
-	-- {
-	-- 	"nmac427/guess-indent.nvim",
-	-- 	lazy = true,
-	-- 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
-	-- 	opts = {},
-	-- },
-
 	{
-		"tpope/vim-sleuth",
+		"nmac427/guess-indent.nvim",
 		lazy = true,
-		event = { "BufNewFile", "BufReadPost", "BufFilePost" },
+		event = { "BufReadPost", "BufAdd", "BufNewFile" },
+		opts = {},
 	},
 
 	-- Highlight word under cursor
@@ -94,6 +89,7 @@ return {
 			})
 		end,
 	},
+
 	-- Session management
 	-- auto save and restore the last session
 	-- {

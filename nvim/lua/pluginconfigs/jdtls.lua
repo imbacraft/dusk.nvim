@@ -2,8 +2,9 @@ local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
 
 local root_markers = {
-  '.git',
+  '.git', -- If you have a git project, this marker only is preferred for the best project recognition.
 
+  -- Otherwise, you can use these root markers to identify your project
   -- 'mvnw',
   -- 'gradlew',
   -- 'pom.xml',
@@ -150,19 +151,6 @@ end
 local function jdtls_on_attach(client, bufnr)
   add_jdtls_keymaps()
 
-  require("lsp_signature").on_attach({
-    bind = true,
-    use_lspsaga = false,
-    floating_window = true,
-    fix_pos = true,
-    hint_enable = false,
-    hi_parameter = "Search",
-    handler_opts = {
-      border = "rounded",
-    },
-    bufnr
-  })
-
   if features.codelens then
     enable_codelens(bufnr)
   end
@@ -188,7 +176,6 @@ local function jdtls_setup(event)
   local path = get_jdtls_paths()
 
   local workspace_dir = path.workspace_dir .. '/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-
   local project_root_dir = require('jdtls.setup').find_root(root_markers)
 
   if cache_vars.capabilities == nil then
@@ -230,7 +217,11 @@ local function jdtls_setup(event)
     java = {
       -- jdt = {
       --   ls = {
-      --     vmargs = "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms256m"
+      --     -- You can define the java home especially for the JDTLS server here. In this way it doesn't matter what is your JAVA_HOME environmental variable anymore.
+      --     -- Convenient to solve version mismatches for some old projects
+      --     java = { home = vim.fn.expand('~/.sdkman/candidates/java/17.0.11-tem') },
+      --     vmargs =
+      --     "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms256m -Xlog:disable"
       --   }
       -- },
       eclipse = {
@@ -249,6 +240,9 @@ local function jdtls_setup(event)
       referencesCodeLens = {
         enabled = true,
       },
+      -- saveActions = {
+      --   organizeImports = true, -- Organize imports on save
+      -- },
       -- inlayHints = {
       --   parameterNames = {
       --     enabled = 'all' -- literals, all, none
