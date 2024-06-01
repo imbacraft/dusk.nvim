@@ -13,11 +13,17 @@ return {
 	},
 
 	-- Electric indentation
+	-- {
+	-- 	"nmac427/guess-indent.nvim",
+	-- 	lazy = true,
+	-- 	event = { "BufReadPost", "BufAdd", "BufNewFile" },
+	-- 	opts = {},
+	-- },
+
 	{
-		"nmac427/guess-indent.nvim",
+		"tpope/vim-sleuth",
 		lazy = true,
-		event = { "BufReadPost", "BufAdd", "BufNewFile" },
-		opts = {},
+		event = { "BufNewFile", "BufReadPost", "BufFilePost" },
 	},
 
 	-- Highlight word under cursor
@@ -82,7 +88,12 @@ return {
 			})
 		end,
 	},
-
+	{
+		"j-hui/fidget.nvim",
+		opts = {
+			-- options
+		},
+	},
 	-- Session management
 	-- auto save and restore the last session
 	-- {
