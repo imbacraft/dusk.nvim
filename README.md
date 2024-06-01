@@ -23,8 +23,9 @@ Dusk.nvim is designed to be:
 
 - Native LSP and autocompletion
 - Syntax highlighting via nvim-treesitter
-- Java Unit Testing with vscode-java-test
-- Java Debugging via nvim-dap
+- Java Unit Testing
+- Java Debugging
+- Javascript client side && server side debugging
 - Sonarlint support
 - Git integration with LazyGit
 - Explore files via nvim-tree
@@ -34,13 +35,16 @@ Dusk.nvim is designed to be:
 ## Project Structure
 
 ```sh
-
+dusk.nvim
 nvim
 ├── init.lua
 └── lua
+    ├── optional
+    │   └── optionalfeatures.lua
     ├── pluginconfigs
     │   ├── cmp.lua
     │   ├── dadbod.lua
+    │   ├── dap.lua
     │   ├── dashboard.lua
     │   ├── jdtls.lua
     │   ├── lsp.lua
@@ -59,6 +63,7 @@ Basically, go through init.lua and you have understood the whole codebase.
 - Vim options are in options.lua
 - Non-whichkey registered keymaps are in keymaps.lua. The rest are in whichkey.lua.
 - Autocommands are in autocommands.lua
+- Go through the optionalfeatures.lua and uncomment the features you want enabled in your build.
 - The more extensive configuration that some plugins require are in pluginconfigs folder. \
 Pay special attention to jdtls.lua, because there you can choose your Java server options
 
@@ -76,7 +81,7 @@ For Dusk.nvim to perform as intended, you need to have the following dependencie
 8. Treesitter-cli nodejs module (Check your package manager for a treesitter or treesitter-cli package)
 9. Java 17+ (for Java LSP server)
 10. A font with nerdfont icons (my suggestion: <https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack>)
-11. LazyGit if you are going to use it inside neovim.
+11. LazyGit && LazyDocker if you are going to use it inside neovim.
 
 NOTE: Run :checkhealth command to see what other dependencies you might be missing and to receive help if you have problems with installation.
 
@@ -94,8 +99,8 @@ NOTE: Run :checkhealth command to see what other dependencies you might be missi
    In the end, your folder should look like this: `~/.config/nvim`. Please note, depending on your OS, neovim might search for configuration in a different folder. In this case, run the `:checkhealth` command inside neovim, to see where it looks for configuration and place the nvim folder inside that.
 4. Run the `nvim` command and wait for the plugins to be installed.
 5. If some plugins fail to install at this point, don't be alarmed. Enter the `:qa!` command to exit neovim.
-6. Re-run the `nvim` command and enter `SPC p s` to update the package manager.
-7. Now all the plugins should have been installed. If some have not, run the `:checkhealth` command and check the dependencies section above to see what you might be missing.
+6. Re-run the `nvim` command and enter `SPC p s` to update the package manager (if it's not done automatically). In general, you might have to do a lot of restarts of nvim until all the packages are installed. It can take quite some time.
+7. If some packages fail to install consistently, run the `:checkhealth` command and check the dependencies section above to see what you might be missing.
 8. Happy editing!
 
 ## State of Java experience
