@@ -665,7 +665,7 @@ require("lazy").setup({
 	-- Database Management
 	{
 		"tpope/vim-dadbod",
-		event = "VeryLazy",
+		cmd = { "DBUIToggle", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
 		dependencies = {
 			"kristijanhusak/vim-dadbod-ui",
 			"kristijanhusak/vim-dadbod-completion",
