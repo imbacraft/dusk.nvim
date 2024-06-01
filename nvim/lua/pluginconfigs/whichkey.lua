@@ -69,6 +69,19 @@ local function print_test_results(items)
 	end
 end
 
+--remove unused imports from the whole project
+local function remove_unused_imports_from_project()
+	vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
+	vim.cmd('packadd cfilter')
+	vim.cmd('Cfilter /main/')
+	vim.cmd('Cfilter /The import/')
+	vim.cmd('cdo normal dd')
+	vim.cmd('cclose')
+	vim.cmd('wa')
+end
+
+vim.api.nvim_create_user_command('RemoveUnusedImportsFromProject', remove_unused_imports_from_project, {})
+
 --------------------------------------
 -- Keymaps --
 --------------------------------------
@@ -258,7 +271,9 @@ local mappings = {
 			"Refresh DAP Debugger" },
 		r = { function()
 			require("jdtls").pick_test({ after_test = print_test_results })
-		end, "Run test and open results" }
+		end, "Run test and open results" },
+		x = { "<Cmd>RemoveUnusedImportsFromProject<CR>", "Remove unused imports from whole project" },
+
 
 	},
 
