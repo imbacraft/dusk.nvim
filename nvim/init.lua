@@ -458,7 +458,7 @@ require("lazy").setup({
 		config = function()
 			require("sonarlint").setup({
 				server = {
-					root_dir = require("jdtls.setup").find_root({ "gradlew", ".git", "pom.xml", "mvnw" }),
+					-- root_dir = require("jdtls.setup").find_root({ "gradlew", ".git", "pom.xml", "mvnw" }),
 					-- autostart = true,
 					cmd = {
 						"sonarlint-language-server",
