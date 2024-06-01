@@ -12,6 +12,12 @@ return {
 		},
 	},
 
+	-- Lsp server status updates
+	{
+		"j-hui/fidget.nvim",
+		opts = {},
+	},
+
 	-- Electric indentation
 	-- {
 	-- 	"nmac427/guess-indent.nvim",
@@ -87,12 +93,6 @@ return {
 				-- your config
 			})
 		end,
-	},
-	{
-		"j-hui/fidget.nvim",
-		opts = {
-			-- options
-		},
 	},
 	-- Session management
 	-- auto save and restore the last session
