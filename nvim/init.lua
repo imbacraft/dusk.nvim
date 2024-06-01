@@ -446,11 +446,7 @@ require("lazy").setup({
 		ft = "java",
 		dependencies = { "mfussenegger/nvim-jdtls" },
 		config = function()
-			require("simaxme-java").setup({
-				rename = {
-					write_and_close = true -- automatically write and close modified (previously unopened) files after refactoring a java file
-				},
-			})
+			require("simaxme-java").setup()
 		end,
 	},
 

@@ -136,7 +136,7 @@ local function add_jdtls_keymaps()
   }
 
   local vmappings = {
-    J = {
+    j = {
       name = "Java",
       v = { "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", "Extract Variable" },
       c = { "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", "Extract Constant" },
