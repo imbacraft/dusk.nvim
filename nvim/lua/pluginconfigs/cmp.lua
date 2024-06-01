@@ -35,8 +35,8 @@ cmp.setup({
   },
   mapping = cmp.mapping.preset.insert({
     ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Enter confirms the autocompletion candidate
-    ['<Tab>'] = cmp_action.luasnip_supertab(),
-    ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+    ['<Tab>'] = cmp_action.luasnip_supertab({ behavior = cmp.SelectBehavior.Select }),
+    ['<S-Tab>'] = cmp_action.luasnip_shift_supertab({ behavior = cmp.SelectBehavior.Select }),
   }),
   snippet = {
     expand = function(args)
