@@ -2,11 +2,11 @@ local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
 
 local root_markers = {
-  '.git', -- If you have a git project, this marker only is preferred for the best project recognition.
+  '.git', -- These markers are preferred for the best root project recognition.
+  'mvnw',
+  'gradlew',
 
-  -- Otherwise, you can use these root markers to identify your project
-  -- 'mvnw',
-  -- 'gradlew',
+  -- Otherwise, you can use these root markers to identify your project also
   -- 'pom.xml',
   -- 'build.gradle',
 }
